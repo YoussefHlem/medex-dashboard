@@ -1,7 +1,7 @@
 import { api } from '@/apis/config'
 
 export const authService = {
-  login: async (credentials: { email: string; password: string }): Promise<any> => {
+  login: async credentials => {
     try {
       const response = await api.post('/auth/login', credentials)
 

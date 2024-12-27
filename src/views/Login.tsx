@@ -109,7 +109,7 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
 
       // Store the token in cookies
       setCookie('userToken', response.data.data._token, {
-        maxAge: 30 * 24 * 60 * 60, // 30 days
+        maxAge: 24 * 60 * 60, // 1 day
         path: '/',
         secure: process.env.NODE_ENV === 'production'
       })

@@ -9,7 +9,7 @@ const verticalMenuData = (): VerticalMenuDataType[] => [
   },
   {
     label: 'Hospital/Clinic',
-    href: '/hospital-clinic',
+    href: '/hospitals',
     icon: 'tabler-building-hospital'
   },
   {

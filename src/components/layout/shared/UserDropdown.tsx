@@ -1,8 +1,9 @@
 'use client'
 
+import type { MouseEvent } from 'react'
+
 // React Imports
 import { useRef, useState } from 'react'
-import type { MouseEvent } from 'react'
 
 // Next Imports
 import { useRouter } from 'next/navigation'
@@ -22,6 +23,8 @@ import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
 
 // Hook Imports
+import { deleteCookie } from 'cookies-next'
+
 import { useSettings } from '@core/hooks/useSettings'
 
 // Styled component for badge content
@@ -63,6 +66,12 @@ const UserDropdown = () => {
   }
 
   const handleUserLogout = async () => {
+    // Clear local storage
+    localStorage.removeItem('userToken')
+
+    // Clear cookies
+    deleteCookie('userToken')
+
     // Redirect to login page
     router.push('/login')
   }

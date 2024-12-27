@@ -4,7 +4,7 @@ import type { HorizontalMenuDataType } from '@/types/menuTypes'
 const horizontalMenuData = (): HorizontalMenuDataType[] => [
   {
     label: 'Hospital/Clinic',
-    href: '/hospital-clinic',
+    href: '/hospitals',
     icon: 'tabler-building-hospital'
   },
   {

@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="" />
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Initial Commit">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/apis/services/hospitals.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospitals/add/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospitals/edit/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospitals/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/TablePaginationComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/tables/HospitalsTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/list/ListTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/list/ViewCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/list/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/services/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/services/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospital-clinic/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/shared/UserDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/shared/UserDropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/tables/DataTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/navigation/horizontalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/navigation/horizontalMenuData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,11 +37,28 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
         <option value="TypeScript File" />
+        <option value="tsconfig.json" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;YoussefHlem&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/YoussefHlem/medex-dashboard.git&quot;,
+    &quot;accountId&quot;: &quot;6ff1daa3-51cd-4acb-959d-ded242b42fb4&quot;
+  }
+}</component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
@@ -26,14 +67,20 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2q32G01jZBHYiZwyq3wNcp0b8bi" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/components/tables&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/app/(dashboard)/hospitals/edit&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
@@ -52,7 +99,13 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)\hospitals\edit" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\views" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\tables" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)\hospitals\edit\[id]" />
     </key>
   </component>
   <component name="RunManager">
@@ -89,11 +142,26 @@
       <updated>1733876839960</updated>
       <workItem from="1733876842131" duration="629000" />
       <workItem from="1733883090576" duration="47000" />
-      <workItem from="1735030432614" duration="3663000" />
+      <workItem from="1735030432614" duration="9764000" />
+      <workItem from="1735118359438" duration="7203000" />
+      <workItem from="1735300263285" duration="34000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1735034764561</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1735034764561</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
   </component>
 </project>
