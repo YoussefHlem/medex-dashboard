@@ -83,19 +83,27 @@ const HospitalForm = ({ id }: { id?: number }) => {
     onSubmit: async values => {
       const formData = new FormData()
 
+      if (id) {
+        formData.append('_method', 'patch')
+      }
+
       Object.keys(values).forEach(key => {
         formData.append(key, values[key])
       })
 
       // Here you would typically send the formData to your API
       console.log('Form submitted:', Object.fromEntries(formData))
-      hospitalsService
-        .createHospital(formData)
+
+      const action = id
+        ? await hospitalsService.updateHospital(id, formData)
+        : await hospitalsService.createHospital(formData)
+
+      action
         .then(() => {
-          toast.success('Hospital created successfully')
+          toast.success(`Hospital ${id ? 'Updated' : 'Created'} successfully`)
         })
         .catch(err => {
-          toast.error(`Failed to create Hospital ${err.response.data.message}`)
+          toast.error(`Failed to ${id ? 'Update' : 'Create'} Hospital ${err.response.data.message}`)
         })
     }
   })
@@ -334,11 +342,17 @@ const HospitalForm = ({ id }: { id?: number }) => {
                 </Typography>
               )}
             </Grid>
-            <Grid size={{ xs: 12 }}>
-              <Button variant='contained' type='submit'>
-                Submit
+            <Box sx={{ mt: 4 }}>
+              <Button
+                fullWidth
+                type='submit'
+                variant='contained'
+                color='primary'
+                disabled={!formik.isValid || formik.isSubmitting}
+              >
+                {id ? 'Update' : 'Create'}
               </Button>
-            </Grid>
+            </Box>
           </Grid>
         </Form>
       </CardContent>

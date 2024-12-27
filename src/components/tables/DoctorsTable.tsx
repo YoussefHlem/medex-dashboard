@@ -1,9 +1,6 @@
-'use client'
+'use client' // React Imports
+import { useEffect, useMemo, useState } from 'react' // Next Imports
 
-// React Imports
-import { useEffect, useMemo, useState } from 'react'
-
-// Next Imports
 import Link from 'next/link'
 
 // MUI Imports
@@ -11,11 +8,9 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import Checkbox from '@mui/material/Checkbox'
 import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import MenuItem from '@mui/material/MenuItem'
-import Tooltip from '@mui/material/Tooltip'
 import TablePagination from '@mui/material/TablePagination'
 import type { TextFieldProps } from '@mui/material/TextField'
 
@@ -36,31 +31,40 @@ import {
   useReactTable
 } from '@tanstack/react-table'
 
+import { toast } from 'react-toastify'
+
+import { Box } from '@mui/material'
+
+import Switch from '@mui/material/Switch'
+
 import TablePaginationComponent from '@components/TablePaginationComponent'
 
-import type { ThemeColor } from '@core/types'
-
 // Component Imports
-import OptionMenu from '@core/components/option-menu'
-import CustomAvatar from '@core/components/mui/Avatar'
-
 import CustomTextField from '@core/components/mui/TextField'
-
-// Util Imports
-import { getInitials } from '@/utils/getInitials'
 
 // Style Imports
 import tableStyles from '@core/styles/table.module.css'
+import { doctorsService } from '@/apis/services/doctors'
+import { specialitiesService } from '@/apis/services/specialities'
 
-type InvoiceTypeWithAction = InvoiceType & {
-  action?: string
+interface DoctorType {
+  id: string
+  name: string
+  type: string
+  cover: string
+  lat: number
+  lng: number
+  status: string
+  speciality_id: string
+  experience: number
+  consultation_fee: number
+  rating: number
+  created_at: string
+  updated_at: string
 }
 
-type InvoiceStatusObj = {
-  [key: string]: {
-    icon: string
-    color: ThemeColor
-  }
+type DoctorTypeWithAction = DoctorType & {
+  action?: string
 }
 
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
@@ -105,118 +109,149 @@ const DebouncedInput = ({
   return <CustomTextField {...props} value={value} onChange={e => setValue(e.target.value)} />
 }
 
-// Vars
-const invoiceStatusObj: InvoiceStatusObj = {
-  Sent: { color: 'secondary', icon: 'tabler-send-2' },
-  Paid: { color: 'success', icon: 'tabler-check' },
-  Draft: { color: 'primary', icon: 'tabler-mail' },
-  'Partial Payment': { color: 'warning', icon: 'tabler-chart-pie-2' },
-  'Past Due': { color: 'error', icon: 'tabler-alert-circle' },
-  Downloaded: { color: 'info', icon: 'tabler-arrow-down' }
-}
-
 // Column Definitions
-const columnHelper = createColumnHelper<InvoiceTypeWithAction>()
+const columnHelper = createColumnHelper<DoctorTypeWithAction>()
 
-const ListTable = ({ invoiceData }: { invoiceData?: InvoiceType[] }) => {
+const ListTable = () => {
   // States
-  const [status, setStatus] = useState<InvoiceType['invoiceStatus']>('')
+  const [status, setStatus] = useState<DoctorType['status']>('')
   const [rowSelection, setRowSelection] = useState({})
-  const [data, setData] = useState(...[invoiceData])
+  const [data, setData] = useState([])
   const [filteredData, setFilteredData] = useState(data)
   const [globalFilter, setGlobalFilter] = useState('')
+  const [specialities, setSpecialities] = useState([])
 
-  const columns = useMemo<ColumnDef<InvoiceTypeWithAction, any>[]>(
+  useEffect(() => {}, [])
+
+  const fetchDoctors = () => {
+    doctorsService.listDoctors().then(res => {
+      setData(res.data.doctors)
+    })
+    specialitiesService.listSpecialities().then(res => {
+      setSpecialities(res.data.specialities)
+    })
+  }
+
+  useEffect(() => {
+    fetchDoctors()
+  }, [])
+
+  const handleDelete = async id => {
+    await toast.promise(doctorsService.deleteDoctor(id), {
+      pending: 'Promise is pending',
+      success: 'Promise resolved 👌',
+      error: 'Promise rejected 🤯'
+    })
+    setData(data?.filter(doctor => doctor.id !== id))
+  }
+
+  // @ts-ignore
+  const columns = useMemo<ColumnDef<DoctorTypeWithAction, any>[]>(
     () => [
       {
         id: 'select',
-        header: ({ table }) => (
-          <Checkbox
-            {...{
-              checked: table.getIsAllRowsSelected(),
-              indeterminate: table.getIsSomeRowsSelected(),
-              onChange: table.getToggleAllRowsSelectedHandler()
-            }}
-          />
-        ),
+        header: 'Id',
         cell: ({ row }) => (
-          <Checkbox
-            {...{
-              checked: row.getIsSelected(),
-              disabled: !row.getCanSelect(),
-              indeterminate: row.getIsSomeSelected(),
-              onChange: row.getToggleSelectedHandler()
-            }}
-          />
+          <Typography className='font-medium' color='text.primary'>
+            {row.original.id}
+          </Typography>
         )
       },
-      columnHelper.accessor('id', {
-        header: '#',
-        cell: ({ row }) => (
-          <Typography
-            component={Link}
-            href={`/apps/invoice/preview/${row.original.id}`}
-            color='primary.main'
-          >{`#${row.original.id}`}</Typography>
-        )
-      }),
-      columnHelper.accessor('invoiceStatus', {
-        header: 'Status',
-        cell: ({ row }) => (
-          <Tooltip
-            title={
-              <div>
-                <Typography variant='body2' component='span' className='text-inherit'>
-                  {row.original.invoiceStatus}
-                </Typography>
-                <br />
-                <Typography variant='body2' component='span' className='text-inherit'>
-                  Balance:
-                </Typography>
-                {row.original.balance}
-                <br />
-                <Typography variant='body2' component='span' className='text-inherit'>
-                  Due Date:
-                </Typography>
-                {row.original.dueDate}
-              </div>
-            }
-          >
-            <CustomAvatar skin='light' color={invoiceStatusObj[row.original.invoiceStatus].color} size={28}>
-              <i className={classnames('bs-4 is-4', invoiceStatusObj[row.original.invoiceStatus].icon)} />
-            </CustomAvatar>
-          </Tooltip>
-        )
-      }),
       columnHelper.accessor('name', {
-        header: 'Client',
+        header: 'Name',
         cell: ({ row }) => (
-          <div className='flex items-center gap-3'>
-            {getAvatar({ avatar: row.original.avatar, name: row.original.name })}
-            <div className='flex flex-col'>
-              <Typography className='font-medium' color='text.primary'>
-                {row.original.name}
-              </Typography>
-              <Typography variant='body2'>{row.original.companyEmail}</Typography>
-            </div>
-          </div>
+          <Typography className='font-medium' color='text.primary'>
+            {row.original.name}
+          </Typography>
         )
       }),
-      columnHelper.accessor('total', {
-        header: 'Total',
-        cell: ({ row }) => <Typography>{`$${row.original.total}`}</Typography>
+      columnHelper.accessor('speciality_id', {
+        header: 'Speciality',
+        cell: ({ row }) => (
+          <Typography className='font-medium' color='text.primary'>
+            {specialities.find(item => item.id === row.original.speciality_id).name}
+          </Typography>
+        )
       }),
-      columnHelper.accessor('issuedDate', {
-        header: 'Issued Date',
-        cell: ({ row }) => <Typography>{row.original.issuedDate}</Typography>
+      columnHelper.accessor('experience', {
+        header: 'Experience',
+        cell: ({ row }) => (
+          <Typography className='font-medium' color='text.primary'>
+            {row.original.experience} years
+          </Typography>
+        )
       }),
-      columnHelper.accessor('balance', {
-        header: 'Balance',
+      columnHelper.accessor('cover', {
+        header: 'Cover',
+        cell: ({ row }) => (
+          <img
+            src={row.original.cover}
+            alt='Doctor profile'
+            style={{ width: 50, height: 50, borderRadius: '4px', objectFit: 'cover' }}
+          />
+        )
+      }),
+      columnHelper.accessor('consultation_fee', {
+        header: 'Fee',
+        cell: ({ row }) => (
+          <Typography className='font-medium' color='text.primary'>
+            ${row.original.consultation_fee}
+          </Typography>
+        )
+      }),
+      columnHelper.accessor('rating', {
+        header: 'Rating',
+        cell: ({ row }) => (
+          <Typography className='font-medium' color='text.primary'>
+            {row.original.rating}
+          </Typography>
+        )
+      }),
+
+      columnHelper.accessor('created_at', {
+        header: 'Created At',
+        cell: ({ row }) => (
+          <Typography className='font-medium' color='text.primary'>
+            {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(
+              new Date(row.original.created_at)
+            )}
+          </Typography>
+        )
+      }),
+      columnHelper.accessor('updated_at', {
+        header: 'Updated At',
+        cell: ({ row }) => (
+          <Typography className='font-medium' color='text.primary'>
+            {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(
+              new Date(row.original.updated_at)
+            )}
+          </Typography>
+        )
+      }),
+      columnHelper.accessor('status', {
+        header: 'Status',
         cell: ({ row }) => {
-          return row.original.balance === 0 ? (
-            <Chip label='Paid' color='success' size='small' variant='tonal' />
-          ) : (
-            <Typography color='text.primary'>{row.original.balance}</Typography>
+          const isActive = row.original.status === 'Active'
+
+          const handleStatusChange = event => {
+            const newStatus = event.target.checked ? 'Active' : 'Inactive'
+
+            doctorsService
+              .activeDoctor({ id: row.original.id, status: newStatus.toLowerCase() })
+              .then(() => {
+                toast.success(`Doctor ${isActive ? 'deactivated' : 'activated'} successfully`)
+                fetchDoctors()
+              })
+              .catch(error => {
+                toast.error(`Failed to update doctor status: ${error.message}`)
+              })
+          }
+
+          return (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Chip label={row.original.status} color={isActive ? 'success' : 'error'} size='small' variant='tonal' />
+              <Switch checked={isActive} onChange={handleStatusChange} size='small' color='success' />
+            </Box>
           )
         }
       }),
@@ -224,49 +259,24 @@ const ListTable = ({ invoiceData }: { invoiceData?: InvoiceType[] }) => {
         header: 'Action',
         cell: ({ row }) => (
           <div className='flex items-center'>
-            <IconButton onClick={() => setData(data?.filter(invoice => invoice.id !== row.original.id))}>
+            <IconButton onClick={() => handleDelete(row.original.id)}>
               <i className='tabler-trash text-textSecondary' />
             </IconButton>
             <IconButton>
-              <Link href={`/apps/invoice/preview/${row.original.id}`} className='flex'>
-                <i className='tabler-eye text-textSecondary' />
+              <Link href={`/doctors/edit/${row.original.id}`} className='flex'>
+                <i className='tabler-pencil text-textSecondary' />
               </Link>
             </IconButton>
-            <OptionMenu
-              iconButtonProps={{ size: 'medium' }}
-              iconClassName='text-textSecondary'
-              options={[
-                {
-                  text: 'Download',
-                  icon: 'tabler-download',
-                  menuItemProps: { className: 'flex items-center gap-2 text-textSecondary' }
-                },
-                {
-                  text: 'Edit',
-                  icon: 'tabler-pencil',
-                  href: `/apps/invoice/edit/${row.original.id}`,
-                  linkProps: {
-                    className: 'flex items-center is-full plb-2 pli-4 gap-2 text-textSecondary'
-                  }
-                },
-                {
-                  text: 'Duplicate',
-                  icon: 'tabler-copy',
-                  menuItemProps: { className: 'flex items-center gap-2 text-textSecondary' }
-                }
-              ]}
-            />
           </div>
         ),
         enableSorting: false
       })
     ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data, filteredData]
+    [data]
   )
 
   const table = useReactTable({
-    data: filteredData as InvoiceType[],
+    data: filteredData as DoctorType[],
     columns,
     filterFns: {
       fuzzy: fuzzyFilter
@@ -277,7 +287,7 @@ const ListTable = ({ invoiceData }: { invoiceData?: InvoiceType[] }) => {
     },
     initialState: {
       pagination: {
-        pageSize: 10
+        pageSize: 25
       }
     },
     enableRowSelection: true, //enable row selection for all rows
@@ -294,23 +304,9 @@ const ListTable = ({ invoiceData }: { invoiceData?: InvoiceType[] }) => {
     getFacetedMinMaxValues: getFacetedMinMaxValues()
   })
 
-  const getAvatar = (params: Pick<InvoiceType, 'avatar' | 'name'>) => {
-    const { avatar, name } = params
-
-    if (avatar) {
-      return <CustomAvatar src={avatar} skin='light' size={34} />
-    } else {
-      return (
-        <CustomAvatar skin='light' size={34}>
-          {getInitials(name as string)}
-        </CustomAvatar>
-      )
-    }
-  }
-
   useEffect(() => {
-    const filteredData = data?.filter(invoice => {
-      if (status && invoice.invoiceStatus.toLowerCase().replace(/\s+/g, '-') !== status) return false
+    const filteredData = data?.filter(item => {
+      if (status && item.status.toLowerCase().replace(/\s+/g, '-') !== status) return false
 
       return true
     })
@@ -339,17 +335,17 @@ const ListTable = ({ invoiceData }: { invoiceData?: InvoiceType[] }) => {
             variant='contained'
             component={Link}
             startIcon={<i className='tabler-plus' />}
-            href={'apps/invoice/add'}
+            href={'doctors/add'}
             className='max-sm:is-full'
           >
-            Create Invoice
+            Create Doctor
           </Button>
         </div>
         <div className='flex max-sm:flex-col max-sm:is-full sm:items-center gap-4'>
           <DebouncedInput
             value={globalFilter ?? ''}
             onChange={value => setGlobalFilter(String(value))}
-            placeholder='Search Invoice'
+            placeholder='Search Doctor'
             className='max-sm:is-full sm:is-[250px]'
           />
           <CustomTextField
@@ -362,13 +358,9 @@ const ListTable = ({ invoiceData }: { invoiceData?: InvoiceType[] }) => {
               select: { displayEmpty: true }
             }}
           >
-            <MenuItem value=''>Invoice Status</MenuItem>
-            <MenuItem value='downloaded'>Downloaded</MenuItem>
-            <MenuItem value='draft'>Draft</MenuItem>
-            <MenuItem value='paid'>Paid</MenuItem>
-            <MenuItem value='partial-payment'>Partial Payment</MenuItem>
-            <MenuItem value='past-due'>Past Due</MenuItem>
-            <MenuItem value='sent'>Sent</MenuItem>
+            <MenuItem value=''>Doctor Status</MenuItem>
+            <MenuItem value='inactive'>In Active</MenuItem>
+            <MenuItem value='active'>Active</MenuItem>
           </CustomTextField>
         </div>
       </CardContent>

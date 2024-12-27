@@ -8,8 +8,8 @@ const horizontalMenuData = (): HorizontalMenuDataType[] => [
     icon: 'tabler-building-hospital'
   },
   {
-    label: 'Doctor',
-    href: '/doctor',
+    label: 'Doctors',
+    href: '/doctors',
     icon: 'tabler-stethoscope'
   },
   {

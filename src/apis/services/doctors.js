@@ -1,18 +1,18 @@
 import { api } from '@/apis/config'
 
-export const hospitalsService = {
-  listHospitals: async () => {
+export const doctorsService = {
+  listDoctors: async () => {
     try {
-      const response = await api.get('/hospitals')
+      const response = await api.get('/doctors')
 
       return response.data
     } catch (error) {
       throw error
     }
   },
-  createHospital: async payload => {
+  createDoctor: async payload => {
     try {
-      const response = await api.post('/hospitals', payload, {
+      const response = await api.post('/doctors', payload, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -23,18 +23,18 @@ export const hospitalsService = {
       throw error
     }
   },
-  getHospital: async id => {
+  getDoctor: async id => {
     try {
-      const response = await api.get(`/hospitals/${id}`)
+      const response = await api.get(`/doctors/${id}`)
 
       return response.data
     } catch (error) {
       throw error
     }
   },
-  updateHospital: async (id, payload) => {
+  updateDoctor: async (id, payload) => {
     try {
-      const response = await api.post(`/hospitals/${id}`, payload, {
+      const response = await api.post(`/doctors/${id}`, payload, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -45,7 +45,7 @@ export const hospitalsService = {
       throw error
     }
   },
-  deleteHospital: async id => {
+  deleteDoctor: async id => {
     try {
       const response = await api.delete(`/hospitals/${id}`)
 
@@ -54,9 +54,9 @@ export const hospitalsService = {
       throw error
     }
   },
-  activeHospital: async payload => {
+  activeDoctor: async payload => {
     try {
-      const response = await api.put(`/hospitals/${payload.id}/${payload.status}`)
+      const response = await api.put(`/doctors/${payload.id}/${payload.status}`)
 
       return response.data
     } catch (error) {
