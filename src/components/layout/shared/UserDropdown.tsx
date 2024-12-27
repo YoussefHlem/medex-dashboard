@@ -19,7 +19,6 @@ import ClickAwayListener from '@mui/material/ClickAwayListener'
 import MenuList from '@mui/material/MenuList'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
-import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
 
 // Hook Imports
@@ -40,6 +39,7 @@ const BadgeContentSpan = styled('span')({
 const UserDropdown = () => {
   // States
   const [open, setOpen] = useState(false)
+  const profile = JSON.parse(localStorage.getItem('profile') || '{}')
 
   // Refs
   const anchorRef = useRef<HTMLDivElement>(null)
@@ -112,31 +112,16 @@ const UserDropdown = () => {
               <ClickAwayListener onClickAway={e => handleDropdownClose(e as MouseEvent | TouchEvent)}>
                 <MenuList>
                   <div className='flex items-center plb-2 pli-6 gap-2' tabIndex={-1}>
-                    <Avatar alt='John Doe' src='/images/avatars/1.png' />
+                    <Avatar alt='John Doe' src={profile?.cover} />
                     <div className='flex items-start flex-col'>
                       <Typography className='font-medium' color='text.primary'>
-                        John Doe
+                        {profile?.name}
                       </Typography>
                       <Typography variant='caption'>admin@vuexy.com</Typography>
                     </div>
                   </div>
                   <Divider className='mlb-1' />
-                  <MenuItem className='mli-2 gap-3' onClick={e => handleDropdownClose(e)}>
-                    <i className='tabler-user' />
-                    <Typography color='text.primary'>My Profile</Typography>
-                  </MenuItem>
-                  <MenuItem className='mli-2 gap-3' onClick={e => handleDropdownClose(e)}>
-                    <i className='tabler-settings' />
-                    <Typography color='text.primary'>Settings</Typography>
-                  </MenuItem>
-                  <MenuItem className='mli-2 gap-3' onClick={e => handleDropdownClose(e)}>
-                    <i className='tabler-currency-dollar' />
-                    <Typography color='text.primary'>Pricing</Typography>
-                  </MenuItem>
-                  <MenuItem className='mli-2 gap-3' onClick={e => handleDropdownClose(e)}>
-                    <i className='tabler-help-circle' />
-                    <Typography color='text.primary'>FAQ</Typography>
-                  </MenuItem>
+
                   <div className='flex items-center plb-2 pli-3'>
                     <Button
                       fullWidth

@@ -133,7 +133,7 @@ const ListTable = () => {
       success: 'Promise resolved 👌',
       error: 'Promise rejected 🤯'
     })
-    setData(data?.filter(hospital => hospital.id !== id))
+    fetchHospitals()
   }
 
   const columns = useMemo<ColumnDef<HospitalTypeWithAction, any>[]>(
@@ -231,7 +231,7 @@ const ListTable = () => {
         enableSorting: false
       })
     ],
-    [data]
+    []
   )
 
   const table = useReactTable({

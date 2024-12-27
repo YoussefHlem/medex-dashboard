@@ -8,7 +8,6 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
 import MenuItem from '@mui/material/MenuItem'
 import TablePagination from '@mui/material/TablePagination'
@@ -33,10 +32,6 @@ import {
 
 import { toast } from 'react-toastify'
 
-import { Box } from '@mui/material'
-
-import Switch from '@mui/material/Switch'
-
 import TablePaginationComponent from '@components/TablePaginationComponent'
 
 // Component Imports
@@ -44,26 +39,18 @@ import CustomTextField from '@core/components/mui/TextField'
 
 // Style Imports
 import tableStyles from '@core/styles/table.module.css'
-import { doctorsService } from '@/apis/services/doctors'
 import { specialitiesService } from '@/apis/services/specialities'
 
-interface DoctorType {
+interface SpecialityType {
   id: string
   name: string
-  type: string
+  description: string
   cover: string
-  lat: number
-  lng: number
-  status: string
-  speciality_id: string
-  experience: number
-  consultation_fee: number
-  rating: number
   created_at: string
   updated_at: string
 }
 
-type DoctorTypeWithAction = DoctorType & {
+type SpecialityTypeWithAction = SpecialityType & {
   action?: string
 }
 
@@ -110,41 +97,34 @@ const DebouncedInput = ({
 }
 
 // Column Definitions
-const columnHelper = createColumnHelper<DoctorTypeWithAction>()
+const columnHelper = createColumnHelper<SpecialityTypeWithAction>()
 
 const ListTable = () => {
   // States
-  const [status, setStatus] = useState<DoctorType['status']>('')
   const [rowSelection, setRowSelection] = useState({})
   const [data, setData] = useState([])
-  const [filteredData, setFilteredData] = useState(data)
   const [globalFilter, setGlobalFilter] = useState('')
-  const [specialities, setSpecialities] = useState([])
 
-  const fetchDoctors = () => {
-    doctorsService.listDoctors().then(res => {
-      setData(res.data.doctors)
-    })
+  const fetchSpecialities = () => {
     specialitiesService.listSpecialities().then(res => {
-      setSpecialities(res.data.specialities)
+      setData(res.data.specialities)
     })
   }
 
   useEffect(() => {
-    fetchDoctors()
+    fetchSpecialities()
   }, [])
 
   const handleDelete = async id => {
-    await toast.promise(doctorsService.deleteDoctor(id), {
+    await toast.promise(specialitiesService.deleteSpeciality(id), {
       pending: 'Promise is pending',
       success: 'Promise resolved 👌',
       error: 'Promise rejected 🤯'
     })
-    fetchDoctors()
+    fetchSpecialities()
   }
 
-  // @ts-ignore
-  const columns = useMemo<ColumnDef<DoctorTypeWithAction, any>[]>(
+  const columns = useMemo<ColumnDef<SpecialityTypeWithAction, any>[]>(
     () => [
       {
         id: 'select',
@@ -163,19 +143,11 @@ const ListTable = () => {
           </Typography>
         )
       }),
-      columnHelper.accessor('speciality_id', {
-        header: 'Speciality',
+      columnHelper.accessor('description', {
+        header: 'Description',
         cell: ({ row }) => (
           <Typography className='font-medium' color='text.primary'>
-            {specialities.find(item => item.id === row.original.speciality_id)?.name}
-          </Typography>
-        )
-      }),
-      columnHelper.accessor('experience', {
-        header: 'Experience',
-        cell: ({ row }) => (
-          <Typography className='font-medium' color='text.primary'>
-            {row.original.experience} years
+            {row.original.description}
           </Typography>
         )
       }),
@@ -184,28 +156,11 @@ const ListTable = () => {
         cell: ({ row }) => (
           <img
             src={row.original.cover}
-            alt='Doctor profile'
+            alt='Speciality Icon'
             style={{ width: 50, height: 50, borderRadius: '4px', objectFit: 'cover' }}
           />
         )
       }),
-      columnHelper.accessor('consultation_fee', {
-        header: 'Fee',
-        cell: ({ row }) => (
-          <Typography className='font-medium' color='text.primary'>
-            ${row.original.consultation_fee}
-          </Typography>
-        )
-      }),
-      columnHelper.accessor('rating', {
-        header: 'Rating',
-        cell: ({ row }) => (
-          <Typography className='font-medium' color='text.primary'>
-            {row.original.rating}
-          </Typography>
-        )
-      }),
-
       columnHelper.accessor('created_at', {
         header: 'Created At',
         cell: ({ row }) => (
@@ -226,33 +181,6 @@ const ListTable = () => {
           </Typography>
         )
       }),
-      columnHelper.accessor('status', {
-        header: 'Status',
-        cell: ({ row }) => {
-          const isActive = row.original.status === 'Active'
-
-          const handleStatusChange = event => {
-            const newStatus = event.target.checked ? 'Active' : 'Inactive'
-
-            doctorsService
-              .activeDoctor({ id: row.original.id, status: newStatus.toLowerCase() })
-              .then(() => {
-                toast.success(`Doctor ${isActive ? 'deactivated' : 'activated'} successfully`)
-                fetchDoctors()
-              })
-              .catch(error => {
-                toast.error(`Failed to update doctor status: ${error.message}`)
-              })
-          }
-
-          return (
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-              <Chip label={row.original.status} color={isActive ? 'success' : 'error'} size='small' variant='tonal' />
-              <Switch checked={isActive} onChange={handleStatusChange} size='small' color='success' />
-            </Box>
-          )
-        }
-      }),
       columnHelper.accessor('action', {
         header: 'Action',
         cell: ({ row }) => (
@@ -261,7 +189,7 @@ const ListTable = () => {
               <i className='tabler-trash text-textSecondary' />
             </IconButton>
             <IconButton>
-              <Link href={`/doctors/edit/${row.original.id}`} className='flex'>
+              <Link href={`/speciality/edit/${row.original.id}`} className='flex'>
                 <i className='tabler-pencil text-textSecondary' />
               </Link>
             </IconButton>
@@ -274,7 +202,7 @@ const ListTable = () => {
   )
 
   const table = useReactTable({
-    data: filteredData as DoctorType[],
+    data: data as SpecialityType[],
     columns,
     filterFns: {
       fuzzy: fuzzyFilter
@@ -302,16 +230,6 @@ const ListTable = () => {
     getFacetedMinMaxValues: getFacetedMinMaxValues()
   })
 
-  useEffect(() => {
-    const filteredData = data?.filter(item => {
-      if (status && item.status.toLowerCase().replace(/\s+/g, '-') !== status) return false
-
-      return true
-    })
-
-    setFilteredData(filteredData)
-  }, [status, data, setFilteredData])
-
   return (
     <Card>
       <CardContent className='flex justify-between flex-col items-start md:items-center md:flex-row gap-4'>
@@ -333,33 +251,19 @@ const ListTable = () => {
             variant='contained'
             component={Link}
             startIcon={<i className='tabler-plus' />}
-            href={'doctors/add'}
+            href={'speciality/add'}
             className='max-sm:is-full'
           >
-            Create Doctor
+            Create Speciality
           </Button>
         </div>
         <div className='flex max-sm:flex-col max-sm:is-full sm:items-center gap-4'>
           <DebouncedInput
             value={globalFilter ?? ''}
             onChange={value => setGlobalFilter(String(value))}
-            placeholder='Search Doctor'
+            placeholder='Search Specialty'
             className='max-sm:is-full sm:is-[250px]'
           />
-          <CustomTextField
-            select
-            id='select-status'
-            value={status}
-            onChange={e => setStatus(e.target.value)}
-            className='max-sm:is-full sm:is-[160px]'
-            slotProps={{
-              select: { displayEmpty: true }
-            }}
-          >
-            <MenuItem value=''>Doctor Status</MenuItem>
-            <MenuItem value='inactive'>In Active</MenuItem>
-            <MenuItem value='active'>Active</MenuItem>
-          </CustomTextField>
         </div>
       </CardContent>
       <div className='overflow-x-auto'>
