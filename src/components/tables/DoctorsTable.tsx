@@ -121,7 +121,7 @@ const ListTable = () => {
   const [globalFilter, setGlobalFilter] = useState('')
   const [specialities, setSpecialities] = useState([])
 
-  const fetchDoctors = () => {
+  const fetchDoctors = async () => {
     doctorsService.listDoctors().then(res => {
       setData(res.data.doctors)
     })
@@ -167,7 +167,7 @@ const ListTable = () => {
         header: 'Speciality',
         cell: ({ row }) => (
           <Typography className='font-medium' color='text.primary'>
-            {specialities.find(item => item.id === row.original.speciality_id)?.name}
+            {specialities.find((item: { id: number }) => item.id === row.original.speciality_id)?.name}
           </Typography>
         )
       }),
@@ -270,7 +270,7 @@ const ListTable = () => {
         enableSorting: false
       })
     ],
-    []
+    [specialities]
   )
 
   const table = useReactTable({
