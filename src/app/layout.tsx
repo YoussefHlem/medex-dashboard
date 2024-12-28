@@ -1,5 +1,6 @@
 // MUI Imports
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript'
+import { ToastContainer } from 'react-toastify'
 
 // Third-party Imports
 import 'react-perfect-scrollbar/dist/css/styles.css'
@@ -15,7 +16,6 @@ import '@/app/globals.css'
 
 // Generated Icon CSS Imports
 import '@assets/iconify-icons/generated-icons.css'
-import { ToastContainer } from 'react-toastify'
 
 export const metadata = {
   title: 'Medex Panel',
