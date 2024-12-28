@@ -15,7 +15,14 @@ import { specialitiesService } from '@/apis/services/specialities'
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required').min(2, 'Name must be at least 2 characters'),
   description: Yup.string().required('Description is required').min(10, 'Description must be at least 10 characters'),
-  cover: Yup.mixed().required('Cover image is required')
+  cover: Yup.mixed()
+    .required('Cover image is required')
+    .test('fileSize', 'File is too large', value => !value || (value && value.size <= 5000000)) // 5MB
+    .test(
+      'fileType',
+      'Unsupported file format',
+      value => !value || (value && ['image/jpeg', 'image/png', 'image/gif'].includes(value.type))
+    )
 })
 
 const SpecialtyForm = ({ id }: { id?: number }) => {
