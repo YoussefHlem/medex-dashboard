@@ -27,7 +27,6 @@ const validationSchema = Yup.object({
   status: Yup.number().required('Status is required'),
   cover: Yup.mixed()
     .required('Cover image is required')
-    .test('fileSize', 'File is too large', value => !value || (value && value.size <= 5000000)) // 5MB
     .test(
       'fileType',
       'Unsupported file format',

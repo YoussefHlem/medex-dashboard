@@ -17,7 +17,6 @@ const validationSchema = Yup.object({
   description: Yup.string().required('Description is required').min(10, 'Description must be at least 10 characters'),
   cover: Yup.mixed()
     .required('Cover image is required')
-    .test('fileSize', 'File is too large', value => !value || (value && value.size <= 5000000)) // 5MB
     .test(
       'fileType',
       'Unsupported file format',

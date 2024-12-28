@@ -32,7 +32,6 @@ const validationSchema = Yup.object({
     .max(180, 'Longitude must be between -180 and 180'),
   cover: Yup.mixed()
     .required('Cover image is required')
-    .test('fileSize', 'File is too large', value => !value || (value && value.size <= 5000000)) // 5MB
     .test(
       'fileType',
       'Unsupported file format',
