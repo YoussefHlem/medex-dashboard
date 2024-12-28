@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="remove size validation">
-      <change afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/SpecialityForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
