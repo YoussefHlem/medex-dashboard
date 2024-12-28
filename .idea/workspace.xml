@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="hot fix">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="remove size validation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/forms/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/SpecialityForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +132,7 @@
       <workItem from="1735306573643" duration="1229000" />
       <workItem from="1735308560953" duration="66000" />
       <workItem from="1735308672019" duration="5233000" />
-      <workItem from="1735380905649" duration="2515000" />
+      <workItem from="1735380905649" duration="2577000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -198,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735383270852</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="remove size validation">
+      <option name="closed" value="true" />
+      <created>1735383929855</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1735383929855</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +219,7 @@
     <MESSAGE value="add pnpm to package.json" />
     <MESSAGE value="remove pnpm to package.json" />
     <MESSAGE value="hot fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="hot fix" />
+    <MESSAGE value="remove size validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove size validation" />
   </component>
 </project>

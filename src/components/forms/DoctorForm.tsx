@@ -25,13 +25,7 @@ const validationSchema = Yup.object({
     .required('Consultation fee is required')
     .min(1, 'Consultation fee must be a positive number'),
   status: Yup.number().required('Status is required'),
-  cover: Yup.mixed()
-    .required('Cover image is required')
-    .test(
-      'fileType',
-      'Unsupported file format',
-      value => !value || (value && ['image/jpeg', 'image/png', 'image/gif'].includes(value.type))
-    )
+  cover: Yup.mixed().required('Cover image is required')
 })
 
 const DoctorForm = ({ id }: { id?: number }) => {
