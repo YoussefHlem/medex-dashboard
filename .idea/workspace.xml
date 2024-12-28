@@ -131,7 +131,7 @@
       <workItem from="1735306573643" duration="1229000" />
       <workItem from="1735308560953" duration="66000" />
       <workItem from="1735308672019" duration="5233000" />
-      <workItem from="1735380905649" duration="264000" />
+      <workItem from="1735380905649" duration="431000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -165,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735381046894</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add pnpm to package.json">
+      <option name="closed" value="true" />
+      <created>1735381192456</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1735381192456</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
