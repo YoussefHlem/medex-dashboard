@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="add pnpm to package.json">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,7 +130,7 @@
       <workItem from="1735306573643" duration="1229000" />
       <workItem from="1735308560953" duration="66000" />
       <workItem from="1735308672019" duration="5233000" />
-      <workItem from="1735380905649" duration="431000" />
+      <workItem from="1735380905649" duration="654000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -173,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735381192456</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add pnpm to package.json">
+      <option name="closed" value="true" />
+      <created>1735381349326</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1735381349326</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
