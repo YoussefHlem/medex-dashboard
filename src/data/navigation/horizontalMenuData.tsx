@@ -18,16 +18,6 @@ const horizontalMenuData = (): HorizontalMenuDataType[] => [
     icon: 'tabler-medical-cross'
   },
   {
-    label: 'Announcement',
-    href: '/announcement',
-    icon: 'tabler-megaphone'
-  },
-  {
-    label: 'Agenda',
-    href: '/agenda',
-    icon: 'tabler-calendar'
-  },
-  {
     label: 'Booking',
     href: '/booking',
     icon: 'tabler-calendar-plus'
@@ -36,11 +26,6 @@ const horizontalMenuData = (): HorizontalMenuDataType[] => [
     label: 'Patient',
     href: '/patient',
     icon: 'tabler-user'
-  },
-  {
-    label: 'Notification',
-    href: '/notification',
-    icon: 'tabler-bell'
   },
   {
     label: 'Installment',

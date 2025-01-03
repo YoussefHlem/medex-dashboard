@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="typescript-ignore">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="hot fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/navigation/horizontalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/navigation/horizontalMenuData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +134,9 @@
       <workItem from="1735308560953" duration="66000" />
       <workItem from="1735308672019" duration="5233000" />
       <workItem from="1735380905649" duration="2839000" />
+      <workItem from="1735463384253" duration="1834000" />
+      <workItem from="1735557868709" duration="23000" />
+      <workItem from="1735912877206" duration="493000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -221,7 +226,23 @@
       <option name="project" value="LOCAL" />
       <updated>1735385513061</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="hot fix on doctors table">
+      <option name="closed" value="true" />
+      <created>1735386946072</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1735386946072</updated>
+    </task>
+    <task id="LOCAL-00013" summary="hot fix">
+      <option name="closed" value="true" />
+      <created>1735387120547</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1735387120548</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -233,9 +254,10 @@
     <MESSAGE value="Complete Specialities endpoint" />
     <MESSAGE value="add pnpm to package.json" />
     <MESSAGE value="remove pnpm to package.json" />
-    <MESSAGE value="hot fix" />
     <MESSAGE value="remove size validation" />
     <MESSAGE value="typescript-ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="typescript-ignore" />
+    <MESSAGE value="hot fix on doctors table" />
+    <MESSAGE value="hot fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="hot fix" />
   </component>
 </project>

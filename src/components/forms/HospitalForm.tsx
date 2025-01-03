@@ -342,18 +342,18 @@ const HospitalForm = ({ id }: { id?: number }) => {
                 </Typography>
               )}
             </Grid>
-            <Box sx={{ mt: 4 }}>
-              <Button
-                fullWidth
-                type='submit'
-                variant='contained'
-                color='primary'
-                disabled={!formik.isValid || formik.isSubmitting}
-              >
-                {id ? 'Update' : 'Create'}
-              </Button>
-            </Box>
           </Grid>
+          <Box sx={{ mt: 4 }}>
+            <Button
+              fullWidth
+              type='submit'
+              variant='contained'
+              color='primary'
+              disabled={!formik.isValid || formik.isSubmitting}
+            >
+              {id ? 'Update' : 'Create'}
+            </Button>
+          </Box>
         </Form>
       </CardContent>
     </Card>
