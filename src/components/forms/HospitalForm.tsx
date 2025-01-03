@@ -31,50 +31,34 @@ const validationSchema = Yup.object({
     .min(-180, 'Longitude must be between -180 and 180')
     .max(180, 'Longitude must be between -180 and 180'),
   cover: Yup.mixed()
-    .required('Cover image is required')
-    .test('fileSize', 'File is too large', value => !value || (value && value.size <= 5000000)) // 5MB
-    .test(
-      'fileType',
-      'Unsupported file format',
-      value => !value || (value && ['image/jpeg', 'image/png', 'image/gif'].includes(value.type))
-    )
+    .test('fileOrString', 'Cover image is required', function (value) {
+      // Accept either a File object or a URL string
+      return value instanceof File || (typeof value === 'string' && value.length > 0)
+    })
+    .test('fileSize', 'File is too large', value => {
+      if (value instanceof File) {
+        return value.size <= 5000000 // 5MB
+      }
+
+      return true
+    })
+    .test('fileType', 'Unsupported file format', value => {
+      if (value instanceof File) {
+        return ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type)
+      }
+
+      return true
+    })
 })
 
 const HospitalForm = ({ id }: { id?: number }) => {
-  const [previewUrl, setPreviewUrl] = useState(null)
-
-  useEffect(() => {
-    if (id) {
-      hospitalsService
-        .getHospital(id)
-        .then(item => {
-          const hospital = item.data.hospital
-
-          console.log(hospital)
-          formik.setValues({
-            name: hospital.name,
-            address: hospital.address,
-            phone: hospital.phone,
-            email: hospital.email,
-            type: hospital.type === 'Public' ? 1 : 2,
-            lat: hospital.lat,
-            lng: hospital.lng,
-            cover: null
-          })
-        })
-        .catch(err => {
-          toast.error(`Failed to fetch Hospital ${err.response.data.message}`)
-        })
-    }
-  }, [])
-
   const formik = useFormik({
     initialValues: {
       name: '',
       address: '',
       phone: '',
       email: '',
-      type: '',
+      type: null,
       lat: '',
       lng: '',
       cover: null
@@ -107,6 +91,36 @@ const HospitalForm = ({ id }: { id?: number }) => {
         })
     }
   })
+
+  const [previewUrl, setPreviewUrl] = useState(null)
+
+  useEffect(() => {
+    if (id) {
+      hospitalsService
+        .getHospital(id)
+        .then(item => {
+          const hospital = item.data.hospital
+
+          formik.setValues(
+            {
+              name: hospital.name,
+              address: hospital.address,
+              phone: hospital.phone,
+              email: hospital.email,
+              type: hospital.type === 'Public' ? 1 : 2,
+              lat: hospital.lat,
+              lng: hospital.lng,
+              cover: hospital.cover
+            },
+            true
+          )
+          setPreviewUrl(hospital.cover)
+        })
+        .catch(err => {
+          toast.error(`Failed to fetch Hospital ${err.response.data.message}`)
+        })
+    }
+  }, [])
 
   const handleImageChange = event => {
     const file = event.target.files[0]

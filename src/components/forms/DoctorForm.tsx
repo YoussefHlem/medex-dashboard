@@ -26,50 +26,27 @@ const validationSchema = Yup.object({
     .min(1, 'Consultation fee must be a positive number'),
   status: Yup.number().required('Status is required'),
   cover: Yup.mixed()
-    .required('Cover image is required')
-    .test('fileSize', 'File is too large', value => !value || (value && value.size <= 5000000)) // 5MB
-    .test(
-      'fileType',
-      'Unsupported file format',
-      value => !value || (value && ['image/jpeg', 'image/png', 'image/gif'].includes(value.type))
-    )
+    .test('fileOrString', 'Cover image is required', function (value) {
+      // Accept either a File object or a URL string
+      return value instanceof File || (typeof value === 'string' && value.length > 0)
+    })
+    .test('fileSize', 'File is too large', value => {
+      if (value instanceof File) {
+        return value.size <= 5000000 // 5MB
+      }
+
+      return true
+    })
+    .test('fileType', 'Unsupported file format', value => {
+      if (value instanceof File) {
+        return ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type)
+      }
+
+      return true
+    })
 })
 
 const DoctorForm = ({ id }: { id?: number }) => {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-  const [specialities, setSpecialities] = useState([])
-
-  useEffect(() => {
-    if (id) {
-      doctorsService
-        .getDoctor(id)
-        .then(item => {
-          const doctor = item.data.doctor
-
-          setPreviewUrl(doctor.cover)
-          formik.setValues({
-            name: doctor.name,
-            speciality_id: doctor.speciality_id,
-            bio: doctor.bio,
-            experience: doctor.experience,
-            description: doctor.description,
-            consultation_fee: doctor.consultation_fee,
-            status: doctor.status === 'Active' ? 1 : 0,
-            cover: null
-          })
-        })
-        .catch(err => {
-          toast.error(`Failed to fetch Doctor: ${err.response.data.message}`)
-        })
-    }
-  }, [id])
-
-  useEffect(() => {
-    specialitiesService.listSpecialities().then(res => {
-      setSpecialities(res.data.specialities)
-    })
-  }, [])
-
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -102,6 +79,43 @@ const DoctorForm = ({ id }: { id?: number }) => {
       }
     }
   })
+
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [specialities, setSpecialities] = useState([])
+
+  useEffect(() => {
+    if (id) {
+      doctorsService
+        .getDoctor(id)
+        .then(item => {
+          const doctor = item.data.doctor
+
+          setPreviewUrl(doctor.cover)
+          formik.setValues(
+            {
+              name: doctor.name,
+              speciality_id: doctor.speciality_id,
+              bio: doctor.bio,
+              experience: doctor.experience,
+              description: doctor.description,
+              consultation_fee: doctor.consultation_fee,
+              status: doctor.status === 'Active' ? 1 : 0,
+              cover: doctor.cover
+            },
+            true
+          )
+        })
+        .catch(err => {
+          toast.error(`Failed to fetch Doctor: ${err.response.data.message}`)
+        })
+    }
+  }, [])
+
+  useEffect(() => {
+    specialitiesService.listSpecialities().then(res => {
+      setSpecialities(res.data.specialities)
+    })
+  }, [])
 
   const handleImageChange = event => {
     const file = event.target.files[0]

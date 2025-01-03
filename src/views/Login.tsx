@@ -14,9 +14,7 @@ import { styled, useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
-import Checkbox from '@mui/material/Checkbox'
 import Button from '@mui/material/Button'
-import FormControlLabel from '@mui/material/FormControlLabel'
 
 // Third-party Imports
 import classnames from 'classnames'
@@ -184,9 +182,6 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
                 }
               }}
             />
-            <div className='flex justify-between items-center gap-x-3 gap-y-1 flex-wrap'>
-              <FormControlLabel control={<Checkbox />} label='Remember me' />
-            </div>
             <Button fullWidth variant='contained' type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Login'}
             </Button>

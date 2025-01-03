@@ -16,38 +16,27 @@ const validationSchema = Yup.object({
   name: Yup.string().required('Name is required').min(2, 'Name must be at least 2 characters'),
   description: Yup.string().required('Description is required').min(10, 'Description must be at least 10 characters'),
   cover: Yup.mixed()
-    .required('Cover image is required')
-    .test('fileSize', 'File is too large', value => !value || (value && value.size <= 5000000)) // 5MB
-    .test(
-      'fileType',
-      'Unsupported file format',
-      value => !value || (value && ['image/jpeg', 'image/png', 'image/gif'].includes(value.type))
-    )
+    .test('fileOrString', 'Cover image is required', function (value) {
+      // Accept either a File object or a URL string
+      return value instanceof File || (typeof value === 'string' && value.length > 0)
+    })
+    .test('fileSize', 'File is too large', value => {
+      if (value instanceof File) {
+        return value.size <= 5000000 // 5MB
+      }
+
+      return true
+    })
+    .test('fileType', 'Unsupported file format', value => {
+      if (value instanceof File) {
+        return ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type)
+      }
+
+      return true
+    })
 })
 
 const SpecialtyForm = ({ id }: { id?: number }) => {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (id) {
-      specialitiesService
-        .getSpeciality(id)
-        .then(item => {
-          const speciality = item.data.speciality
-
-          setPreviewUrl(speciality.cover)
-          formik.setValues({
-            name: speciality.name,
-            description: speciality.description,
-            cover: null
-          })
-        })
-        .catch(err => {
-          toast.error(`Failed to fetch Specialty: ${err.response.data.message}`)
-        })
-    }
-  }, [id])
-
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -77,6 +66,31 @@ const SpecialtyForm = ({ id }: { id?: number }) => {
       }
     }
   })
+
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (id) {
+      specialitiesService
+        .getSpeciality(id)
+        .then(item => {
+          const speciality = item.data.speciality
+
+          setPreviewUrl(speciality.cover)
+          formik.setValues(
+            {
+              name: speciality.name,
+              description: speciality.description,
+              cover: speciality.cover
+            },
+            true
+          )
+        })
+        .catch(err => {
+          toast.error(`Failed to fetch Specialty: ${err.response.data.message}`)
+        })
+    }
+  }, [])
 
   const handleImageChange = event => {
     const file = event.target.files[0]
