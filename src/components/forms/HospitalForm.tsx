@@ -78,17 +78,25 @@ const HospitalForm = ({ id }: { id?: number }) => {
       // Here you would typically send the formData to your API
       console.log('Form submitted:', Object.fromEntries(formData))
 
-      const action = id
-        ? await hospitalsService.updateHospital(id, formData)
-        : await hospitalsService.createHospital(formData)
-
-      action
-        .then(() => {
-          toast.success(`Hospital ${id ? 'Updated' : 'Created'} successfully`)
-        })
-        .catch(err => {
-          toast.error(`Failed to ${id ? 'Update' : 'Create'} Hospital ${err.response.data.message}`)
-        })
+      if (id) {
+        await hospitalsService
+          .updateHospital(id, formData)
+          .then(() => {
+            toast.success(`Hospital Updated successfully`)
+          })
+          .catch(err => {
+            toast.error(`Failed to Update Hospital ${err.response.data.message}`)
+          })
+      } else {
+        await hospitalsService
+          .createHospital(formData)
+          .then(() => {
+            toast.success(`Hospital Created successfully`)
+          })
+          .catch(err => {
+            toast.error(`Failed to Create Hospital ${err.response.data.message}`)
+          })
+      }
     }
   })
 

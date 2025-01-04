@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { Box, Button, Card, CardContent, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, InputAdornment, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 
 import { toast } from 'react-toastify'
@@ -21,6 +21,7 @@ const validationSchema = Yup.object({
   bio: Yup.string().required('Bio is required').min(10, 'Bio must be at least 10 characters'),
   experience: Yup.number().required('Experience is required').min(1, 'Experience must be at least 1 year'),
   description: Yup.string().required('Description is required').min(10, 'Description must be at least 10 characters'),
+  email: Yup.string().required('Email is required').email('Please enter a valid email'),
   consultation_fee: Yup.number()
     .required('Consultation fee is required')
     .min(1, 'Consultation fee must be a positive number'),
@@ -54,6 +55,7 @@ const DoctorForm = ({ id }: { id?: number }) => {
       bio: '',
       experience: '',
       description: '',
+      email: '',
       consultation_fee: '',
       status: '',
       cover: null
@@ -70,12 +72,24 @@ const DoctorForm = ({ id }: { id?: number }) => {
         formData.append(key, values[key])
       })
 
-      try {
-        id ? await doctorsService.updateDoctor(id, formData) : await doctorsService.createDoctor(formData)
-
-        toast.success(`Doctor ${id ? 'Updated' : 'Created'} successfully`)
-      } catch (err) {
-        toast.error(`Failed to ${id ? 'Update' : 'Create'} Doctor: ${err.response.data.message}`)
+      if (id) {
+        await doctorsService
+          .updateDoctor(id, formData)
+          .then(() => {
+            toast.success(`Doctor Updated successfully`)
+          })
+          .catch(err => {
+            toast.error(`Failed to Update Doctor ${err.response.data.message}`)
+          })
+      } else {
+        await doctorsService
+          .createDoctor(formData)
+          .then(() => {
+            toast.success(`Doctor Created successfully`)
+          })
+          .catch(err => {
+            toast.error(`Failed to Create Doctor ${err.response.data.message}`)
+          })
       }
     }
   })
@@ -98,6 +112,7 @@ const DoctorForm = ({ id }: { id?: number }) => {
               bio: doctor.bio,
               experience: doctor.experience,
               description: doctor.description,
+              email: doctor.email,
               consultation_fee: doctor.consultation_fee,
               status: doctor.status === 'Active' ? 1 : 0,
               cover: doctor.cover
@@ -206,6 +221,29 @@ const DoctorForm = ({ id }: { id?: number }) => {
                 onBlur={formik.handleBlur}
                 error={formik.touched.description && Boolean(formik.errors.description)}
                 helperText={formik.touched.description && formik.errors.description}
+              />
+            </Grid>
+            <Grid size={{ xs: 12 }}>
+              <CustomTextField
+                fullWidth
+                name='email'
+                type='email'
+                label='Email'
+                placeholder='omerre@omer.co0'
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                slotProps={{
+                  input: {
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <i className='tabler-mail' />
+                      </InputAdornment>
+                    )
+                  }
+                }}
               />
             </Grid>
             <Grid size={{ xs: 12 }}>

@@ -45,7 +45,6 @@ import CustomTextField from '@core/components/mui/TextField'
 // Style Imports
 import tableStyles from '@core/styles/table.module.css'
 import { doctorsService } from '@/apis/services/doctors'
-import { specialitiesService } from '@/apis/services/specialities'
 
 interface DoctorType {
   id: string
@@ -55,7 +54,7 @@ interface DoctorType {
   lat: number
   lng: number
   status: string
-  speciality_id: string
+  speciality: string
   experience: number
   consultation_fee: number
   rating: number
@@ -119,14 +118,10 @@ const ListTable = () => {
   const [data, setData] = useState([])
   const [filteredData, setFilteredData] = useState(data)
   const [globalFilter, setGlobalFilter] = useState('')
-  const [specialities, setSpecialities] = useState([])
 
   const fetchDoctors = async () => {
     doctorsService.listDoctors().then(res => {
       setData(res.data.doctors)
-    })
-    specialitiesService.listSpecialities().then(res => {
-      setSpecialities(res.data.specialities)
     })
   }
 
@@ -163,11 +158,11 @@ const ListTable = () => {
           </Typography>
         )
       }),
-      columnHelper.accessor('speciality_id', {
+      columnHelper.accessor('speciality', {
         header: 'Speciality',
         cell: ({ row }) => (
           <Typography className='font-medium' color='text.primary'>
-            {specialities.find((item: { id: number }) => item.id === row.original.speciality_id)?.name}
+            {row.original.speciality}
           </Typography>
         )
       }),
@@ -197,35 +192,36 @@ const ListTable = () => {
           </Typography>
         )
       }),
-      columnHelper.accessor('rating', {
-        header: 'Rating',
-        cell: ({ row }) => (
-          <Typography className='font-medium' color='text.primary'>
-            {row.original.rating}
-          </Typography>
-        )
-      }),
 
-      columnHelper.accessor('created_at', {
-        header: 'Created At',
-        cell: ({ row }) => (
-          <Typography className='font-medium' color='text.primary'>
-            {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(
-              new Date(row.original.created_at)
-            )}
-          </Typography>
-        )
-      }),
-      columnHelper.accessor('updated_at', {
-        header: 'Updated At',
-        cell: ({ row }) => (
-          <Typography className='font-medium' color='text.primary'>
-            {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(
-              new Date(row.original.updated_at)
-            )}
-          </Typography>
-        )
-      }),
+      // columnHelper.accessor('rating', {
+      //   header: 'Rating',
+      //   cell: ({ row }) => (
+      //     <Typography className='font-medium' color='text.primary'>
+      //       {row.original.rating}
+      //     </Typography>
+      //   )
+      // }),
+
+      // columnHelper.accessor('created_at', {
+      //   header: 'Created At',
+      //   cell: ({ row }) => (
+      //     <Typography className='font-medium' color='text.primary'>
+      //       {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(
+      //         new Date(row.original.created_at)
+      //       )}
+      //     </Typography>
+      //   )
+      // }),
+      // columnHelper.accessor('updated_at', {
+      //   header: 'Updated At',
+      //   cell: ({ row }) => (
+      //     <Typography className='font-medium' color='text.primary'>
+      //       {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(
+      //         new Date(row.original.updated_at)
+      //       )}
+      //     </Typography>
+      //   )
+      // }),
       columnHelper.accessor('status', {
         header: 'Status',
         cell: ({ row }) => {
@@ -270,7 +266,7 @@ const ListTable = () => {
         enableSorting: false
       })
     ],
-    [specialities]
+    []
   )
 
   const table = useReactTable({

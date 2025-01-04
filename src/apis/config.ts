@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Create base axios instance
 export const api = axios.create({
-  baseURL: 'https://medex-backend-c54c00f7a296.herokuapp.com/api',
+  baseURL: 'https://medex-backend.youssefhlem.com/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json'

@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="remove unnecessary tabs">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="migrate to new baseUrl">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/SpecialityForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +43,9 @@
 }</component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -137,7 +140,8 @@
       <workItem from="1735380905649" duration="2839000" />
       <workItem from="1735463384253" duration="1834000" />
       <workItem from="1735557868709" duration="23000" />
-      <workItem from="1735912877206" duration="4636000" />
+      <workItem from="1735912877206" duration="7118000" />
+      <workItem from="1735975220674" duration="4362000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -251,7 +255,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735913538357</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fix validation on forms">
+      <option name="closed" value="true" />
+      <created>1735918585991</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1735918585991</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +280,8 @@
     <MESSAGE value="hot fix on doctors table" />
     <MESSAGE value="hot fix" />
     <MESSAGE value="remove unnecessary tabs" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove unnecessary tabs" />
+    <MESSAGE value="fix validation on forms" />
+    <MESSAGE value="migrate to new baseUrl" />
+    <option name="LAST_COMMIT_MESSAGE" value="migrate to new baseUrl" />
   </component>
 </project>
