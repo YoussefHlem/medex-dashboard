@@ -47,7 +47,7 @@ export const doctorsService = {
   },
   deleteDoctor: async id => {
     try {
-      const response = await api.delete(`/hospitals/${id}`)
+      const response = await api.delete(`/doctors/${id}`)
 
       return response.data
     } catch (error) {

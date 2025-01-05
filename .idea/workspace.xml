@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="migrate to new baseUrl">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apis/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/services/doctors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/services/doctors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/shared/UserDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/shared/UserDropdown.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +139,7 @@
       <workItem from="1735463384253" duration="1834000" />
       <workItem from="1735557868709" duration="23000" />
       <workItem from="1735912877206" duration="7118000" />
-      <workItem from="1735975220674" duration="4362000" />
+      <workItem from="1735975220674" duration="11331000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -263,7 +261,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735918585991</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="migrate to new baseUrl">
+      <option name="closed" value="true" />
+      <created>1735993380572</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1735993380572</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
