@@ -4,10 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="migrate to new baseUrl">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="remove profile default pic;&#10;change doctors apis">
+      <change afterPath="$PROJECT_DIR$/src/fake-db/apps/calendar.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/styles/AppFullCalendar.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/styles/AppKeenSlider.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/styles/AppReactApexCharts.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/styles/AppReactDatepicker.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/styles/AppReactDropzone.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/styles/AppReactToastify.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/styles/AppRecharts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/styles/inputOtp.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/styles/tiptapEditor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux-store/ReduxProvider.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux-store/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux-store/slices/calendar.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/apps/calendarTypes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/apps/calendar/AddEventSidebar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/apps/calendar/CalendarWrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/apps/calendar/SidebarLeft.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apis/services/doctors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/services/doctors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/shared/UserDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/shared/UserDropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/agenda/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/announcement/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctors/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctors/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/notification/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Providers.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +87,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/components/forms&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/types/apps&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
@@ -82,13 +106,14 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\forms" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\tables" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\apis\services" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)\hospitals\edit" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\types\apps" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\fake-db\apps" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\libs" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\libs\styles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\libs" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)\hospitals\edit\[id]" />
     </key>
   </component>
@@ -140,6 +165,8 @@
       <workItem from="1735557868709" duration="23000" />
       <workItem from="1735912877206" duration="7118000" />
       <workItem from="1735975220674" duration="11331000" />
+      <workItem from="1736070264973" duration="4009000" />
+      <workItem from="1736234510851" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -269,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735993380572</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="remove profile default pic;&#10;change doctors apis">
+      <option name="closed" value="true" />
+      <created>1736070334476</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1736070334476</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,6 +323,7 @@
     <MESSAGE value="remove unnecessary tabs" />
     <MESSAGE value="fix validation on forms" />
     <MESSAGE value="migrate to new baseUrl" />
-    <option name="LAST_COMMIT_MESSAGE" value="migrate to new baseUrl" />
+    <MESSAGE value="remove profile default pic;&#10;change doctors apis" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove profile default pic;&#10;change doctors apis" />
   </component>
 </project>
