@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Implementing Calendar Page">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="implement InstallmentsTable">
+      <change afterPath="$PROJECT_DIR$/src/apis/services/installments.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/apis/services/patients.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/tables/InstallmentsTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/tables/PatientsTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/installment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/installment/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/patient/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/patient/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/shared/UserDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/shared/UserDropdown.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +68,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/types/apps&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/apis/services&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
@@ -73,18 +80,23 @@
     &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
     &quot;npm.dev.executor&quot;: &quot;Run&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;ECMAScript 6&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\apis\services" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\tables" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\types\apps" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\fake-db\apps" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\libs" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\libs\styles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\libs" />
@@ -111,7 +123,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.222" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.120" />
       </set>
     </attachedChunks>
   </component>
@@ -141,7 +153,19 @@
       <workItem from="1735975220674" duration="11331000" />
       <workItem from="1736070264973" duration="4009000" />
       <workItem from="1736234510851" duration="9000" />
-      <workItem from="1736528928817" duration="1108000" />
+      <workItem from="1736528928817" duration="4206000" />
+      <workItem from="1736768363127" duration="545000" />
+      <workItem from="1736768929114" duration="9000" />
+      <workItem from="1736768948617" duration="19000" />
+      <workItem from="1736768978701" duration="1166000" />
+      <workItem from="1736770170464" duration="1824000" />
+      <workItem from="1736893748991" duration="8000" />
+      <workItem from="1736897000878" duration="143000" />
+      <workItem from="1736897711074" duration="51000" />
+      <workItem from="1736907787227" duration="2886000" />
+      <workItem from="1737136468911" duration="13000" />
+      <workItem from="1737220812705" duration="597000" />
+      <workItem from="1737717598620" duration="127000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -287,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736528943175</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="remove unused files">
+      <option name="closed" value="true" />
+      <created>1736530087632</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1736530087632</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,6 +340,8 @@
     <MESSAGE value="migrate to new baseUrl" />
     <MESSAGE value="remove profile default pic;&#10;change doctors apis" />
     <MESSAGE value="Implementing Calendar Page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing Calendar Page" />
+    <MESSAGE value="remove unused files" />
+    <MESSAGE value="implement InstallmentsTable" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement InstallmentsTable" />
   </component>
 </project>

@@ -88,7 +88,7 @@ const UserDropdown = () => {
         <Avatar
           ref={anchorRef}
           alt={profile?.name}
-          src='/images/avatars/4.png'
+          src={profile?.avatar}
           onClick={handleDropdownOpen}
           className='cursor-pointer bs-[38px] is-[38px]'
         />
@@ -112,7 +112,7 @@ const UserDropdown = () => {
               <ClickAwayListener onClickAway={e => handleDropdownClose(e as MouseEvent | TouchEvent)}>
                 <MenuList>
                   <div className='flex items-center plb-2 pli-6 gap-2' tabIndex={-1}>
-                    <Avatar alt='John Doe' src={profile?.cover} />
+                    <Avatar alt='John Doe' src={profile?.avatar} />
                     <div className='flex items-start flex-col'>
                       <Typography className='font-medium' color='text.primary'>
                         {profile?.name}
