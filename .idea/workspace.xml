@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="done">
-      <change afterPath="$PROJECT_DIR$/src/apis/services/agenda.js" afterDir="false" />
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Implementing Agenda APIs">
+      <change afterPath="$PROJECT_DIR$/src/components/tables/BookingsTables.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/booking/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/services/doctors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/services/doctors.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctors/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctors/edit/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/navigation/horizontalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/navigation/horizontalMenuData.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux-store/slices/calendar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux-store/slices/calendar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/apps/calendarTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/apps/calendarTypes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/AddEventSidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/AddEventSidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/CalendarWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/CalendarWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/SidebarLeft.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/SidebarLeft.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,38 +63,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/apis/services&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/components/tables",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.stylelint": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "npm.dev.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;ECMAScript 6&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "ECMAScript 6"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\apis\services" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\tables" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\apis\services" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\types\apps" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\fake-db\apps" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src" />
@@ -174,7 +168,7 @@
       <workItem from="1737220812705" duration="597000" />
       <workItem from="1737717598620" duration="355000" />
       <workItem from="1737745638122" duration="3046000" />
-      <workItem from="1737789356952" duration="3926000" />
+      <workItem from="1737789356952" duration="7274000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -336,7 +330,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737717953050</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Implementing Agenda APIs">
+      <option name="closed" value="true" />
+      <created>1737797769461</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1737797769461</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,6 +362,7 @@
     <MESSAGE value="remove unused files" />
     <MESSAGE value="implement InstallmentsTable" />
     <MESSAGE value="done" />
-    <option name="LAST_COMMIT_MESSAGE" value="done" />
+    <MESSAGE value="Implementing Agenda APIs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementing Agenda APIs" />
   </component>
 </project>

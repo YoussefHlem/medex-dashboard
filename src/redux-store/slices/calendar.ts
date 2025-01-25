@@ -7,11 +7,11 @@ import type { EventInput } from '@fullcalendar/core'
 import type { CalendarFiltersType, CalendarType } from '@/types/apps/calendarTypes'
 
 // Data Imports
-import { events } from '@/fake-db/apps/calendar'
+// import { events } from '@/fake-db/apps/calendar'
 
 const initialState: CalendarType = {
-  events: events,
-  filteredEvents: events,
+  events: [],
+  filteredEvents: [],
   selectedEvent: null,
   selectedCalendars: ['Personal', 'Business', 'Family', 'Holiday', 'ETC']
 }

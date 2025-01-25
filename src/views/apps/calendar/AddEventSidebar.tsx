@@ -24,7 +24,7 @@ import CustomTextField from '@core/components/mui/TextField'
 import AppReactDatepicker from '@/libs/styles/AppReactDatepicker'
 
 // Slice Imports
-import { addEvent, deleteEvent, filterEvents, selectedEvent, updateEvent } from '@/redux-store/slices/calendar'
+import { addEvent, filterEvents, selectedEvent, updateEvent } from '@/redux-store/slices/calendar'
 import { agendaService } from '@/apis/services/agenda'
 
 interface PickerProps {
@@ -139,16 +139,16 @@ const AddEventSidebar = (props: AddEventSidebarType) => {
     handleSidebarClose()
   }
 
-  const handleDeleteButtonClick = () => {
-    if (calendarStore.selectedEvent) {
-      agendaService.deleteAgenda(calendarStore.selectedEvent.id).then(() => {
-        dispatch(deleteEvent(calendarStore.selectedEvent.id))
-      })
-      dispatch(filterEvents())
-    }
-
-    handleSidebarClose()
-  }
+  // const handleDeleteButtonClick = () => {
+  //   if (calendarStore.selectedEvent) {
+  //     agendaService.deleteAgenda(calendarStore.selectedEvent.id).then(() => {
+  //       dispatch(deleteEvent(calendarStore.selectedEvent.id))
+  //     })
+  //     dispatch(filterEvents())
+  //   }
+  //
+  //   handleSidebarClose()
+  // }
 
   const handleStartDate = (date: Date | null) => {
     if (date && date > values.endDate) {

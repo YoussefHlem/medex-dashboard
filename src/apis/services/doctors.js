@@ -62,5 +62,14 @@ export const doctorsService = {
     } catch (error) {
       throw error
     }
+  },
+  listBookings: async id => {
+    try {
+      const response = await api.get(`/doctors/${id}/bookings`)
+
+      return response.data
+    } catch (error) {
+      throw error
+    }
   }
 }
