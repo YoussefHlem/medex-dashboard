@@ -3,21 +3,20 @@ import Button from '@mui/material/Button'
 import Drawer from '@mui/material/Drawer'
 import Divider from '@mui/material/Divider'
 import Checkbox from '@mui/material/Checkbox'
-import Typography from '@mui/material/Typography'
 import FormControlLabel from '@mui/material/FormControlLabel'
 
 // Third-party imports
 import classnames from 'classnames'
 
 // Types Imports
-import type { SidebarLeftProps, CalendarFiltersType } from '@/types/apps/calendarTypes'
+import type { CalendarFiltersType, SidebarLeftProps } from '@/types/apps/calendarTypes'
 import type { ThemeColor } from '@core/types'
 
 // Styled Component Imports
 import AppReactDatepicker from '@/libs/styles/AppReactDatepicker'
 
 // Slice Imports
-import { filterAllCalendarLabels, filterCalendarLabel, selectedEvent } from '@/redux-store/slices/calendar'
+import { filterCalendarLabel, selectedEvent } from '@/redux-store/slices/calendar'
 
 const SidebarLeft = (props: SidebarLeftProps) => {
   // Props
@@ -108,25 +107,25 @@ const SidebarLeft = (props: SidebarLeftProps) => {
             sx: { '& .react-datepicker': { boxShadow: 'none !important', border: 'none !important' } }
           }}
         />
-        <Divider className='is-full' />
+        {/*<Divider className='is-full' />*/}
 
-        <div className='flex flex-col p-6 is-full'>
-          <Typography variant='h5' className='mbe-4'>
-            Event Filters
-          </Typography>
-          <FormControlLabel
-            className='mbe-1'
-            label='View All'
-            control={
-              <Checkbox
-                color='secondary'
-                checked={calendarStore.selectedCalendars.length === colorsArr.length}
-                onChange={e => dispatch(filterAllCalendarLabels(e.target.checked))}
-              />
-            }
-          />
-          {renderFilters}
-        </div>
+        {/*<div className='flex flex-col p-6 is-full'>*/}
+        {/*  <Typography variant='h5' className='mbe-4'>*/}
+        {/*    Event Filters*/}
+        {/*  </Typography>*/}
+        {/*  <FormControlLabel*/}
+        {/*    className='mbe-1'*/}
+        {/*    label='View All'*/}
+        {/*    control={*/}
+        {/*      <Checkbox*/}
+        {/*        color='secondary'*/}
+        {/*        checked={calendarStore.selectedCalendars.length === colorsArr.length}*/}
+        {/*        onChange={e => dispatch(filterAllCalendarLabels(e.target.checked))}*/}
+        {/*      />*/}
+        {/*    }*/}
+        {/*  />*/}
+        {/*  {renderFilters}*/}
+        {/*</div>*/}
       </Drawer>
     )
   } else {

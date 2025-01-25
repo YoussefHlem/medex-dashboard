@@ -41,4 +41,5 @@ export type AddEventSidebarType = {
   dispatch: Dispatch
   addEventSidebarOpen: boolean
   handleAddEventSidebarToggle: () => void
+  doctorId: number
 }

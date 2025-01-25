@@ -1,26 +1,21 @@
 // React Imports
-import { useState, useEffect, forwardRef, useCallback } from 'react'
+import { forwardRef, useCallback, useEffect, useState } from 'react'
 
 // MUI Imports
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
-import Switch from '@mui/material/Switch'
 import Button from '@mui/material/Button'
-import MenuItem from '@mui/material/MenuItem'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import FormControl from '@mui/material/FormControl'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import type { SelectChangeEvent } from '@mui/material/Select'
 import type { Theme } from '@mui/material/styles'
 
 // Third-party Imports
-import { useForm, Controller } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // Type Imports
-import type { AddEventSidebarType, AddEventType } from '@/types/apps/calendarTypes'
+import type { AddEventSidebarType } from '@/types/apps/calendarTypes'
 
 // Component Imports
 import CustomTextField from '@core/components/mui/TextField'
@@ -29,7 +24,8 @@ import CustomTextField from '@core/components/mui/TextField'
 import AppReactDatepicker from '@/libs/styles/AppReactDatepicker'
 
 // Slice Imports
-import { addEvent, deleteEvent, updateEvent, selectedEvent, filterEvents } from '@/redux-store/slices/calendar'
+import { addEvent, deleteEvent, filterEvents, selectedEvent, updateEvent } from '@/redux-store/slices/calendar'
+import { agendaService } from '@/apis/services/agenda'
 
 interface PickerProps {
   label?: string
@@ -38,29 +34,26 @@ interface PickerProps {
 }
 
 interface DefaultStateType {
-  url: string
   title: string
-  allDay: boolean
-  calendar: string
   description: string
   endDate: Date
   startDate: Date
-  guests: string[] | undefined
 }
 
 // Vars
-const capitalize = (string: string) => string && string[0].toUpperCase() + string.slice(1)
-
-// Vars
 const defaultState: DefaultStateType = {
-  url: '',
   title: '',
-  guests: [],
-  allDay: true,
   description: '',
   endDate: new Date(),
-  calendar: 'Business',
   startDate: new Date()
+}
+
+interface AddEventType {
+  display: 'block'
+  title: string
+  start: Date
+  end: Date
+  description?: string
 }
 
 const AddEventSidebar = (props: AddEventSidebarType) => {
@@ -101,12 +94,8 @@ const AddEventSidebar = (props: AddEventSidebarType) => {
 
       setValue('title', event.title || '')
       setValues({
-        url: event.url || '',
         title: event.title || '',
-        allDay: event.allDay,
-        guests: event.extendedProps.guests || [],
         description: event.extendedProps.description || '',
-        calendar: event.extendedProps.calendar || 'Business',
         endDate: event.end !== null ? event.end : event.start,
         startDate: event.start !== null ? event.start : new Date()
       })
@@ -127,24 +116,20 @@ const AddEventSidebar = (props: AddEventSidebarType) => {
 
   const onSubmit = (data: { title: string }) => {
     const modifiedEvent: AddEventType = {
-      url: values.url,
       display: 'block',
       title: data.title,
       end: values.endDate,
-      allDay: values.allDay,
       start: values.startDate,
-      extendedProps: {
-        calendar: capitalize(values.calendar),
-        guests: values.guests && values.guests.length ? values.guests : undefined,
-        description: values.description.length ? values.description : undefined
-      }
+      description: values.description.length ? values.description : undefined
     }
 
     if (
       calendarStore.selectedEvent === null ||
       (calendarStore.selectedEvent !== null && !calendarStore.selectedEvent.title.length)
     ) {
-      dispatch(addEvent(modifiedEvent))
+      agendaService.createAgenda(props.doctorId, modifiedEvent).then(() => {
+        dispatch(addEvent(modifiedEvent))
+      })
     } else {
       dispatch(updateEvent({ ...modifiedEvent, id: calendarStore.selectedEvent.id }))
     }
@@ -156,11 +141,12 @@ const AddEventSidebar = (props: AddEventSidebarType) => {
 
   const handleDeleteButtonClick = () => {
     if (calendarStore.selectedEvent) {
-      dispatch(deleteEvent(calendarStore.selectedEvent.id))
+      agendaService.deleteAgenda(calendarStore.selectedEvent.id).then(() => {
+        dispatch(deleteEvent(calendarStore.selectedEvent.id))
+      })
       dispatch(filterEvents())
     }
 
-    // calendarApi.getEventById(calendarStore.selectedEvent.id).remove()
     handleSidebarClose()
   }
 
@@ -223,9 +209,9 @@ const AddEventSidebar = (props: AddEventSidebarType) => {
         </Typography>
         {calendarStore.selectedEvent && calendarStore.selectedEvent.title.length ? (
           <Box className='flex items-center' sx={{ gap: calendarStore.selectedEvent !== null ? 1 : 0 }}>
-            <IconButton size='small' onClick={handleDeleteButtonClick}>
-              <i className='tabler-trash text-2xl text-textPrimary' />
-            </IconButton>
+            {/*<IconButton size='small' onClick={handleDeleteButtonClick}>*/}
+            {/*  <i className='tabler-trash text-2xl text-textPrimary' />*/}
+            {/*</IconButton>*/}
             <IconButton size='small' onClick={handleSidebarClose}>
               <i className='tabler-x text-2xl text-textPrimary' />
             </IconButton>
@@ -257,19 +243,7 @@ const AddEventSidebar = (props: AddEventSidebarType) => {
                 />
               )}
             />
-            <CustomTextField
-              select
-              fullWidth
-              label='Calendar'
-              value={values.calendar}
-              onChange={e => setValues({ ...values, calendar: e.target.value })}
-            >
-              <MenuItem value='Personal'>Personal</MenuItem>
-              <MenuItem value='Business'>Business</MenuItem>
-              <MenuItem value='Family'>Family</MenuItem>
-              <MenuItem value='Holiday'>Holiday</MenuItem>
-              <MenuItem value='ETC'>ETC</MenuItem>
-            </CustomTextField>
+            <input value={'Business'} hidden={true} />
 
             <AppReactDatepicker
               selectsStart
@@ -277,12 +251,13 @@ const AddEventSidebar = (props: AddEventSidebarType) => {
               endDate={values.endDate}
               selected={values.startDate}
               startDate={values.startDate}
-              showTimeSelect={!values.allDay}
-              dateFormat={!values.allDay ? 'yyyy-MM-dd hh:mm' : 'yyyy-MM-dd'}
+              showTimeSelect
+              dateFormat={'yyyy-MM-dd hh:mm'}
               customInput={<PickersComponent label='Start Date' registername='startDate' />}
               onChange={(date: Date | null) => date !== null && setValues({ ...values, startDate: new Date(date) })}
               onSelect={handleStartDate}
             />
+
             <AppReactDatepicker
               selectsEnd
               id='event-end-date'
@@ -290,53 +265,12 @@ const AddEventSidebar = (props: AddEventSidebarType) => {
               selected={values.endDate}
               minDate={values.startDate}
               startDate={values.startDate}
-              showTimeSelect={!values.allDay}
-              dateFormat={!values.allDay ? 'yyyy-MM-dd hh:mm' : 'yyyy-MM-dd'}
+              showTimeSelect
+              dateFormat={'yyyy-MM-dd hh:mm'}
               customInput={<PickersComponent label='End Date' registername='endDate' />}
               onChange={(date: Date | null) => date !== null && setValues({ ...values, endDate: new Date(date) })}
             />
-            <FormControl>
-              <FormControlLabel
-                label='All Day'
-                control={
-                  <Switch checked={values.allDay} onChange={e => setValues({ ...values, allDay: e.target.checked })} />
-                }
-              />
-            </FormControl>
-            <CustomTextField
-              fullWidth
-              type='url'
-              id='event-url'
-              label='Event URL'
-              value={values.url}
-              onChange={e => setValues({ ...values, url: e.target.value })}
-            />
-            <CustomTextField
-              fullWidth
-              select
-              label='Guests'
-              value={values.guests}
-              id='event-guests-select'
-              // eslint-disable-next-line lines-around-comment
-              // @ts-ignore
-              onChange={(e: SelectChangeEvent<(typeof values)['guests']>) => {
-                setValues({
-                  ...values,
-                  guests: typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value
-                })
-              }}
-              slotProps={{
-                select: {
-                  multiple: true
-                }
-              }}
-            >
-              <MenuItem value='bruce'>Bruce</MenuItem>
-              <MenuItem value='clark'>Clark</MenuItem>
-              <MenuItem value='diana'>Diana</MenuItem>
-              <MenuItem value='john'>John</MenuItem>
-              <MenuItem value='barry'>Barry</MenuItem>
-            </CustomTextField>
+
             <CustomTextField
               rows={4}
               multiline

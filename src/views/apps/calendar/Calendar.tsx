@@ -89,7 +89,7 @@ const Calendar = (props: CalenderProps) => {
       Enable dragging and resizing event
       ? Docs: https://fullcalendar.io/docs/editable
     */
-    editable: true,
+    editable: false,
 
     /*
       Enable resizing event from start
@@ -101,7 +101,7 @@ const Calendar = (props: CalenderProps) => {
       Automatically scroll the scroll-containers during event drag-and-drop and date selecting
       ? Docs: https://fullcalendar.io/docs/dragScroll
     */
-    dragScroll: true,
+    dragScroll: false,
 
     /*
       Max number of events within a given day
@@ -113,7 +113,7 @@ const Calendar = (props: CalenderProps) => {
       Determines if day names and week names are clickable
       ? Docs: https://fullcalendar.io/docs/navLinks
     */
-    navLinks: true,
+    navLinks: false,
 
     eventClassNames({ event: calendarEvent }: any) {
       // @ts-ignore
@@ -130,11 +130,6 @@ const Calendar = (props: CalenderProps) => {
 
       dispatch(selectedEvent(clickedEvent))
       handleAddEventSidebarToggle()
-
-      if (clickedEvent.url) {
-        // Open the URL in a new tab
-        window.open(clickedEvent.url, '_blank')
-      }
 
       //* Only grab required field otherwise it goes in infinity loop
       //! Always grab all fields rendered by form (even if it get `undefined`)

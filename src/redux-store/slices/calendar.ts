@@ -1,6 +1,6 @@
 // Third-party Imports
-import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import type { EventInput } from '@fullcalendar/core'
 
 // Type Imports
@@ -24,6 +24,10 @@ export const calendarSlice = createSlice({
   name: 'calendar',
   initialState: initialState,
   reducers: {
+    setEvents: (state, action) => {
+      state.events = action.payload
+    },
+
     filterEvents: state => {
       state.filteredEvents = state.events
     },
@@ -82,6 +86,7 @@ export const calendarSlice = createSlice({
 })
 
 export const {
+  setEvents,
   filterEvents,
   addEvent,
   updateEvent,

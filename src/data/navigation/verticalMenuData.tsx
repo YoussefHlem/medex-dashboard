@@ -18,11 +18,6 @@ const verticalMenuData = (): VerticalMenuDataType[] => [
     icon: 'tabler-medical-cross'
   },
   {
-    label: 'Booking',
-    href: '/booking',
-    icon: 'tabler-calendar-plus'
-  },
-  {
     label: 'Patient',
     href: '/patient',
     icon: 'tabler-user'
