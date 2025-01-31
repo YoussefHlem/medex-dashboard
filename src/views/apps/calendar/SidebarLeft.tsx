@@ -1,5 +1,4 @@
 // MUI Imports
-import Button from '@mui/material/Button'
 import Drawer from '@mui/material/Drawer'
 import Divider from '@mui/material/Divider'
 import Checkbox from '@mui/material/Checkbox'
@@ -16,20 +15,12 @@ import type { ThemeColor } from '@core/types'
 import AppReactDatepicker from '@/libs/styles/AppReactDatepicker'
 
 // Slice Imports
-import { filterCalendarLabel, selectedEvent } from '@/redux-store/slices/calendar'
+import { filterCalendarLabel } from '@/redux-store/slices/calendar'
 
 const SidebarLeft = (props: SidebarLeftProps) => {
   // Props
-  const {
-    mdAbove,
-    leftSidebarOpen,
-    calendarStore,
-    calendarsColor,
-    calendarApi,
-    dispatch,
-    handleLeftSidebarToggle,
-    handleAddEventSidebarToggle
-  } = props
+  const { mdAbove, leftSidebarOpen, calendarStore, calendarsColor, calendarApi, dispatch, handleLeftSidebarToggle } =
+    props
 
   // Vars
   const colorsArr = calendarsColor ? Object.entries(calendarsColor) : []
@@ -53,10 +44,10 @@ const SidebarLeft = (props: SidebarLeftProps) => {
       })
     : null
 
-  const handleSidebarToggleSidebar = () => {
-    dispatch(selectedEvent(null))
-    handleAddEventSidebarToggle()
-  }
+  // const handleSidebarToggleSidebar = () => {
+  //   dispatch(selectedEvent(null))
+  //   handleAddEventSidebarToggle()
+  // }
 
   if (renderFilters) {
     return (
@@ -88,16 +79,6 @@ const SidebarLeft = (props: SidebarLeftProps) => {
           }
         }}
       >
-        <div className='is-full p-6'>
-          <Button
-            fullWidth
-            variant='contained'
-            onClick={handleSidebarToggleSidebar}
-            startIcon={<i className='tabler-plus' />}
-          >
-            Add Event
-          </Button>
-        </div>
         <Divider className='is-full' />
         <AppReactDatepicker
           inline

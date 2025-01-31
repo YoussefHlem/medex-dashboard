@@ -22,6 +22,7 @@ import CalendarWrapper from '@views/apps/calendar/CalendarWrapper'
 import { agendaService } from '@/apis/services/agenda'
 import { setEvents } from '@/redux-store/slices/calendar'
 import BookingsTable from '@components/tables/BookingsTables'
+import DoctorSlots from '@components/DoctorSlots/DoctorSlots'
 
 const DoctorDetails = ({ params }: { params: { id: number } }) => {
   const id = params.id
@@ -45,6 +46,7 @@ const DoctorDetails = ({ params }: { params: { id: number } }) => {
         <Tab value='1' label='Details' icon={<i className='tabler-file-description' />} />
         <Tab value='2' label='Agenda' icon={<i className='tabler-calendar' />} />
         <Tab value='3' label='Bookings' icon={<i className='tabler-book' />} />
+        <Tab value='4' label='Slots' icon={<i className='tabler-calendar' />} />
       </TabList>
       <TabPanel value='1'>
         <DoctorForm id={id} />
@@ -60,6 +62,13 @@ const DoctorDetails = ({ params }: { params: { id: number } }) => {
         <Grid container>
           <Grid size={{ xs: 12 }}>
             <BookingsTable id={id} />
+          </Grid>
+        </Grid>
+      </TabPanel>
+      <TabPanel value='4'>
+        <Grid container>
+          <Grid size={{ xs: 12 }}>
+            <DoctorSlots />
           </Grid>
         </Grid>
       </TabPanel>

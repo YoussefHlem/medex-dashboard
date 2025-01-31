@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Implementing Agenda APIs">
-      <change afterPath="$PROJECT_DIR$/src/components/tables/BookingsTables.tsx" afterDir="false" />
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Implement Slots Feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apis/services/doctors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/services/doctors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctors/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctors/edit/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux-store/slices/calendar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux-store/slices/calendar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/AddEventSidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/AddEventSidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DoctorSlots/SlotForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DoctorSlots/SlotForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,10 +16,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="tsconfig.json" />
-        <option value="TypeScript JSX File" />
         <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -42,7 +38,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/YoussefHlem/medex-dashboard.git&quot;,
-    &quot;accountId&quot;: &quot;6ff1daa3-51cd-4acb-959d-ded242b42fb4&quot;
+    &quot;accountId&quot;: &quot;b75f5588-d132-4db4-a0c0-d826ccfb4f6a&quot;
   }
 }</component>
   <component name="OptimizeOnSaveOptions">
@@ -63,43 +59,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/components/tables",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.stylelint": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "pnpm",
-    "npm.dev.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/components/DoctorSlots&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "ECMAScript 6"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;ECMAScript 6&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\DoctorSlots" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\tables" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\apis\services" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\types\apps" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\fake-db\apps" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\DoctorSlots" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\libs" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)\hospitals\edit\[id]" />
     </key>
@@ -124,7 +122,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.120" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.157" />
       </set>
     </attachedChunks>
   </component>
@@ -168,7 +166,10 @@
       <workItem from="1737220812705" duration="597000" />
       <workItem from="1737717598620" duration="355000" />
       <workItem from="1737745638122" duration="3046000" />
-      <workItem from="1737789356952" duration="7274000" />
+      <workItem from="1737789356952" duration="10322000" />
+      <workItem from="1738149471241" duration="4533000" />
+      <workItem from="1738172908037" duration="3508000" />
+      <workItem from="1738325500032" duration="951000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -338,7 +339,23 @@
       <option name="project" value="LOCAL" />
       <updated>1737797769461</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Add Bookings Table">
+      <option name="closed" value="true" />
+      <created>1737806529030</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1737806529030</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Implement Slots Feature">
+      <option name="closed" value="true" />
+      <created>1738326249414</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1738326249414</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,6 +380,8 @@
     <MESSAGE value="implement InstallmentsTable" />
     <MESSAGE value="done" />
     <MESSAGE value="Implementing Agenda APIs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementing Agenda APIs" />
+    <MESSAGE value="Add Bookings Table" />
+    <MESSAGE value="Implement Slots Feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement Slots Feature" />
   </component>
 </project>
