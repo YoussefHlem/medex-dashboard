@@ -5,43 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Hot fixes">
-      <change afterPath="$PROJECT_DIR$/public/images/medex.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/agenda/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/booking/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/profile/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/schedule/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospital/installment/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospital/profile/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/dialogs/confirmation-dialog/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux-store/slices/auth.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/doctor/settings/AccountDelete.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/doctor/settings/AccountDetails.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/apis/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctors/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/add/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctors/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctors/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospitals/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/add/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospitals/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/edit/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospitals/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/installment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/installment/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/patient/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/patient/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/speciality/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/add/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/speciality/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/edit/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/speciality/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/vertical/VerticalMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/vertical/VerticalMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/tables/BookingsTables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/BookingsTables.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/tables/HospitalsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/HospitalsTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/tables/InstallmentsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/InstallmentsTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/tables/SpecialitiesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/SpecialitiesTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux-store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux-store/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/CalendarWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/CalendarWrapper.tsx" afterDir="false" />
     </list>
@@ -79,7 +43,7 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -210,7 +174,7 @@
       <workItem from="1738438029938" duration="3000" />
       <workItem from="1738468527984" duration="86000" />
       <workItem from="1738495411256" duration="1284000" />
-      <workItem from="1738512955410" duration="4992000" />
+      <workItem from="1738512955410" duration="6041000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -404,7 +368,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738326524593</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Hot fixes">
+      <option name="closed" value="true" />
+      <created>1738518835037</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1738518835037</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -26,7 +26,7 @@ const calendarsColor: CalendarColors = {
   ETC: 'info'
 }
 
-const AppCalendar = ({ doctorId }: { doctorId: number }) => {
+const AppCalendar = () => {
   // States
   const [calendarApi, setCalendarApi] = useState<null | any>(null)
   const [leftSidebarOpen, setLeftSidebarOpen] = useState<boolean>(false)
