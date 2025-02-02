@@ -97,15 +97,11 @@ const BookingsTable = ({ id }: { id: number }) => {
   const [data, setData] = useState<BookingType[]>([])
   const [globalFilter, setGlobalFilter] = useState('')
 
-  const fetchBookings = () => {
+  useEffect(() => {
     doctorsService.listBookings(id).then(res => {
       setData(res.data.bookings)
     })
-  }
-
-  useEffect(() => {
-    fetchBookings()
-  }, [])
+  }, [id])
 
   const columns = useMemo<ColumnDef<BookingTypeWithAction, any>[]>(
     () => [
@@ -169,12 +165,7 @@ const BookingsTable = ({ id }: { id: number }) => {
                 variant='filled'
               />
               <FormControl size='small' sx={{ minWidth: 120 }}>
-                <Select
-                  value={statusValue}
-                  // onChange={e => handleStatusUpdate(row.original.id, e.target.value as Status)}
-                  variant='outlined'
-                  size='small'
-                >
+                <Select value={statusValue} variant='outlined' size='small'>
                   <MenuItem value={Status.PENDING}>Pending</MenuItem>
                   <MenuItem value={Status.CONFIRMED}>Confirmed</MenuItem>
                   <MenuItem value={Status.PAID}>Paid</MenuItem>
