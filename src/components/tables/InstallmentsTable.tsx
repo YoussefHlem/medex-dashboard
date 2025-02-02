@@ -32,7 +32,7 @@ import tableStyles from '@core/styles/table.module.css'
 import { isntallmentsService } from '@/apis/services/installments'
 
 // Define status enum and type
-enum Status {
+export enum Status {
   PENDING = 1,
   CONFIRMED = 2,
   PAID = 3,
@@ -40,7 +40,7 @@ enum Status {
   CANCELLED = 5
 }
 
-const StatusColors: Record<Status, 'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'> = {
+export const StatusColors: Record<Status, 'default' | 'primary' | 'success' | 'info' | 'warning' | 'error'> = {
   [Status.PENDING]: 'warning',
   [Status.CONFIRMED]: 'info',
   [Status.PAID]: 'primary',

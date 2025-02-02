@@ -4,9 +4,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Implement Slots Feature">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Hot fixes">
+      <change afterPath="$PROJECT_DIR$/public/images/medex.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/agenda/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/booking/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/profile/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/schedule/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospital/installment/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospital/profile/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/dialogs/confirmation-dialog/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux-store/slices/auth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/doctor/settings/AccountDelete.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/doctor/settings/AccountDetails.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DoctorSlots/SlotForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DoctorSlots/SlotForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctors/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/add/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctors/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctors/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospitals/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/add/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospitals/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospitals/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/installment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/installment/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/patient/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/patient/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/speciality/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/add/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/speciality/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/speciality/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/vertical/VerticalMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/vertical/VerticalMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/tables/BookingsTables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/BookingsTables.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/DoctorsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/tables/HospitalsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/HospitalsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/tables/InstallmentsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/InstallmentsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/tables/SpecialitiesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/tables/SpecialitiesTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux-store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux-store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/CalendarWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/CalendarWrapper.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +55,8 @@
       <list>
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -32,9 +69,6 @@
     &quot;assignee&quot;: &quot;YoussefHlem&quot;
   }
 }</component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="6ff1daa3-51cd-4acb-959d-ded242b42fb4" />
-  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/YoussefHlem/medex-dashboard.git&quot;,
@@ -59,44 +93,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Hlemo/WebstormProjects/medex-dashboard/src/components/DoctorSlots&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.stylelint&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Hlemo/WebstormProjects/medex-dashboard/public/images",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.stylelint": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "npm.dev.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;ECMAScript 6&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "ECMAScript 6"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\DoctorSlots" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\tables" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\apis\services" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\types\apps" />
-      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\fake-db\apps" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\public\images" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)\hospital" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)\doctor" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\dialogs" />
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\views\doctor\settings" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)\admin" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\DoctorSlots" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\libs" />
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\app\(dashboard)\hospitals\edit\[id]" />
@@ -169,7 +204,13 @@
       <workItem from="1737789356952" duration="10322000" />
       <workItem from="1738149471241" duration="4533000" />
       <workItem from="1738172908037" duration="3508000" />
-      <workItem from="1738325500032" duration="951000" />
+      <workItem from="1738325500032" duration="2003000" />
+      <workItem from="1738327569279" duration="6310000" />
+      <workItem from="1738349664522" duration="32000" />
+      <workItem from="1738438029938" duration="3000" />
+      <workItem from="1738468527984" duration="86000" />
+      <workItem from="1738495411256" duration="1284000" />
+      <workItem from="1738512955410" duration="4992000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -355,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738326249414</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Implement Slots Feature">
+      <option name="closed" value="true" />
+      <created>1738326524593</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1738326524593</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,6 +431,7 @@
     <MESSAGE value="Implementing Agenda APIs" />
     <MESSAGE value="Add Bookings Table" />
     <MESSAGE value="Implement Slots Feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement Slots Feature" />
+    <MESSAGE value="Hot fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hot fixes" />
   </component>
 </project>

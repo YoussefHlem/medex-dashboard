@@ -2,30 +2,29 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
-// 1. Specify protected and public routes
-const protectedRoutes = ['/home']
-const publicRoutes = ['/login', '/signup', '/']
+// 1. Only specify public routes since everything else will be protected
+const publicRoutes = ['/login']
 
 export default async function middleware(req: NextRequest) {
-  // 2. Check if the current route is protected or public
+  // 2. Check if the current route is public
   const path = req.nextUrl.pathname
-  const isProtectedRoute = protectedRoutes.includes(path)
   const isPublicRoute = publicRoutes.includes(path)
 
   // 3. Decrypt the session from the cookie
   const cookie = (await cookies()).get('userToken')
   const session = await cookie
 
-  // 4. Redirect to /login if the user is not authenticated
-  if (isProtectedRoute && !session) {
-    // return NextResponse.redirect(new URL('/login', req.nextUrl))
+  // 4. Allow access to public routes regardless of authentication
+  if (isPublicRoute) {
+    return NextResponse.next()
   }
 
-  // 5. Redirect to /dashboard if the user is authenticated
-  if (isPublicRoute && session && !req.nextUrl.pathname.startsWith('/home')) {
-    // return NextResponse.redirect(new URL('/home', req.nextUrl))
+  // 5. Redirect to /login if the user is not authenticated and trying to access any protected route
+  if (!session) {
+    return NextResponse.redirect(new URL('/login', req.nextUrl))
   }
 
+  // 6. Allow access to protected routes for authenticated users
   return NextResponse.next()
 }
 

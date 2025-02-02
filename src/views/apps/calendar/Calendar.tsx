@@ -126,11 +126,10 @@ const Calendar = (props: CalenderProps) => {
     },
 
     eventClick({ event: clickedEvent, jsEvent }: any) {
-      jsEvent.preventDefault()
-
-      dispatch(selectedEvent(clickedEvent))
-      handleAddEventSidebarToggle()
-
+      // jsEvent.preventDefault()
+      //
+      // dispatch(selectedEvent(clickedEvent))
+      // handleAddEventSidebarToggle()
       //* Only grab required field otherwise it goes in infinity loop
       //! Always grab all fields rendered by form (even if it get `undefined`)
       // event.value = grabEventDataFromEventApi(clickedEvent)

@@ -26,6 +26,10 @@ import {
   useReactTable
 } from '@tanstack/react-table'
 
+import { Box, FormControl, Select } from '@mui/material'
+
+import Chip from '@mui/material/Chip'
+
 import TablePaginationComponent from '@components/TablePaginationComponent'
 
 // Component Imports
@@ -34,6 +38,7 @@ import CustomTextField from '@core/components/mui/TextField'
 // Style Imports
 import tableStyles from '@core/styles/table.module.css'
 import { doctorsService } from '@/apis/services/doctors'
+import { Status, StatusColors } from '@components/tables/InstallmentsTable'
 
 interface BookingType {
   id: number
@@ -42,6 +47,7 @@ interface BookingType {
   patient_email: string
   patient_phone: string
   booking_date: string
+  status: Status
 }
 
 type BookingTypeWithAction = BookingType & {
@@ -147,6 +153,38 @@ const BookingsTable = ({ id }: { id: number }) => {
             }).format(new Date(row.original.booking_date))}
           </Typography>
         )
+      }),
+      columnHelper.accessor('status', {
+        header: 'Status',
+        cell: ({ row }) => {
+          const currentStatus = row.original.status
+          const statusValue = Status[currentStatus as keyof typeof Status] || Status.PENDING
+
+          return (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Chip
+                label={row.original.status || 'Unknown'}
+                color={StatusColors[statusValue]}
+                size='small'
+                variant='filled'
+              />
+              <FormControl size='small' sx={{ minWidth: 120 }}>
+                <Select
+                  value={statusValue}
+                  // onChange={e => handleStatusUpdate(row.original.id, e.target.value as Status)}
+                  variant='outlined'
+                  size='small'
+                >
+                  <MenuItem value={Status.PENDING}>Pending</MenuItem>
+                  <MenuItem value={Status.CONFIRMED}>Confirmed</MenuItem>
+                  <MenuItem value={Status.PAID}>Paid</MenuItem>
+                  <MenuItem value={Status.COMPLETED}>Completed</MenuItem>
+                  <MenuItem value={Status.CANCELLED}>Cancelled</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          )
+        }
       })
     ],
     []

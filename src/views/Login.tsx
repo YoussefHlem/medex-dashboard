@@ -6,8 +6,6 @@ import { useState } from 'react'
 // Next Imports
 import { useRouter } from 'next/navigation'
 
-import { setCookie } from 'cookies-next'
-
 // MUI Imports
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
@@ -20,6 +18,10 @@ import Button from '@mui/material/Button'
 import classnames from 'classnames'
 
 // Type Imports
+import { useDispatch } from 'react-redux'
+
+import { setCookie } from 'cookies-next'
+
 import type { SystemMode } from '@core/types'
 
 // Component Imports
@@ -33,6 +35,7 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
+import { setUserType } from '@/redux-store/slices/auth'
 import { authService } from '@/apis/services/auth'
 
 // Auth Service Import
@@ -68,6 +71,16 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
   const [password, setPassword] = useState('P@ssw0rd')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const [selectedUserType, setSelectedUserType] = useState<'admin' | 'doctor' | 'hospital'>('admin')
+
+  const dispatch = useDispatch()
+
+  const handleUserTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const userType = e.target.value as 'admin' | 'doctor' | 'hospital'
+
+    setSelectedUserType(userType)
+    dispatch(setUserType(userType))
+  }
 
   // Vars
   const darkImg = '/images/pages/auth-mask-dark.png'
@@ -185,6 +198,43 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
             <Button fullWidth variant='contained' type='submit' disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Login'}
             </Button>
+            <div className='flex gap-4 items-center'>
+              <div className='flex items-center gap-2'>
+                <input
+                  type='radio'
+                  id='admin'
+                  name='userType'
+                  value='admin'
+                  checked={selectedUserType === 'admin'}
+                  onChange={handleUserTypeChange}
+                />
+                <label htmlFor='admin'>Admin</label>
+              </div>
+
+              <div className='flex items-center gap-2'>
+                <input
+                  type='radio'
+                  id='doctor'
+                  name='userType'
+                  value='doctor'
+                  checked={selectedUserType === 'doctor'}
+                  onChange={handleUserTypeChange}
+                />
+                <label htmlFor='doctor'>Doctor</label>
+              </div>
+
+              <div className='flex items-center gap-2'>
+                <input
+                  type='radio'
+                  id='hospital'
+                  name='userType'
+                  value='hospital'
+                  checked={selectedUserType === 'hospital'}
+                  onChange={handleUserTypeChange}
+                />
+                <label htmlFor='hospital'>Hospital</label>
+              </div>
+            </div>
           </form>
         </div>
       </div>

@@ -189,7 +189,7 @@ const ListTable = () => {
               <i className='tabler-trash text-textSecondary' />
             </IconButton>
             <IconButton>
-              <Link href={`/speciality/edit/${row.original.id}`} className='flex'>
+              <Link href={`/admin/speciality/edit/${row.original.id}`} className='flex'>
                 <i className='tabler-pencil text-textSecondary' />
               </Link>
             </IconButton>

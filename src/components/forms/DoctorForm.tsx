@@ -44,7 +44,11 @@ const validationSchema = Yup.object({
       }
 
       return true
-    })
+    }),
+  rating: Yup.number()
+    .required('Rating is required')
+    .min(1, 'Rating must be at least 1')
+    .max(5, 'Rating must be at most 5')
 })
 
 const DoctorForm = ({ id }: { id?: number }) => {
@@ -58,7 +62,8 @@ const DoctorForm = ({ id }: { id?: number }) => {
       email: '',
       consultation_fee: '',
       status: '',
-      cover: null
+      cover: null,
+      rating: ''
     },
     validationSchema,
     onSubmit: async values => {
@@ -115,7 +120,8 @@ const DoctorForm = ({ id }: { id?: number }) => {
               email: doctor.email,
               consultation_fee: doctor.consultation_fee,
               status: doctor.status === 'Active' ? 1 : 0,
-              cover: doctor.cover
+              cover: doctor.cover,
+              rating: doctor.rating
             },
             true
           )
@@ -275,6 +281,20 @@ const DoctorForm = ({ id }: { id?: number }) => {
                 <MenuItem value={1}>Active</MenuItem>
                 <MenuItem value={0}>Inactive</MenuItem>
               </CustomTextField>
+            </Grid>
+            <Grid size={{ xs: 12 }}>
+              <CustomTextField
+                fullWidth
+                name='rating'
+                label='Rating'
+                placeholder='e.g., 4.5'
+                type='number'
+                value={formik.values.rating}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.rating && Boolean(formik.errors.rating)}
+                helperText={formik.touched.rating && formik.errors.rating}
+              />
             </Grid>
             <Grid>
               <input

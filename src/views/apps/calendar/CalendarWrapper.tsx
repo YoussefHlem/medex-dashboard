@@ -15,8 +15,7 @@ import type { CalendarColors, CalendarType } from '@/types/apps/calendarTypes'
 
 // Component Imports
 import Calendar from './Calendar'
-import SidebarLeft from './SidebarLeft'
-import AddEventSidebar from './AddEventSidebar'
+import SidebarLeft from '@views/apps/calendar/SidebarLeft'
 
 // CalendarColors Object
 const calendarsColor: CalendarColors = {
@@ -65,14 +64,14 @@ const AppCalendar = ({ doctorId }: { doctorId: number }) => {
           handleAddEventSidebarToggle={handleAddEventSidebarToggle}
         />
       </div>
-      <AddEventSidebar
-        dispatch={dispatch}
-        calendarApi={calendarApi}
-        calendarStore={calendarStore}
-        addEventSidebarOpen={addEventSidebarOpen}
-        handleAddEventSidebarToggle={handleAddEventSidebarToggle}
-        doctorId={doctorId}
-      />
+      {/*<AddEventSidebar*/}
+      {/*  dispatch={dispatch}*/}
+      {/*  calendarApi={calendarApi}*/}
+      {/*  calendarStore={calendarStore}*/}
+      {/*  addEventSidebarOpen={addEventSidebarOpen}*/}
+      {/*  handleAddEventSidebarToggle={handleAddEventSidebarToggle}*/}
+      {/*  doctorId={doctorId}*/}
+      {/*/>*/}
     </>
   )
 }

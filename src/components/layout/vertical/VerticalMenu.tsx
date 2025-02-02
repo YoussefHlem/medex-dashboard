@@ -5,6 +5,8 @@ import { useTheme } from '@mui/material/styles'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // Type Imports
+import { useSelector } from 'react-redux'
+
 import type { VerticalMenuContextProps } from '@menu/components/vertical-menu/Menu'
 
 // Component Imports
@@ -21,6 +23,7 @@ import menuItemStyles from '@core/styles/vertical/menuItemStyles'
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
 import { GenerateVerticalMenu } from '@components/GenerateMenu'
 import verticalMenuData from '@/data/navigation/verticalMenuData'
+import type { RootState } from '@/redux-store'
 
 type RenderExpandIconProps = {
   open?: boolean
@@ -41,6 +44,9 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
   // Hooks
   const theme = useTheme()
   const verticalNavOptions = useVerticalNav()
+  const userType = useSelector((state: RootState) => state.authReducer.userType)
+
+  console.log('userType:', userType)
 
   // Vars
   const { isBreakpointReached, transitionDuration } = verticalNavOptions
@@ -69,7 +75,7 @@ const VerticalMenu = ({ scrollMenu }: Props) => {
         renderExpandedMenuItemIcon={{ icon: <i className='tabler-circle text-xs' /> }}
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
-        <GenerateVerticalMenu menuData={verticalMenuData()} />
+        <GenerateVerticalMenu menuData={verticalMenuData(userType)} />
       </Menu>
     </ScrollWrapper>
   )
