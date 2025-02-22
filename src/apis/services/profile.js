@@ -9,3 +9,17 @@ export const getProfile = async () => {
     throw error
   }
 }
+
+export const updateProfile = async payload => {
+  try {
+    const response = await api.post(`/patient/profile`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}

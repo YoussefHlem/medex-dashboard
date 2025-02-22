@@ -117,7 +117,7 @@ const UserDropdown = () => {
                       <Typography className='font-medium' color='text.primary'>
                         {profile?.name}
                       </Typography>
-                      <Typography variant='caption'>admin@vuexy.com</Typography>
+                      <Typography variant='caption'>{profile?.email}</Typography>
                     </div>
                   </div>
                   <Divider className='mlb-1' />

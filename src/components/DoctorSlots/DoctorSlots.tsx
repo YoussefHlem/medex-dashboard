@@ -1,105 +1,18 @@
+// @ts-nocheck
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
+import 'react-toastify/dist/ReactToastify.css'
+import { Loader2 } from 'lucide-react'
 
-import type { FormData, Slot } from '@components/DoctorSlots/doctor-slots'
-import { formatDate, formatTime, parseTimeToDate } from '@/utils/dateUtils'
 import SlotForm from '@components/DoctorSlots/SlotForm'
 import SlotList from '@components/DoctorSlots/SlotList'
+import { useSlotsManagement } from '@components/DoctorSlots/use-slots-management'
 
-const DoctorSlots = () => {
-  const [slots, setSlots] = useState<Slot[]>([
-    {
-      date: 'Wednesday, March 20, 2024',
-      timeSlots: [
-        { time: '09:00 - 10:00', capacity: 10, active: true },
-        { time: '10:00 - 11:00', capacity: 8, active: false }
-      ]
-    },
-    {
-      date: 'Thursday, March 21, 2024',
-      timeSlots: [
-        { time: '09:00 - 10:00', capacity: 12, active: true },
-        { time: '10:00 - 11:00', capacity: 15, active: true }
-      ]
-    }
-  ])
-
-  const [formData, setFormData] = useState<FormData>({
-    date: new Date(),
-    slots: [{ startTime: new Date(), endTime: new Date(), capacity: '' }]
-  })
-
-  const handleSwitchChange = (dayIndex: number, slotIndex: number) => {
-    const newSlots = [...slots]
-
-    newSlots[dayIndex].timeSlots[slotIndex].active = !newSlots[dayIndex].timeSlots[slotIndex].active
-    setSlots(newSlots)
-  }
-
-  const handleEdit = (dayIndex: number) => {
-    const day = slots[dayIndex]
-
-    const formattedSlots = day.timeSlots.map(slot => {
-      const [startTime, endTime] = slot.time.split(' - ')
-
-      return {
-        startTime: parseTimeToDate(startTime),
-        endTime: parseTimeToDate(endTime),
-        capacity: slot.capacity.toString()
-      }
-    })
-
-    setFormData({
-      date: new Date(day.date),
-      slots: formattedSlots
-    })
-  }
-
-  const handleTimeChange = (index: number, field: 'startTime' | 'endTime', date: Date) => {
-    const newSlots = [...formData.slots]
-
-    newSlots[index][field] = date
-    setFormData(prev => ({ ...prev, slots: newSlots }))
-  }
-
-  const handleCapacityChange = (index: number, value: string) => {
-    const newSlots = [...formData.slots]
-
-    newSlots[index].capacity = value
-    setFormData(prev => ({ ...prev, slots: newSlots }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-
-    const newSlot = {
-      date: formatDate(formData.date),
-      timeSlots: formData.slots.map(slot => ({
-        time: `${formatTime(slot.startTime)} - ${formatTime(slot.endTime)}`,
-        capacity: parseInt(slot.capacity),
-        active: true
-      }))
-    }
-
-    const existingIndex = slots.findIndex(slot => slot.date === newSlot.date)
-
-    if (existingIndex !== -1) {
-      const newSlots = [...slots]
-
-      newSlots[existingIndex] = newSlot
-      setSlots(newSlots)
-    } else {
-      setSlots([...slots, newSlot])
-    }
-
-    setFormData({
-      date: new Date(),
-      slots: [{ startTime: new Date(), endTime: new Date(), capacity: '' }]
-    })
-  }
+const DoctorSlots = ({ id }: { id: number }) => {
+  const { slots, isLoading, formData, handlers, isSaving } = useSlotsManagement(id)
 
   return (
     <div className='space-y-4'>
@@ -109,27 +22,27 @@ const DoctorSlots = () => {
         </Typography>
         <SlotForm
           formData={formData}
-          onSubmit={handleSubmit}
-          onDateChange={date => setFormData(prev => ({ ...prev, date }))}
-          onTimeChange={handleTimeChange}
-          onCapacityChange={handleCapacityChange}
-          onAddSlot={() =>
-            setFormData(prev => ({
-              ...prev,
-              slots: [...prev.slots, { startTime: new Date(), endTime: new Date(), capacity: '' }]
-            }))
-          }
-          onRemoveSlot={index =>
-            setFormData(prev => ({
-              ...prev,
-              slots: prev.slots.filter((_, i) => i !== index)
-            }))
-          }
+          onSubmit={handlers.handleSubmit}
+          onDateChange={handlers.handleDateChange}
+          onTimeChange={handlers.handleTimeChange}
+          onCapacityChange={handlers.handleCapacityChange}
+          onAddSlot={handlers.handleAddSlot}
+          onRemoveSlot={handlers.handleRemoveSlot}
+          disabled={isLoading || isSaving}
         />
       </Paper>
 
       <Paper className='p-4'>
-        <SlotList slots={slots} onEdit={handleEdit} onSwitchChange={handleSwitchChange} />
+        {isLoading ? (
+          <Loader2 />
+        ) : (
+          <SlotList
+            slots={slots}
+            onEdit={handlers.handleEdit}
+            onSwitchChange={handlers.handleSwitchChange}
+            disabled={isSaving}
+          />
+        )}
       </Paper>
     </div>
   )

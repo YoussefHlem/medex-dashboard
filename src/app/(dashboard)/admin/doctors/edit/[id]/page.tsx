@@ -54,7 +54,7 @@ const DoctorDetails = ({ params }: { params: { id: number } }) => {
       <TabPanel value='2'>
         <Card className='overflow-visible'>
           <AppFullCalendar className='app-calendar'>
-            <CalendarWrapper doctorId={id} />
+            <CalendarWrapper />
           </AppFullCalendar>
         </Card>
       </TabPanel>
@@ -68,7 +68,7 @@ const DoctorDetails = ({ params }: { params: { id: number } }) => {
       <TabPanel value='4'>
         <Grid container>
           <Grid size={{ xs: 12 }}>
-            <DoctorSlots />
+            <DoctorSlots id={id} />
           </Grid>
         </Grid>
       </TabPanel>

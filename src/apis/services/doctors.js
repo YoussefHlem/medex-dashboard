@@ -71,5 +71,32 @@ export const doctorsService = {
     } catch (error) {
       throw error
     }
+  },
+  listSlots: async id => {
+    try {
+      const response = await api.get(`/doctors/${id}/schedules`)
+
+      return response.data
+    } catch (error) {
+      throw error
+    }
+  },
+  updateSlots: async (id, payload) => {
+    try {
+      const response = await api.post(`/doctors/${id}/schedules/update-slots`, payload)
+
+      return response.data
+    } catch (error) {
+      throw error
+    }
+  },
+  updateBooking: async (doctorId, bookingId, status) => {
+    try {
+      const response = await api.post(`doctors/${doctorId}/bookings/${bookingId}/${status}`)
+
+      return response.data
+    } catch (error) {
+      throw error
+    }
   }
 }

@@ -1,92 +1,106 @@
+// @ts-nocheck
 'use client'
 
-// React Imports
-import { useState } from 'react'
 import type { ChangeEvent } from 'react'
+import { useEffect, useState } from 'react'
 
-// MUI Imports
 import Grid from '@mui/material/Grid2'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import MenuItem from '@mui/material/MenuItem'
-import Chip from '@mui/material/Chip'
-import type { SelectChangeEvent } from '@mui/material/Select'
 
-// Component Imports
+import { toast } from 'react-toastify'
+
 import CustomTextField from '@core/components/mui/TextField'
+import { getProfile, updateProfile } from '@/apis/services/profile'
 
 type Data = {
-  firstName: string
-  lastName: string
+  name: string
   email: string
-  organization: string
-  phoneNumber: number | string
-  address: string
-  state: string
-  zipCode: string
-  country: string
-  language: string
-  timezone: string
-  currency: string
+  phone_number: string | null
+  gender: string | null
+  date_of_birth: string | null
+  avatar: string
+  address: string | null
 }
 
-// Vars
 const initialData: Data = {
-  firstName: 'John',
-  lastName: 'Doe',
-  email: 'john.doe@example.com',
-  organization: 'Pixinvent',
-  phoneNumber: '+1 (917) 543-9876',
-  address: '123 Main St, New York, NY 10001',
-  state: 'New York',
-  zipCode: '634880',
-  country: 'usa',
-  language: 'english',
-  timezone: 'gmt-12',
-  currency: 'usd'
+  name: '',
+  email: '',
+  phone_number: null,
+  gender: null,
+  date_of_birth: null,
+  avatar: '',
+  address: null
 }
-
-const languageData = ['English', 'Arabic', 'French', 'German', 'Portuguese']
 
 const AccountDetails = () => {
-  // States
   const [formData, setFormData] = useState<Data>(initialData)
-  const [fileInput, setFileInput] = useState<string>('')
-  const [imgSrc, setImgSrc] = useState<string>('/images/avatars/1.png')
-  const [language, setLanguage] = useState<string[]>(['English'])
-
-  const handleDelete = (value: string) => {
-    setLanguage(current => current.filter(item => item !== value))
-  }
-
-  const handleChange = (event: SelectChangeEvent<string[]>) => {
-    setLanguage(event.target.value as string[])
-  }
+  const [fileInput, setFileInput] = useState<File | null>(null)
+  const [imgSrc, setImgSrc] = useState<string>(formData.avatar)
 
   const handleFormChange = (field: keyof Data, value: Data[keyof Data]) => {
     setFormData({ ...formData, [field]: value })
   }
 
   const handleFileInputChange = (file: ChangeEvent) => {
-    const reader = new FileReader()
     const { files } = file.target as HTMLInputElement
 
     if (files && files.length !== 0) {
-      reader.onload = () => setImgSrc(reader.result as string)
-      reader.readAsDataURL(files[0])
+      const selectedFile = files[0]
 
-      if (reader.result !== null) {
-        setFileInput(reader.result as string)
+      setFileInput(selectedFile)
+
+      const reader = new FileReader()
+
+      reader.onload = () => {
+        setImgSrc(reader.result as string)
       }
+
+      reader.readAsDataURL(selectedFile)
     }
   }
 
   const handleFileInputReset = () => {
-    setFileInput('')
-    setImgSrc('/images/avatars/1.png')
+    setFileInput(null)
+    setImgSrc(formData.avatar)
   }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const submitFormData = new FormData()
+
+    // Append all form fields
+    if (fileInput) {
+      submitFormData.append('avatar', fileInput)
+    }
+
+    submitFormData.append('name', formData.name)
+    submitFormData.append('email', formData.email)
+    submitFormData.append('phone_number', formData.phone_number)
+    submitFormData.append('gender', formData.gender)
+    submitFormData.append('date_of_birth', formData.date_of_birth)
+    submitFormData.append('address', formData.address)
+    submitFormData.append('_method', 'PUT')
+
+    updateProfile(submitFormData)
+      .then(() => {
+        toast.success('Profile updated successfully')
+      })
+      .catch(() => {
+        toast.error('Failed to update profile')
+      })
+  }
+
+  useEffect(() => {
+    getProfile().then(({ data }) => {
+      setFormData({ ...data.user, gender: data.user.gender === 'male' ? 1 : 2 })
+      setImgSrc(data.user.avatar)
+    })
+  }, [])
 
   return (
     <Card>
@@ -100,7 +114,6 @@ const AccountDetails = () => {
                 <input
                   hidden
                   type='file'
-                  value={fileInput}
                   accept='image/png, image/jpeg'
                   onChange={handleFileInputChange}
                   id='account-settings-upload-image'
@@ -115,24 +128,15 @@ const AccountDetails = () => {
         </div>
       </CardContent>
       <CardContent>
-        <form onSubmit={e => e.preventDefault()}>
+        <form onSubmit={e => handleSubmit(e)}>
           <Grid container spacing={6}>
             <Grid size={{ xs: 12, sm: 6 }}>
               <CustomTextField
                 fullWidth
-                label='First Name'
-                value={formData.firstName}
-                placeholder='John'
-                onChange={e => handleFormChange('firstName', e.target.value)}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <CustomTextField
-                fullWidth
-                label='Last Name'
-                value={formData.lastName}
-                placeholder='Doe'
-                onChange={e => handleFormChange('lastName', e.target.value)}
+                label='Full Name'
+                value={formData.name}
+                placeholder='Veda Morgan'
+                onChange={e => handleFormChange('name', e.target.value)}
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
@@ -140,147 +144,48 @@ const AccountDetails = () => {
                 fullWidth
                 label='Email'
                 value={formData.email}
-                placeholder='john.doe@gmail.com'
+                placeholder='dywyxixi@mailinator.com'
                 onChange={e => handleFormChange('email', e.target.value)}
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <CustomTextField
                 fullWidth
-                label='Organization'
-                value={formData.organization}
-                placeholder='Pixinvent'
-                onChange={e => handleFormChange('organization', e.target.value)}
+                label='Phone Number'
+                value={formData.phone_number || ''}
+                placeholder='+1 (234) 567-8901'
+                onChange={e => handleFormChange('phone_number', e.target.value)}
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <CustomTextField
+                select
                 fullWidth
-                label='Phone Number'
-                value={formData.phoneNumber}
-                placeholder='+1 (234) 567-8901'
-                onChange={e => handleFormChange('phoneNumber', e.target.value)}
+                label='Gender'
+                value={formData.gender || ''}
+                onChange={e => handleFormChange('gender', e.target.value)}
+              >
+                <MenuItem value='1'>Male</MenuItem>
+                <MenuItem value='2'>Female</MenuItem>
+              </CustomTextField>
+            </Grid>
+            <Grid size={{ xs: 12, sm: 6 }}>
+              <CustomTextField
+                fullWidth
+                type='date'
+                label='Date of Birth'
+                value={formData.date_of_birth || ''}
+                onChange={e => handleFormChange('date_of_birth', e.target.value)}
               />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <CustomTextField
                 fullWidth
                 label='Address'
-                value={formData.address}
+                value={formData.address || ''}
                 placeholder='Address'
                 onChange={e => handleFormChange('address', e.target.value)}
               />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <CustomTextField
-                fullWidth
-                label='State'
-                value={formData.state}
-                placeholder='New York'
-                onChange={e => handleFormChange('state', e.target.value)}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <CustomTextField
-                fullWidth
-                type='number'
-                label='Zip Code'
-                value={formData.zipCode}
-                placeholder='123456'
-                onChange={e => handleFormChange('zipCode', e.target.value)}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <CustomTextField
-                select
-                fullWidth
-                label='Country'
-                value={formData.country}
-                onChange={e => handleFormChange('country', e.target.value)}
-              >
-                <MenuItem value='usa'>USA</MenuItem>
-                <MenuItem value='uk'>UK</MenuItem>
-                <MenuItem value='australia'>Australia</MenuItem>
-                <MenuItem value='germany'>Germany</MenuItem>
-              </CustomTextField>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <CustomTextField
-                select
-                fullWidth
-                label='Language'
-                value={language}
-                slotProps={{
-                  select: {
-                    multiple: true, // @ts-ignore
-                    onChange: handleChange,
-                    renderValue: selected => (
-                      <div className='flex flex-wrap gap-2'>
-                        {(selected as string[]).map(value => (
-                          <Chip
-                            key={value}
-                            clickable
-                            onMouseDown={event => event.stopPropagation()}
-                            size='small'
-                            label={value}
-                            onDelete={() => handleDelete(value)}
-                          />
-                        ))}
-                      </div>
-                    )
-                  }
-                }}
-              >
-                {languageData.map(name => (
-                  <MenuItem key={name} value={name}>
-                    {name}
-                  </MenuItem>
-                ))}
-              </CustomTextField>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <CustomTextField
-                select
-                fullWidth
-                label='TimeZone'
-                value={formData.timezone}
-                onChange={e => handleFormChange('timezone', e.target.value)}
-                slotProps={{
-                  select: { MenuProps: { PaperProps: { style: { maxHeight: 250 } } } }
-                }}
-              >
-                <MenuItem value='gmt-12'>(GMT-12:00) International Date Line West</MenuItem>
-                <MenuItem value='gmt-11'>(GMT-11:00) Midway Island, Samoa</MenuItem>
-                <MenuItem value='gmt-10'>(GMT-10:00) Hawaii</MenuItem>
-                <MenuItem value='gmt-09'>(GMT-09:00) Alaska</MenuItem>
-                <MenuItem value='gmt-08'>(GMT-08:00) Pacific Time (US & Canada)</MenuItem>
-                <MenuItem value='gmt-08-baja'>(GMT-08:00) Tijuana, Baja California</MenuItem>
-                <MenuItem value='gmt-07'>(GMT-07:00) Chihuahua, La Paz, Mazatlan</MenuItem>
-                <MenuItem value='gmt-07-mt'>(GMT-07:00) Mountain Time (US & Canada)</MenuItem>
-                <MenuItem value='gmt-06'>(GMT-06:00) Central America</MenuItem>
-                <MenuItem value='gmt-06-ct'>(GMT-06:00) Central Time (US & Canada)</MenuItem>
-                <MenuItem value='gmt-06-mc'>(GMT-06:00) Guadalajara, Mexico City, Monterrey</MenuItem>
-                <MenuItem value='gmt-06-sk'>(GMT-06:00) Saskatchewan</MenuItem>
-                <MenuItem value='gmt-05'>(GMT-05:00) Bogota, Lima, Quito, Rio Branco</MenuItem>
-                <MenuItem value='gmt-05-et'>(GMT-05:00) Eastern Time (US & Canada)</MenuItem>
-                <MenuItem value='gmt-05-ind'>(GMT-05:00) Indiana (East)</MenuItem>
-                <MenuItem value='gmt-04'>(GMT-04:00) Atlantic Time (Canada)</MenuItem>
-                <MenuItem value='gmt-04-clp'>(GMT-04:00) Caracas, La Paz</MenuItem>
-              </CustomTextField>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <CustomTextField
-                select
-                fullWidth
-                label='Currency'
-                value={formData.currency}
-                onChange={e => handleFormChange('currency', e.target.value)}
-              >
-                <MenuItem value='usd'>USD</MenuItem>
-                <MenuItem value='euro'>EUR</MenuItem>
-                <MenuItem value='pound'>Pound</MenuItem>
-                <MenuItem value='bitcoin'>Bitcoin</MenuItem>
-              </CustomTextField>
             </Grid>
             <Grid size={{ xs: 12 }} className='flex gap-4 flex-wrap'>
               <Button variant='contained' type='submit'>
