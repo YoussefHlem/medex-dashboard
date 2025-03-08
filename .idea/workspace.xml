@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Refactor AccountDetails and DoctorSlots components for improved profile management and slot handling">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="Refactor authentication and calendar state management; enhance hospital form with Google Maps integration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux-store/slices/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux-store/slices/auth.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux-store/slices/calendar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux-store/slices/calendar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +214,7 @@
       <workItem from="1740208821476" duration="13314000" />
       <workItem from="1740748080970" duration="1198000" />
       <workItem from="1741360454227" duration="933000" />
-      <workItem from="1741450542660" duration="1997000" />
+      <workItem from="1741450542660" duration="3183000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -436,7 +432,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740254453218</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Refactor authentication and calendar state management; enhance hospital form with Google Maps integration">
+      <option name="closed" value="true" />
+      <created>1741452799321</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1741452799321</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,6 +469,7 @@
     <MESSAGE value="Implement Slots Feature" />
     <MESSAGE value="Hot fixes" />
     <MESSAGE value="Refactor AccountDetails and DoctorSlots components for improved profile management and slot handling" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor AccountDetails and DoctorSlots components for improved profile management and slot handling" />
+    <MESSAGE value="Refactor authentication and calendar state management; enhance hospital form with Google Maps integration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor authentication and calendar state management; enhance hospital form with Google Maps integration" />
   </component>
 </project>
