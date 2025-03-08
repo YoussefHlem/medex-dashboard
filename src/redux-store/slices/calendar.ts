@@ -7,7 +7,7 @@ import type { EventInput } from '@fullcalendar/core'
 import type { CalendarFiltersType, CalendarType } from '@/types/apps/calendarTypes'
 
 // Data Imports
-// import { events } from '@/fake-db/apps/calendar'
+import { events } from '@/fake-db/apps/calendar'
 
 const initialState: CalendarType = {
   events: [],
@@ -26,6 +26,7 @@ export const calendarSlice = createSlice({
   reducers: {
     setEvents: (state, action) => {
       state.events = action.payload
+      state.filteredEvents = action.payload
     },
 
     filterEvents: state => {

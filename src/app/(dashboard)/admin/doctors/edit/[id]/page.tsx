@@ -37,6 +37,9 @@ const DoctorDetails = ({ params }: { params: { id: number } }) => {
     agendaService.listAgendas(id).then(res => {
       console.log(res.data.agendas)
       dispatch(setEvents(res.data.agendas))
+      const date = new Date()
+
+      console.log(new Date(date.getFullYear(), date.getMonth() + 1, -11))
     })
   }, [id, dispatch])
 

@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -17,9 +17,7 @@ import { hospitalsService } from '@/apis/services/hospitals'
 const validationSchema = Yup.object({
   name: Yup.string().required('Hospital name is required').min(3, 'Name must be at least 3 characters'),
   address: Yup.string().required('Address is required').min(5, 'Address must be at least 5 characters'),
-  phone: Yup.string()
-    .required('Phone number is required')
-    .matches(/^\+?[1-9]\d{10,14}$/, 'Please enter a valid phone number'),
+  phone: Yup.number().required('Phone number is required'),
   email: Yup.string().required('Email is required').email('Please enter a valid email'),
   type: Yup.number().required('Type is required').oneOf([1, 2], 'Please select a valid type'),
   lat: Yup.number()
@@ -52,6 +50,11 @@ const validationSchema = Yup.object({
 })
 
 const HospitalForm = ({ id }: { id?: number }) => {
+  const [mapLoaded, setMapLoaded] = useState(false)
+  const [showMap, setShowMap] = useState(false)
+  const mapRef = useRef(null)
+  const markerRef = useRef(null)
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -101,6 +104,106 @@ const HospitalForm = ({ id }: { id?: number }) => {
   })
 
   const [previewUrl, setPreviewUrl] = useState(null)
+
+  // Load Google Maps script
+  useEffect(() => {
+    if (!window.google) {
+      const script = document.createElement('script')
+
+      script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places`
+      script.async = true
+      script.defer = true
+      script.onload = () => setMapLoaded(true)
+      document.head.appendChild(script)
+
+      return () => {
+        document.head.removeChild(script)
+      }
+    } else {
+      setMapLoaded(true)
+    }
+  }, [])
+
+  // Initialize map when component mounts and map script is loaded
+  useEffect(() => {
+    if (mapLoaded && showMap && mapRef.current) {
+      const defaultLocation = {
+        lat: formik.values.lat ? parseFloat(formik.values.lat) : 30.0444,
+        lng: formik.values.lng ? parseFloat(formik.values.lng) : 31.2357
+      }
+
+      const map = new window.google.maps.Map(mapRef.current, {
+        center: defaultLocation,
+        zoom: 12,
+        mapTypeControl: true,
+        fullscreenControl: true,
+        streetViewControl: false
+      })
+
+      const marker = new window.google.maps.Marker({
+        position: defaultLocation,
+        map: map,
+        draggable: true
+      })
+
+      markerRef.current = marker
+
+      // Update lat/lng when marker is dragged
+      marker.addListener('dragend', () => {
+        const position = marker.getPosition()
+        const lat = position.lat()
+        const lng = position.lng()
+
+        formik.setFieldValue('lat', lat)
+        formik.setFieldValue('lng', lng)
+      })
+
+      // Create search box for finding locations
+      const input = document.getElementById('map-search-input')
+      const searchBox = new window.google.maps.places.SearchBox(input)
+
+      map.addListener('bounds_changed', () => {
+        searchBox.setBounds(map.getBounds())
+      })
+
+      searchBox.addListener('places_changed', () => {
+        const places = searchBox.getPlaces()
+
+        if (places.length === 0) return
+
+        const place = places[0]
+
+        if (!place.geometry || !place.geometry.location) return
+
+        // Update marker and form values
+        marker.setPosition(place.geometry.location)
+        map.setCenter(place.geometry.location)
+
+        const lat = place.geometry.location.lat()
+        const lng = place.geometry.location.lng()
+
+        formik.setFieldValue('lat', lat)
+        formik.setFieldValue('lng', lng)
+
+        // Optionally update address field with the found place's address
+        if (place.formatted_address) {
+          formik.setFieldValue('address', place.formatted_address)
+        }
+      })
+    }
+  }, [mapLoaded, showMap, mapRef.current])
+
+  // Update marker position when lat/lng values change directly in the input fields
+  useEffect(() => {
+    if (mapLoaded && markerRef.current && formik.values.lat && formik.values.lng) {
+      const position = {
+        lat: parseFloat(formik.values.lat),
+        lng: parseFloat(formik.values.lng)
+      }
+
+      markerRef.current.setPosition(position)
+    }
+  }, [formik.values.lat, formik.values.lng, mapLoaded])
 
   useEffect(() => {
     if (id) {
@@ -263,6 +366,52 @@ const HospitalForm = ({ id }: { id?: number }) => {
                 <MenuItem value={1}>Public</MenuItem>
                 <MenuItem value={2}>Private</MenuItem>
               </CustomTextField>
+            </Grid>
+            <Grid size={{ xs: 12 }}>
+              <Box sx={{ mb: 2 }}>
+                <Typography variant='subtitle1' fontWeight='medium' sx={{ mb: 1 }}>
+                  Hospital Location
+                </Typography>
+                <Button
+                  variant='outlined'
+                  color='primary'
+                  startIcon={<i className='tabler-map' />}
+                  onClick={() => setShowMap(!showMap)}
+                  sx={{ mb: 2 }}
+                >
+                  {showMap ? 'Hide Map' : 'Show Map to Select Location'}
+                </Button>
+
+                {showMap && (
+                  <Box sx={{ mb: 3 }}>
+                    <CustomTextField
+                      fullWidth
+                      id='map-search-input'
+                      placeholder='Search for a location...'
+                      sx={{ mb: 2 }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position='start'>
+                            <i className='tabler-search' />
+                          </InputAdornment>
+                        )
+                      }}
+                    />
+                    <Box
+                      ref={mapRef}
+                      sx={{
+                        height: 400,
+                        borderRadius: 1,
+                        boxShadow: 3,
+                        mb: 2
+                      }}
+                    />
+                    <Typography variant='caption' color='textSecondary'>
+                      Drag the marker to set the exact hospital location or use the search box above
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
             </Grid>
             <Grid size={{ xs: 12, md: 6 }}>
               <CustomTextField
