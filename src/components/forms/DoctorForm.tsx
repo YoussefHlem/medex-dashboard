@@ -16,7 +16,14 @@ import { doctorsService } from '@/apis/services/doctors'
 import { specialitiesService } from '@/apis/services/specialities'
 
 const validationSchema = Yup.object({
-  name: Yup.string().required('Name is required').min(2, 'Name must be at least 2 characters'),
+  name: Yup.array()
+    .of(
+      Yup.object({
+        langId: Yup.string().required('Language ID is required'),
+        value: Yup.string().required('Name is required').min(2, 'Name must be at least 2 characters')
+      })
+    )
+    .required('Name is required'),
   speciality_id: Yup.number().required('Speciality is required'),
   bio: Yup.string().required('Bio is required').min(10, 'Bio must be at least 10 characters'),
   experience: Yup.number().required('Experience is required').min(1, 'Experience must be at least 1 year'),
@@ -54,7 +61,10 @@ const validationSchema = Yup.object({
 const DoctorForm = ({ id }: { id?: number }) => {
   const formik = useFormik({
     initialValues: {
-      name: '',
+      name: [
+        { langId: 'en', value: '' },
+        { langId: 'ar', value: '' }
+      ],
       speciality_id: '',
       bio: '',
       experience: '',
@@ -73,8 +83,14 @@ const DoctorForm = ({ id }: { id?: number }) => {
         formData.append('_method', 'patch')
       }
 
+      // Handle name array separately
+      formData.append('name', JSON.stringify(values.name))
+
+      // Handle other fields
       Object.keys(values).forEach(key => {
-        formData.append(key, values[key])
+        if (key !== 'name') {
+          formData.append(key, values[key])
+        }
       })
 
       if (id) {
@@ -110,9 +126,20 @@ const DoctorForm = ({ id }: { id?: number }) => {
           const doctor = item.data.doctor
 
           setPreviewUrl(doctor.cover)
+
+          // Handle name field conversion
+          const nameValue = doctor.name
+
+          const nameArray = Array.isArray(nameValue)
+            ? nameValue
+            : [
+                { langId: 'en', value: nameValue },
+                { langId: 'ar', value: '' }
+              ]
+
           formik.setValues(
             {
-              name: doctor.name,
+              name: nameArray,
               speciality_id: doctor.speciality_id,
               bio: doctor.bio,
               experience: doctor.experience,
@@ -153,12 +180,47 @@ const DoctorForm = ({ id }: { id?: number }) => {
     }
   }
 
+  const handleNameChange = (lang: string, value: string) => {
+    const nameArray = [...formik.values.name]
+    const index = nameArray.findIndex(item => item.langId === lang)
+
+    if (index !== -1) {
+      nameArray[index].value = value
+    }
+
+    formik.setFieldValue('name', nameArray)
+  }
+
   return (
     <Card>
       <CardContent>
         <Form onSubmit={formik.handleSubmit}>
           <Grid container spacing={6}>
             <Grid size={{ xs: 12, md: 6 }}>
+              <CustomTextField
+                fullWidth
+                name='name.0.value'
+                label='Name (English)'
+                placeholder='Your Name in English'
+                value={formik.values.name[0].value}
+                onChange={e => handleNameChange('en', e.target.value)}
+                onBlur={formik.handleBlur}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
+              />
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <CustomTextField
+                fullWidth
+                name='name.1.value'
+                label='Name (Arabic)'
+                placeholder='Your Name in Arabic'
+                value={formik.values.name[1].value}
+                onChange={e => handleNameChange('ar', e.target.value)}
+                onBlur={formik.handleBlur}
+              />
+            </Grid>
+            <Grid size={{ xs: 12 }}>
               <CustomTextField
                 select
                 fullWidth
@@ -176,19 +238,6 @@ const DoctorForm = ({ id }: { id?: number }) => {
                   </MenuItem>
                 ))}
               </CustomTextField>
-            </Grid>{' '}
-            <Grid size={{ xs: 12, md: 6 }}>
-              <CustomTextField
-                fullWidth
-                name='name'
-                label='Name'
-                placeholder='Your Name'
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.name && Boolean(formik.errors.name)}
-                helperText={formik.touched.name && formik.errors.name}
-              />
             </Grid>
             <Grid size={{ xs: 12 }}>
               <CustomTextField

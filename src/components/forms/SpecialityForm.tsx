@@ -13,7 +13,14 @@ import Form from '@components/Form'
 import { specialitiesService } from '@/apis/services/specialities'
 
 const validationSchema = Yup.object({
-  name: Yup.string().required('Name is required').min(2, 'Name must be at least 2 characters'),
+  name: Yup.array()
+    .of(
+      Yup.object({
+        langId: Yup.string().required('Language ID is required'),
+        value: Yup.string().required('Name is required').min(2, 'Name must be at least 2 characters')
+      })
+    )
+    .required('Name is required'),
   description: Yup.string().required('Description is required').min(10, 'Description must be at least 10 characters'),
   cover: Yup.mixed()
     .test('fileOrString', 'Cover image is required', function (value) {
@@ -39,7 +46,10 @@ const validationSchema = Yup.object({
 const SpecialtyForm = ({ id }: { id?: number }) => {
   const formik = useFormik({
     initialValues: {
-      name: '',
+      name: [
+        { langId: 'en', value: '' },
+        { langId: 'ar', value: '' }
+      ],
       description: '',
       cover: null
     },
@@ -51,8 +61,14 @@ const SpecialtyForm = ({ id }: { id?: number }) => {
         formData.append('_method', 'patch')
       }
 
+      // Handle name array separately
+      formData.append('name', JSON.stringify(values.name))
+
+      // Handle other fields
       Object.keys(values).forEach(key => {
-        formData.append(key, values[key])
+        if (key !== 'name') {
+          formData.append(key, values[key])
+        }
       })
 
       try {
@@ -77,9 +93,20 @@ const SpecialtyForm = ({ id }: { id?: number }) => {
           const speciality = item.data.speciality
 
           setPreviewUrl(speciality.cover)
+
+          // Handle name field conversion
+          const nameValue = speciality.name
+
+          const nameArray = Array.isArray(nameValue)
+            ? nameValue
+            : [
+                { langId: 'en', value: nameValue },
+                { langId: 'ar', value: '' }
+              ]
+
           formik.setValues(
             {
-              name: speciality.name,
+              name: nameArray,
               description: speciality.description,
               cover: speciality.cover
             },
@@ -107,22 +134,44 @@ const SpecialtyForm = ({ id }: { id?: number }) => {
     }
   }
 
+  const handleNameChange = (lang: string, value: string) => {
+    const nameArray = [...formik.values.name]
+    const index = nameArray.findIndex(item => item.langId === lang)
+
+    if (index !== -1) {
+      nameArray[index].value = value
+    }
+
+    formik.setFieldValue('name', nameArray)
+  }
+
   return (
     <Card>
       <CardContent>
         <Form onSubmit={formik.handleSubmit}>
           <Grid container spacing={6}>
-            <Grid size={{ xs: 12 }}>
+            <Grid size={{ xs: 12, md: 6 }}>
               <CustomTextField
                 fullWidth
-                name='name'
-                label='Name'
-                placeholder='Specialty Name'
-                value={formik.values.name}
-                onChange={formik.handleChange}
+                name='name.0.value'
+                label='Name (English)'
+                placeholder='Specialty Name in English'
+                value={formik.values.name[0].value}
+                onChange={e => handleNameChange('en', e.target.value)}
                 onBlur={formik.handleBlur}
                 error={formik.touched.name && Boolean(formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
+              />
+            </Grid>
+            <Grid size={{ xs: 12, md: 6 }}>
+              <CustomTextField
+                fullWidth
+                name='name.1.value'
+                label='Name (Arabic)'
+                placeholder='Specialty Name in Arabic'
+                value={formik.values.name[1].value}
+                onChange={e => handleNameChange('ar', e.target.value)}
+                onBlur={formik.handleBlur}
               />
             </Grid>
             <Grid size={{ xs: 12 }}>

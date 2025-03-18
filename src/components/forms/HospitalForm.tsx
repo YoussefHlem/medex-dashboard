@@ -15,7 +15,14 @@ import Form from '@components/Form'
 import { hospitalsService } from '@/apis/services/hospitals'
 
 const validationSchema = Yup.object({
-  name: Yup.string().required('Hospital name is required').min(3, 'Name must be at least 3 characters'),
+  name: Yup.array()
+    .of(
+      Yup.object().shape({
+        langId: Yup.string().required('Language ID is required'),
+        value: Yup.string().required('Name is required').min(3, 'Name must be at least 3 characters')
+      })
+    )
+    .required('Hospital name is required'),
   address: Yup.string().required('Address is required').min(5, 'Address must be at least 5 characters'),
   phone: Yup.number().required('Phone number is required'),
   email: Yup.string().required('Email is required').email('Please enter a valid email'),
@@ -57,7 +64,10 @@ const HospitalForm = ({ id }: { id?: number }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
+      name: [
+        { langId: 'en', value: '' },
+        { langId: 'ar', value: '' }
+      ],
       address: '',
       phone: '',
       email: '',
@@ -74,8 +84,14 @@ const HospitalForm = ({ id }: { id?: number }) => {
         formData.append('_method', 'patch')
       }
 
+      // Handle name array separately
+      formData.append('name', JSON.stringify(values.name))
+
+      // Append other form values
       Object.keys(values).forEach(key => {
-        formData.append(key, values[key])
+        if (key !== 'name') {
+          formData.append(key, values[key])
+        }
       })
 
       // Here you would typically send the formData to your API
@@ -212,9 +228,17 @@ const HospitalForm = ({ id }: { id?: number }) => {
         .then(item => {
           const hospital = item.data.hospital
 
+          // Convert existing name to multi-language format
+          const nameValue = hospital.name || ''
+
+          const nameArray = [
+            { langId: 'en', value: nameValue },
+            { langId: 'ar', value: '' }
+          ]
+
           formik.setValues(
             {
-              name: hospital.name,
+              name: nameArray,
               address: hospital.address,
               phone: hospital.phone,
               email: hospital.email,
@@ -248,32 +272,72 @@ const HospitalForm = ({ id }: { id?: number }) => {
     }
   }
 
+  // Handle name field change for specific language
+  const handleNameChange = (langId, value) => {
+    const nameArray = [...formik.values.name]
+    const langIndex = nameArray.findIndex(item => item.langId === langId)
+
+    if (langIndex !== -1) {
+      nameArray[langIndex].value = value
+      formik.setFieldValue('name', nameArray)
+    }
+  }
+
   return (
     <Card>
       <CardContent>
         <Form onSubmit={formik.handleSubmit}>
           <Grid container spacing={6}>
             <Grid size={{ xs: 12 }}>
-              <CustomTextField
-                fullWidth
-                name='name'
-                label='Name'
-                placeholder='Hospital 1'
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                error={formik.touched.name && Boolean(formik.errors.name)}
-                helperText={formik.touched.name && formik.errors.name}
-                slotProps={{
-                  input: {
-                    startAdornment: (
-                      <InputAdornment position='start'>
-                        <i className='tabler-building-hospital' />
-                      </InputAdornment>
-                    )
-                  }
-                }}
-              />
+              <Typography variant='subtitle1' fontWeight='medium' sx={{ mb: 2 }}>
+                Hospital Name
+              </Typography>
+              <Grid container spacing={2}>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <CustomTextField
+                    fullWidth
+                    name='name-en'
+                    label='Name (English)'
+                    placeholder='Hospital 1'
+                    value={formik.values.name.find(item => item.langId === 'en')?.value || ''}
+                    onChange={e => handleNameChange('en', e.target.value)}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && typeof formik.errors.name === 'string' ? formik.errors.name : ''}
+                    slotProps={{
+                      input: {
+                        startAdornment: (
+                          <InputAdornment position='start'>
+                            <i className='tabler-building-hospital' />
+                          </InputAdornment>
+                        )
+                      }
+                    }}
+                  />
+                </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <CustomTextField
+                    fullWidth
+                    name='name-ar'
+                    label='Name (Arabic)'
+                    placeholder='المستشفى 1'
+                    value={formik.values.name.find(item => item.langId === 'ar')?.value || ''}
+                    onChange={e => handleNameChange('ar', e.target.value)}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && typeof formik.errors.name === 'string' ? formik.errors.name : ''}
+                    slotProps={{
+                      input: {
+                        startAdornment: (
+                          <InputAdornment position='start'>
+                            <i className='tabler-building-hospital' />
+                          </InputAdornment>
+                        )
+                      }
+                    }}
+                  />
+                </Grid>
+              </Grid>
             </Grid>
             <Grid size={{ xs: 12 }}>
               <CustomTextField
@@ -515,13 +579,7 @@ const HospitalForm = ({ id }: { id?: number }) => {
             </Grid>
           </Grid>
           <Box sx={{ mt: 4 }}>
-            <Button
-              fullWidth
-              type='submit'
-              variant='contained'
-              color='primary'
-              disabled={!formik.isValid || formik.isSubmitting}
-            >
+            <Button fullWidth type='submit' variant='contained' color='primary' disabled={formik.isSubmitting}>
               {id ? 'Update' : 'Create'}
             </Button>
           </Box>
