@@ -1,9 +1,9 @@
 import React from 'react'
 
-import HospitalForm from '@/modules/hospital/HospitalForm'
+import Index from '@/modules/hospital/HospitalForm'
 
 const Page = () => {
-  return <HospitalForm />
+  return <Index />
 }
 
 export default Page

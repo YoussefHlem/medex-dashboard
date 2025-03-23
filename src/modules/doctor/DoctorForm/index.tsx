@@ -1,237 +1,109 @@
 'use client'
-import type { ChangeEvent } from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import { Box, Button, Card, CardContent, InputAdornment, Typography, Grid } from '@mui/material'
+import { Box, Button, Card, CardContent, Grid, InputAdornment } from '@mui/material'
 import { toast } from 'react-toastify'
 
 import CustomTextField from '@core/components/mui/TextField'
 import Form from '@components/Form'
-import { doctorsService } from '@/apis/services/doctors'
-import { specialitiesService } from '@/apis/services/specialities'
 import ImageUpload from '@/components/ImageUpload'
 import MultiLangTextFields from '@/components/MultiLangTextFields'
-import { appendMultilingualFields, appendOtherFields } from '@/utils/formHelpers'
-
-interface LanguageValue {
-  langId: string
-  value: string
-}
-
-export interface DoctorFormValues {
-  name: LanguageValue[]
-  speciality_id: string | number
-  bio: string
-  experience: string | number
-  description: string
-  email: string
-  consultation_fee: string | number
-  status: string | number
-  cover: File | string | null
-  rating: string | number
-}
-
-interface Speciality {
-  id: number
-  name: string
-}
+import { doctorsService } from '@/apis/services/doctors'
+import { specialitiesService } from '@/apis/services/specialities'
+import { doctorValidationSchema, initialDoctorFormValues } from './DoctorFormValidation'
+import { submitDoctorDataRequest, formatDoctorDataForForm } from './DoctorFormHelpers'
 
 interface DoctorFormProps {
   id?: number
 }
 
-interface DoctorData {
-  name: string | LanguageValue[]
-  speciality_id: number
-  bio: string
-  experience: number
-  description: string
-  email: string
-  consultation_fee: number
-  status: string | number
-  cover: string
-  rating: number
-}
-
-const doctorValidationSchema = Yup.object({
-  name: Yup.array()
-    .of(
-      Yup.object({
-        langId: Yup.string().required('Language ID is required'),
-        value: Yup.string().required('Name is required').min(2, 'Name must be at least 2 characters')
-      })
-    )
-    .required('Name is required'),
-  speciality_id: Yup.number().required('Speciality is required'),
-  bio: Yup.string().required('Bio is required').min(10, 'Bio must be at least 10 characters'),
-  experience: Yup.number().required('Experience is required').min(1, 'Experience must be at least 1 year'),
-  description: Yup.string().required('Description is required').min(10, 'Description must be at least 10 characters'),
-  email: Yup.string().required('Email is required').email('Please enter a valid email'),
-  consultation_fee: Yup.number()
-    .required('Consultation fee is required')
-    .min(1, 'Consultation fee must be a positive number'),
-  status: Yup.number().required('Status is required'),
-  cover: Yup.mixed()
-    .test('fileOrString', 'Cover image is required', function (value) {
-      return value instanceof File || (typeof value === 'string' && value.length > 0)
-    })
-    .test('fileSize', 'File is too large', value => {
-      if (value instanceof File) {
-        return value.size <= 5000000
-      }
-
-      return true
-    })
-    .test('fileType', 'Unsupported file format', value => {
-      if (value instanceof File) {
-        return ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type)
-      }
-
-      return true
-    }),
-  rating: Yup.number()
-    .required('Rating is required')
-    .min(1, 'Rating must be at least 1')
-    .max(5, 'Rating must be at most 5')
-})
-
-const getInitialFormValues = (): DoctorFormValues => ({
-  name: [
-    { langId: 'en', value: '' },
-    { langId: 'ar', value: '' }
-  ],
-  speciality_id: '',
-  bio: '',
-  experience: '',
-  description: '',
-  email: '',
-  consultation_fee: '',
-  status: '',
-  cover: null,
-  rating: ''
-})
-
 const DoctorForm = ({ id }: DoctorFormProps) => {
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
-  const [availableSpecialities, setAvailableSpecialities] = useState<Speciality[]>([])
+  const [coverPreview, setCoverPreview] = useState<string | null>(null)
+  const [specialityOptions, setSpecialityOptions] = useState<any[]>([])
 
-  const formik = useFormik<DoctorFormValues>({
-    initialValues: getInitialFormValues(),
+  const formik = useFormik({
+    initialValues: initialDoctorFormValues,
     validationSchema: doctorValidationSchema,
     onSubmit: async values => {
       const formData = new FormData()
 
-      if (id) {
-        formData.append('_method', 'patch')
-      }
+      if (id) formData.append('_method', 'patch')
 
-      appendMultilingualFields(formData, 'name', values.name)
-      appendOtherFields(formData, values, ['name'])
-      await submitDoctorData(formData, id)
+      import('@/utils/formHelpers').then(({ appendMultilingualFields, appendOtherFields }) => {
+        appendMultilingualFields(formData, 'name', values.name)
+        appendOtherFields(formData, values, ['name'])
+      })
+
+      await submitDoctorDataRequest(formData, id)
     }
   })
 
-  const submitDoctorData = async (formData: FormData, doctorId?: number): Promise<void> => {
-    try {
-      if (doctorId) {
-        await doctorsService.updateDoctor(doctorId, formData)
-        toast.success('Doctor updated successfully')
-      } else {
-        await doctorsService.createDoctor(formData)
-        toast.success('Doctor created successfully')
-      }
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'An unknown error occurred'
+  // Update the multilingual name for doctor.
+  const updateDoctorNameTranslation = (languageCode: string, text: string): void => {
+    const updatedNames = formik.values.name.map(nameItem =>
+      nameItem.langId === languageCode ? { ...nameItem, value: text } : nameItem
+    )
 
-      toast.error(`Failed to ${doctorId ? 'update' : 'create'} doctor: ${errorMessage}`)
-    }
+    formik.setFieldValue('name', updatedNames)
   }
 
-  const handleImageSelection = (event: ChangeEvent<HTMLInputElement>): void => {
+  // Handle image selection and preview update.
+  const handleCoverImageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const file = event.target.files?.[0]
 
     if (!file) return
+
     formik.setFieldValue('cover', file)
     const reader = new FileReader()
 
-    reader.onloadend = () => {
-      setImagePreviewUrl(reader.result as string)
-    }
-
+    reader.onloadend = () => setCoverPreview(reader.result as string)
     reader.readAsDataURL(file)
   }
 
-  const updateNameField = (language: string, value: string): void => {
-    const updatedNames = [...formik.values.name]
-    const languageIndex = updatedNames.findIndex(item => item.langId === language)
-
-    if (languageIndex !== -1) {
-      updatedNames[languageIndex].value = value
-      formik.setFieldValue('name', updatedNames)
-    }
-  }
-
-  const formatDoctorDataForForm = (doctorData: DoctorData): DoctorFormValues => {
-    const nameArray = Array.isArray(doctorData.name)
-      ? doctorData.name
-      : [
-          { langId: 'en', value: doctorData.name as string },
-          { langId: 'ar', value: '' }
-        ]
-
-    return {
-      name: nameArray,
-      speciality_id: doctorData.speciality_id,
-      bio: doctorData.bio,
-      experience: doctorData.experience,
-      description: doctorData.description,
-      email: doctorData.email,
-      consultation_fee: doctorData.consultation_fee,
-      status: doctorData.status === 'Active' ? 1 : 0,
-      cover: doctorData.cover,
-      rating: doctorData.rating
-    }
-  }
-
-  const fetchDoctorData = async (doctorId: number): Promise<void> => {
-    try {
-      const response = await doctorsService.getDoctor(doctorId)
-      const doctorData = response.data.doctor
-
-      setImagePreviewUrl(doctorData.cover)
-      const formattedData = formatDoctorDataForForm(doctorData)
-
-      formik.setValues(formattedData, true)
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'An unknown error occurred'
-
-      toast.error(`Failed to fetch doctor data: ${errorMessage}`)
-    }
-  }
-
-  const fetchSpecialities = async (): Promise<void> => {
+  // Load specialities and, if editing, the doctor data.
+  const loadSpecialityOptions = async (): Promise<void> => {
     try {
       const response = await specialitiesService.listSpecialities()
 
-      setAvailableSpecialities(response.data.specialities)
+      setSpecialityOptions(response.data.specialities)
     } catch (error: any) {
       toast.error('Failed to load specialities')
     }
   }
 
-  useEffect(() => {
-    fetchSpecialities()
+  const loadDoctorData = async (doctorId: number): Promise<void> => {
+    try {
+      const response = await doctorsService.getDoctor(doctorId)
+      const doctorData = response.data.doctor
 
-    if (id) {
-      fetchDoctorData(id)
+      setCoverPreview(doctorData.cover)
+      const formattedData = formatDoctorDataForForm(doctorData)
+
+      formik.setValues(formattedData, true)
+    } catch (error: any) {
+      const errMsg = error.response?.data?.message || 'An unknown error occurred'
+
+      toast.error(`Failed to fetch doctor data: ${errMsg}`)
     }
+  }
+
+  useEffect(() => {
+    loadSpecialityOptions()
+    if (id) loadDoctorData(id)
   }, [id])
 
   const languages = [
-    { langId: 'en', label: 'Name (English)', placeholder: 'Your Name in English' },
-    { langId: 'ar', label: 'Name (Arabic)', placeholder: 'Your Name in Arabic' }
+    {
+      langId: 'en',
+      label: 'Name (English)',
+      placeholder: 'Your Name in English'
+    },
+    {
+      langId: 'ar',
+      label: 'Name (Arabic)',
+      placeholder: 'Your Name in Arabic'
+    }
   ]
 
   return (
@@ -242,7 +114,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
             <MultiLangTextFields
               languages={languages}
               values={formik.values.name}
-              onChange={updateNameField}
+              onChange={updateDoctorNameTranslation}
               onBlur={formik.handleBlur}
               error={formik.touched.name && Boolean(formik.errors.name)}
               helperText={formik.touched.name && (formik.errors.name as string)}
@@ -259,9 +131,9 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 error={formik.touched.speciality_id && Boolean(formik.errors.speciality_id)}
                 helperText={formik.touched.speciality_id && (formik.errors.speciality_id as string)}
               >
-                {availableSpecialities.map((speciality: Speciality) => (
-                  <option key={speciality.id} value={speciality.id}>
-                    {speciality.name}
+                {specialityOptions.map(spec => (
+                  <option key={spec.id} value={spec.id}>
+                    {spec.name}
                   </option>
                 ))}
               </CustomTextField>
@@ -376,8 +248,8 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
               <ImageUpload
                 id='cover-upload'
                 name='cover'
-                onChange={handleImageSelection}
-                imagePreviewUrl={imagePreviewUrl}
+                onChange={handleCoverImageChange}
+                imagePreviewUrl={coverPreview}
                 touched={formik.touched.cover}
                 error={formik.errors.cover as string}
               />

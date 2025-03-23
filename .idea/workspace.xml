@@ -4,14 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: reorganize component structure and update import paths for tables and forms">
-      <change afterPath="$PROJECT_DIR$/src/components/ImageUpload.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MultiLangTextFields.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/formHelpers.ts" afterDir="false" />
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: implement form helpers and validation for multilingual support in doctor and hospital forms">
+      <change afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm/DoctorFormHelpers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm/DoctorFormValidation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalForm/HospitalFormValidation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalForm/HospitalGoogleMap.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm/SpecialityFormHelpers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm/SpecialityFormValidation.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/add/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/add/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalForm/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,11 +119,11 @@
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\dialogs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\SpecialityForm" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\doctor\DoctorForm" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital\HospitalForm" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\doctor" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\patient" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -229,7 +236,7 @@
       <workItem from="1742181956818" duration="482000" />
       <workItem from="1742247357294" duration="6211000" />
       <workItem from="1742276446631" duration="720000" />
-      <workItem from="1742742154203" duration="12013000" />
+      <workItem from="1742742154203" duration="13242000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -487,15 +494,21 @@
       <option name="project" value="LOCAL" />
       <updated>1742765819186</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="refactor: enhance form components with multilingual support and image upload functionality">
+      <option name="closed" value="true" />
+      <created>1742766001170</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1742766001170</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Complete Specialities endpoint" />
-    <MESSAGE value="add pnpm to package.json" />
     <MESSAGE value="remove pnpm to package.json" />
     <MESSAGE value="remove size validation" />
     <MESSAGE value="typescript-ignore" />
@@ -519,6 +532,8 @@
     <MESSAGE value="refactor: update forms to support multi-language name fields for doctors, hospitals, and specialties" />
     <MESSAGE value="refactor: update user type definitions and improve name field handling in forms" />
     <MESSAGE value="refactor: reorganize component structure and update import paths for tables and forms" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: reorganize component structure and update import paths for tables and forms" />
+    <MESSAGE value="refactor: enhance form components with multilingual support and image upload functionality" />
+    <MESSAGE value="refactor: implement form helpers and validation for multilingual support in doctor and hospital forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: implement form helpers and validation for multilingual support in doctor and hospital forms" />
   </component>
 </project>

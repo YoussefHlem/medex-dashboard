@@ -16,7 +16,7 @@ import Card from '@mui/material/Card'
 // Custom Imports
 import Grid from '@mui/material/Grid2'
 
-import DoctorForm from '@/modules/doctor/DoctorForm'
+import Index from '@/modules/doctor/DoctorForm'
 import AppFullCalendar from '@/libs/styles/AppFullCalendar'
 import CalendarWrapper from '@views/apps/calendar/CalendarWrapper'
 import { agendaService } from '@/apis/services/agenda'
@@ -52,7 +52,7 @@ const DoctorDetails = ({ params }: { params: { id: number } }) => {
         <Tab value='4' label='Slots' icon={<i className='tabler-calendar' />} />
       </TabList>
       <TabPanel value='1'>
-        <DoctorForm id={id} />
+        <Index id={id} />
       </TabPanel>
       <TabPanel value='2'>
         <Card className='overflow-visible'>

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import DoctorForm from '@/modules/doctor/DoctorForm'
+import Index from '@/modules/doctor/DoctorForm'
 
 const Page = () => {
-  return <DoctorForm />
+  return <Index />
 }
 
 export default Page
