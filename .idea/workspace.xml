@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: implement form helpers and validation for multilingual support in doctor and hospital forms">
-      <change afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm/DoctorFormHelpers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm/DoctorFormValidation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalForm/HospitalFormValidation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalForm/HospitalGoogleMap.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm/SpecialityFormHelpers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm/SpecialityFormValidation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/add/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/add/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/edit/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalForm/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm/index.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: reorganize component structure and update import paths for tables and forms" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,13 +15,14 @@
       <list>
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -68,39 +54,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Halimo/WebstormProjects/medex-dashboard/src/modules",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.stylelint": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "pnpm",
-    "npm.build.executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.start.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Halimo/WebstormProjects/medex-dashboard/src/modules&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "JSON",
-      "ECMAScript 6"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JSON&quot;,
+      &quot;ECMAScript 6&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -119,11 +105,11 @@
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\dialogs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\SpecialityForm" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\doctor\DoctorForm" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital\HospitalForm" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital\HospitalForm" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\doctor" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\patient" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -236,7 +222,7 @@
       <workItem from="1742181956818" duration="482000" />
       <workItem from="1742247357294" duration="6211000" />
       <workItem from="1742276446631" duration="720000" />
-      <workItem from="1742742154203" duration="13242000" />
+      <workItem from="1742742154203" duration="11795000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -486,29 +472,26 @@
       <option name="project" value="LOCAL" />
       <updated>1742742940731</updated>
     </task>
-    <task id="LOCAL-00032" summary="refactor: reorganize component structure and update import paths for tables and forms">
-      <option name="closed" value="true" />
-      <created>1742765819185</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1742765819186</updated>
-    </task>
-    <task id="LOCAL-00033" summary="refactor: enhance form components with multilingual support and image upload functionality">
-      <option name="closed" value="true" />
-      <created>1742766001170</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1742766001170</updated>
-    </task>
-    <option name="localTasksCounter" value="34" />
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Complete Specialities endpoint" />
+    <MESSAGE value="add pnpm to package.json" />
     <MESSAGE value="remove pnpm to package.json" />
     <MESSAGE value="remove size validation" />
     <MESSAGE value="typescript-ignore" />
@@ -532,8 +515,6 @@
     <MESSAGE value="refactor: update forms to support multi-language name fields for doctors, hospitals, and specialties" />
     <MESSAGE value="refactor: update user type definitions and improve name field handling in forms" />
     <MESSAGE value="refactor: reorganize component structure and update import paths for tables and forms" />
-    <MESSAGE value="refactor: enhance form components with multilingual support and image upload functionality" />
-    <MESSAGE value="refactor: implement form helpers and validation for multilingual support in doctor and hospital forms" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: implement form helpers and validation for multilingual support in doctor and hospital forms" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: reorganize component structure and update import paths for tables and forms" />
   </component>
 </project>
