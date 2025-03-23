@@ -4,23 +4,23 @@ import { useEffect, useState } from 'react'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { Box, Button, Card, CardContent, InputAdornment, Typography } from '@mui/material'
-import Grid from '@mui/material/Grid2'
-import MenuItem from '@mui/material/MenuItem'
+import { Box, Button, Card, CardContent, InputAdornment, Typography, Grid } from '@mui/material'
 import { toast } from 'react-toastify'
 
 import CustomTextField from '@core/components/mui/TextField'
 import Form from '@components/Form'
 import { doctorsService } from '@/apis/services/doctors'
 import { specialitiesService } from '@/apis/services/specialities'
+import ImageUpload from '@/components/ImageUpload'
+import MultiLangTextFields from '@/components/MultiLangTextFields'
+import { appendMultilingualFields, appendOtherFields } from '@/utils/formHelpers'
 
-// Type definitions
 interface LanguageValue {
   langId: string
   value: string
 }
 
-interface DoctorFormValues {
+export interface DoctorFormValues {
   name: LanguageValue[]
   speciality_id: string | number
   bio: string
@@ -55,7 +55,6 @@ interface DoctorData {
   rating: number
 }
 
-// Validation schema
 const doctorValidationSchema = Yup.object({
   name: Yup.array()
     .of(
@@ -80,7 +79,7 @@ const doctorValidationSchema = Yup.object({
     })
     .test('fileSize', 'File is too large', value => {
       if (value instanceof File) {
-        return value.size <= 5000000 // 5MB
+        return value.size <= 5000000
       }
 
       return true
@@ -98,7 +97,6 @@ const doctorValidationSchema = Yup.object({
     .max(5, 'Rating must be at most 5')
 })
 
-// Initial form values
 const getInitialFormValues = (): DoctorFormValues => ({
   name: [
     { langId: 'en', value: '' },
@@ -119,43 +117,22 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
   const [availableSpecialities, setAvailableSpecialities] = useState<Speciality[]>([])
 
-  // Form setup
   const formik = useFormik<DoctorFormValues>({
     initialValues: getInitialFormValues(),
     validationSchema: doctorValidationSchema,
     onSubmit: async values => {
-      const formData = prepareFormData(values, id)
+      const formData = new FormData()
 
+      if (id) {
+        formData.append('_method', 'patch')
+      }
+
+      appendMultilingualFields(formData, 'name', values.name)
+      appendOtherFields(formData, values, ['name'])
       await submitDoctorData(formData, id)
     }
   })
 
-  // Prepare form data for submission
-  const prepareFormData = (values: DoctorFormValues, doctorId?: number): FormData => {
-    const formData = new FormData()
-
-    if (doctorId) {
-      formData.append('_method', 'patch')
-    }
-
-    // Handle multilingual name fields
-    values.name.forEach((nameObj, index) => {
-      Object.keys(nameObj).forEach(key => {
-        formData.append(`name[${index}][${key}]`, nameObj[key])
-      })
-    })
-
-    // Handle other fields
-    Object.keys(values).forEach(key => {
-      if (key !== 'name' && values[key] !== null) {
-        formData.append(key, values[key] as string)
-      }
-    })
-
-    return formData
-  }
-
-  // Submit form data to API
   const submitDoctorData = async (formData: FormData, doctorId?: number): Promise<void> => {
     try {
       if (doctorId) {
@@ -172,14 +149,11 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
     }
   }
 
-  // Handle image selection
   const handleImageSelection = (event: ChangeEvent<HTMLInputElement>): void => {
     const file = event.target.files?.[0]
 
     if (!file) return
-
     formik.setFieldValue('cover', file)
-
     const reader = new FileReader()
 
     reader.onloadend = () => {
@@ -189,7 +163,6 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
     reader.readAsDataURL(file)
   }
 
-  // Update name field for a specific language
   const updateNameField = (language: string, value: string): void => {
     const updatedNames = [...formik.values.name]
     const languageIndex = updatedNames.findIndex(item => item.langId === language)
@@ -200,9 +173,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
     }
   }
 
-  // Format doctor data for form
   const formatDoctorDataForForm = (doctorData: DoctorData): DoctorFormValues => {
-    // Convert name field to proper format
     const nameArray = Array.isArray(doctorData.name)
       ? doctorData.name
       : [
@@ -224,7 +195,6 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
     }
   }
 
-  // Fetch doctor data if editing
   const fetchDoctorData = async (doctorId: number): Promise<void> => {
     try {
       const response = await doctorsService.getDoctor(doctorId)
@@ -241,7 +211,6 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
     }
   }
 
-  // Fetch specialities for dropdown
   const fetchSpecialities = async (): Promise<void> => {
     try {
       const response = await specialitiesService.listSpecialities()
@@ -252,105 +221,33 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
     }
   }
 
-  // Load data on component mount
   useEffect(() => {
     fetchSpecialities()
 
     if (id) {
       fetchDoctorData(id)
     }
-  }, [])
+  }, [id])
 
-  // Render image upload section
-  const renderImageUploadSection = (): JSX.Element => (
-    <Grid>
-      <input
-        type='file'
-        accept='image/*'
-        id='cover-upload'
-        name='cover'
-        onChange={handleImageSelection}
-        style={{ display: 'none' }}
-      />
-      <label htmlFor='cover-upload'>
-        <Card
-          sx={{
-            height: 200,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '2px dashed',
-            borderColor: formik.touched.cover && formik.errors.cover ? 'error.main' : 'primary.main',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              borderColor: formik.touched.cover && formik.errors.cover ? 'error.dark' : 'primary.dark',
-              opacity: 0.8
-            }
-          }}
-        >
-          {imagePreviewUrl ? (
-            <Box
-              component='img'
-              src={imagePreviewUrl}
-              alt='Cover preview'
-              sx={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-              }}
-            />
-          ) : (
-            <Box sx={{ textAlign: 'center', p: 2 }}>
-              <i className='tabler-upload' style={{ fontSize: '2rem', color: 'primary.main' }} />
-              <Typography variant='body1' color='primary' sx={{ mt: 2 }}>
-                Upload Cover Image
-              </Typography>
-              <Typography variant='caption' color='textSecondary'>
-                Click to select an image (JPG, PNG, or GIF)
-              </Typography>
-            </Box>
-          )}
-        </Card>
-      </label>
-      {formik.touched.cover && formik.errors.cover && (
-        <Typography color='error' variant='caption' sx={{ mt: 1, display: 'block' }}>
-          {formik.errors.cover as string}
-        </Typography>
-      )}
-    </Grid>
-  )
+  const languages = [
+    { langId: 'en', label: 'Name (English)', placeholder: 'Your Name in English' },
+    { langId: 'ar', label: 'Name (Arabic)', placeholder: 'Your Name in Arabic' }
+  ]
 
   return (
     <Card>
       <CardContent>
         <Form onSubmit={formik.handleSubmit}>
           <Grid container spacing={6}>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <CustomTextField
-                fullWidth
-                name='name.0.value'
-                label='Name (English)'
-                placeholder='Your Name in English'
-                value={formik.values.name[0].value}
-                onChange={e => updateNameField('en', e.target.value)}
-                onBlur={formik.handleBlur}
-                error={formik.touched.name && Boolean(formik.errors.name)}
-                helperText={formik.touched.name && (formik.errors.name as string)}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <CustomTextField
-                fullWidth
-                name='name.1.value'
-                label='Name (Arabic)'
-                placeholder='Your Name in Arabic'
-                value={formik.values.name[1].value}
-                onChange={e => updateNameField('ar', e.target.value)}
-                onBlur={formik.handleBlur}
-              />
-            </Grid>
-            <Grid size={{ xs: 12 }}>
+            <MultiLangTextFields
+              languages={languages}
+              values={formik.values.name}
+              onChange={updateNameField}
+              onBlur={formik.handleBlur}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && (formik.errors.name as string)}
+            />
+            <Grid item xs={12}>
               <CustomTextField
                 select
                 fullWidth
@@ -363,13 +260,13 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.speciality_id && (formik.errors.speciality_id as string)}
               >
                 {availableSpecialities.map((speciality: Speciality) => (
-                  <MenuItem key={speciality.id} value={speciality.id}>
+                  <option key={speciality.id} value={speciality.id}>
                     {speciality.name}
-                  </MenuItem>
+                  </option>
                 ))}
               </CustomTextField>
             </Grid>
-            <Grid size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CustomTextField
                 fullWidth
                 name='bio'
@@ -382,7 +279,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.bio && formik.errors.bio}
               />
             </Grid>
-            <Grid size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CustomTextField
                 fullWidth
                 name='experience'
@@ -395,7 +292,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.experience && (formik.errors.experience as string)}
               />
             </Grid>
-            <Grid size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CustomTextField
                 fullWidth
                 name='description'
@@ -408,7 +305,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.description && formik.errors.description}
               />
             </Grid>
-            <Grid size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CustomTextField
                 fullWidth
                 name='email'
@@ -431,7 +328,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 }}
               />
             </Grid>
-            <Grid size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CustomTextField
                 fullWidth
                 name='consultation_fee'
@@ -445,7 +342,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.consultation_fee && (formik.errors.consultation_fee as string)}
               />
             </Grid>
-            <Grid size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CustomTextField
                 select
                 fullWidth
@@ -457,11 +354,11 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 error={formik.touched.status && Boolean(formik.errors.status)}
                 helperText={formik.touched.status && (formik.errors.status as string)}
               >
-                <MenuItem value={1}>Active</MenuItem>
-                <MenuItem value={0}>Inactive</MenuItem>
+                <option value={1}>Active</option>
+                <option value={0}>Inactive</option>
               </CustomTextField>
             </Grid>
-            <Grid size={{ xs: 12 }}>
+            <Grid item xs={12}>
               <CustomTextField
                 fullWidth
                 name='rating'
@@ -475,7 +372,16 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.rating && (formik.errors.rating as string)}
               />
             </Grid>
-            {renderImageUploadSection()}
+            <Grid item xs={12}>
+              <ImageUpload
+                id='cover-upload'
+                name='cover'
+                onChange={handleImageSelection}
+                imagePreviewUrl={imagePreviewUrl}
+                touched={formik.touched.cover}
+                error={formik.errors.cover as string}
+              />
+            </Grid>
           </Grid>
           <Box sx={{ mt: 4 }}>
             <Button

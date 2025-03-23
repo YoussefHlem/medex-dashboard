@@ -5,21 +5,22 @@ import { useEffect, useState } from 'react'
 import type { FormikHelpers } from 'formik'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { Box, Button, Card, CardContent, Typography } from '@mui/material'
-import Grid from '@mui/material/Grid2'
+import { Box, Button, Card, CardContent, Typography, Grid } from '@mui/material'
 import { toast } from 'react-toastify'
 
 import CustomTextField from '@core/components/mui/TextField'
 import Form from '@components/Form'
 import { specialitiesService } from '@/apis/services/specialities'
+import ImageUpload from '@/components/ImageUpload'
+import MultiLangTextFields from '@/components/MultiLangTextFields'
+import { appendMultilingualFields, appendOtherFields } from '@/utils/formHelpers'
 
-// Types
 interface LanguageValue {
   langId: string
   value: string
 }
 
-interface SpecialtyFormValues {
+export interface SpecialtyFormValues {
   name: LanguageValue[]
   description: string
   cover: File | string | null
@@ -35,7 +36,6 @@ interface SpecialtyData {
   cover: string
 }
 
-// Validation schema
 const specialtyValidationSchema = Yup.object({
   name: Yup.array()
     .of(
@@ -52,7 +52,7 @@ const specialtyValidationSchema = Yup.object({
     })
     .test('fileSize', 'File is too large', value => {
       if (value instanceof File) {
-        return value.size <= 5000000 // 5MB
+        return value.size <= 5000000
       }
 
       return true
@@ -66,7 +66,6 @@ const specialtyValidationSchema = Yup.object({
     })
 })
 
-// Initial form values
 const initialSpecialtyValues: SpecialtyFormValues = {
   name: [
     { langId: 'en', value: '' },
@@ -79,84 +78,83 @@ const initialSpecialtyValues: SpecialtyFormValues = {
 const SpecialtyForm = ({ id }: SpecialtyFormProps) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null)
 
-  // Prepare form data for submission
-  const prepareFormData = (values: SpecialtyFormValues, editMode: boolean): FormData => {
-    const formData = new FormData()
+  const formik = useFormik<SpecialtyFormValues>({
+    initialValues: initialSpecialtyValues,
+    validationSchema: specialtyValidationSchema,
+    onSubmit: async (values, formikHelpers: FormikHelpers<SpecialtyFormValues>) => {
+      const formData = new FormData()
 
-    if (editMode) {
-      formData.append('_method', 'patch')
-    }
-
-    // Handle name array
-    values.name.forEach((nameObj, index) => {
-      Object.keys(nameObj).forEach(key => {
-        formData.append(`name[${index}][${key}]`, nameObj[key as keyof LanguageValue])
-      })
-    })
-
-    // Handle other fields
-    Object.keys(values).forEach(key => {
-      if (key !== 'name' && values[key as keyof SpecialtyFormValues] !== null) {
-        formData.append(key, values[key as keyof SpecialtyFormValues] as string | Blob)
-      }
-    })
-
-    return formData
-  }
-
-  // Submit handler
-  const handleSpecialtySubmit = async (
-    values: SpecialtyFormValues,
-    formikHelpers: FormikHelpers<SpecialtyFormValues>
-  ): Promise<void> => {
-    const formData = prepareFormData(values, Boolean(id))
-    const isEditMode = Boolean(id)
-
-    try {
-      if (isEditMode && id) {
-        await specialitiesService.updateSpeciality(id, formData)
-      } else {
-        await specialitiesService.createSpeciality(formData)
+      if (id) {
+        formData.append('_method', 'patch')
       }
 
-      toast.success(`Specialty ${isEditMode ? 'Updated' : 'Created'} successfully`)
-    } catch (err: any) {
-      toast.error(
-        `Failed to ${isEditMode ? 'Update' : 'Create'} Specialty: ${err.response?.data?.message || 'Unknown error'}`
-      )
-    } finally {
-      formikHelpers.setSubmitting(false)
+      appendMultilingualFields(formData, 'name', values.name)
+      appendOtherFields(formData, values, ['name'])
+
+      try {
+        if (id) {
+          await specialitiesService.updateSpeciality(id, formData)
+          toast.success('Specialty Updated successfully')
+        } else {
+          await specialitiesService.createSpeciality(formData)
+          toast.success('Specialty Created successfully')
+        }
+      } catch (err: any) {
+        toast.error(
+          `Failed to ${id ? 'Update' : 'Create'} Specialty: ${err.response?.data?.message || 'Unknown error'}`
+        )
+      } finally {
+        formikHelpers.setSubmitting(false)
+      }
+    }
+  })
+
+  const handleImageFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const file = event.currentTarget.files?.[0]
+
+    if (!file) return
+    formik.setFieldValue('cover', file)
+    const reader = new FileReader()
+
+    reader.onloadend = () => {
+      setImagePreviewUrl(reader.result as string)
+    }
+
+    reader.readAsDataURL(file)
+  }
+
+  const handleLanguageNameChange = (languageId: string, value: string): void => {
+    const updatedNameArray = [...formik.values.name]
+    const languageIndex = updatedNameArray.findIndex(item => item.langId === languageId)
+
+    if (languageIndex !== -1) {
+      updatedNameArray[languageIndex].value = value
+      formik.setFieldValue('name', updatedNameArray)
     }
   }
 
-  // Process specialty data from API response
-  const processSpecialtyData = (specialtyData: SpecialtyData): SpecialtyFormValues => {
-    const nameValue = specialtyData.name
-
-    const nameArray = Array.isArray(nameValue)
-      ? nameValue
-      : [
-          { langId: 'en', value: nameValue as string },
-          { langId: 'ar', value: '' }
-        ]
-
-    return {
-      name: nameArray,
-      description: specialtyData.description,
-      cover: specialtyData.cover
-    }
-  }
-
-  // Fetch specialty data if in edit mode
   const fetchSpecialtyData = async (specialtyId: number): Promise<void> => {
     try {
       const response = await specialitiesService.getSpeciality(specialtyId)
-      const specialtyData = response.data.speciality
+      const specialtyData: SpecialtyData = response.data.speciality
 
       setImagePreviewUrl(specialtyData.cover)
-      const processedData = processSpecialtyData(specialtyData)
 
-      formik.setValues(processedData, true)
+      const nameArray = Array.isArray(specialtyData.name)
+        ? specialtyData.name
+        : [
+            { langId: 'en', value: specialtyData.name as string },
+            { langId: 'ar', value: '' }
+          ]
+
+      formik.setValues(
+        {
+          name: nameArray,
+          description: specialtyData.description,
+          cover: specialtyData.cover
+        },
+        true
+      )
     } catch (err: any) {
       toast.error(`Failed to fetch Specialty: ${err.response?.data?.message || 'Unknown error'}`)
     }
@@ -168,133 +166,25 @@ const SpecialtyForm = ({ id }: SpecialtyFormProps) => {
     }
   }, [id])
 
-  // Handle image file selection
-  const handleImageFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const file = event.currentTarget.files?.[0]
-
-    if (!file) return
-
-    formik.setFieldValue('cover', file)
-
-    const reader = new FileReader()
-
-    reader.onloadend = () => {
-      setImagePreviewUrl(reader.result as string)
-    }
-
-    reader.readAsDataURL(file)
-  }
-
-  // Handle name field changes for specific language
-  const handleLanguageNameChange = (languageId: string, value: string): void => {
-    const updatedNameArray = [...formik.values.name]
-    const languageIndex = updatedNameArray.findIndex(item => item.langId === languageId)
-
-    if (languageIndex !== -1) {
-      updatedNameArray[languageIndex].value = value
-      formik.setFieldValue('name', updatedNameArray)
-    }
-  }
-
-  // Initialize formik
-  const formik = useFormik<SpecialtyFormValues>({
-    initialValues: initialSpecialtyValues,
-    validationSchema: specialtyValidationSchema,
-    onSubmit: handleSpecialtySubmit
-  })
-
-  // Render image upload section
-  const renderImageUploadSection = (): JSX.Element => {
-    return (
-      <Grid>
-        <input
-          type='file'
-          accept='image/*'
-          id='cover-upload'
-          name='cover'
-          onChange={handleImageFileChange}
-          style={{ display: 'none' }}
-        />
-        <label htmlFor='cover-upload'>
-          <Card
-            sx={{
-              height: 200,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '2px dashed',
-              borderColor: formik.touched.cover && formik.errors.cover ? 'error.main' : 'primary.main',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                borderColor: formik.touched.cover && formik.errors.cover ? 'error.dark' : 'primary.dark',
-                opacity: 0.8
-              }
-            }}
-          >
-            {imagePreviewUrl ? (
-              <Box
-                component='img'
-                src={imagePreviewUrl}
-                alt='Cover preview'
-                sx={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-              />
-            ) : (
-              <Box sx={{ textAlign: 'center', p: 2 }}>
-                <i className='tabler-upload' style={{ fontSize: '2rem', color: 'primary.main' }} />
-                <Typography variant='body1' color='primary' sx={{ mt: 2 }}>
-                  Upload Cover Image
-                </Typography>
-                <Typography variant='caption' color='textSecondary'>
-                  Click to select an image (JPG, PNG, or GIF)
-                </Typography>
-              </Box>
-            )}
-          </Card>
-        </label>
-        {formik.touched.cover && formik.errors.cover && (
-          <Typography color='error' variant='caption' sx={{ mt: 1, display: 'block' }}>
-            {formik.errors.cover as string}
-          </Typography>
-        )}
-      </Grid>
-    )
-  }
+  const languages = [
+    { langId: 'en', label: 'Name (English)', placeholder: 'Specialty Name in English' },
+    { langId: 'ar', label: 'Name (Arabic)', placeholder: 'Specialty Name in Arabic' }
+  ]
 
   return (
     <Card>
       <CardContent>
         <Form onSubmit={formik.handleSubmit}>
           <Grid container spacing={6}>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <CustomTextField
-                fullWidth
-                name='name.0.value'
-                label='Name (English)'
-                placeholder='Specialty Name in English'
-                value={formik.values.name[0].value}
-                onChange={e => handleLanguageNameChange('en', e.target.value)}
-                onBlur={formik.handleBlur}
-                error={formik.touched.name && Boolean(formik.errors.name)}
-                helperText={formik.touched.name && (formik.errors.name as string)}
-              />
-            </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <CustomTextField
-                fullWidth
-                name='name.1.value'
-                label='Name (Arabic)'
-                placeholder='Specialty Name in Arabic'
-                value={formik.values.name[1].value}
-                onChange={e => handleLanguageNameChange('ar', e.target.value)}
-                onBlur={formik.handleBlur}
-              />
-            </Grid>
-            <Grid size={{ xs: 12 }}>
+            <MultiLangTextFields
+              languages={languages}
+              values={formik.values.name}
+              onChange={handleLanguageNameChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && (formik.errors.name as string)}
+            />
+            <Grid item xs={12}>
               <CustomTextField
                 fullWidth
                 name='description'
@@ -307,7 +197,16 @@ const SpecialtyForm = ({ id }: SpecialtyFormProps) => {
                 helperText={formik.touched.description && formik.errors.description}
               />
             </Grid>
-            {renderImageUploadSection()}
+            <Grid item xs={12}>
+              <ImageUpload
+                id='cover-upload'
+                name='cover'
+                onChange={handleImageFileChange}
+                imagePreviewUrl={imagePreviewUrl}
+                touched={formik.touched.cover}
+                error={formik.errors.cover as string}
+              />
+            </Grid>
           </Grid>
           <Box sx={{ mt: 4 }}>
             <Button
