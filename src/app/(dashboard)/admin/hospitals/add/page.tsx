@@ -1,6 +1,6 @@
 import React from 'react'
 
-import HospitalForm from '@components/forms/HospitalForm'
+import HospitalForm from '@/modules/hospital/HospitalForm'
 
 const Page = () => {
   return <HospitalForm />

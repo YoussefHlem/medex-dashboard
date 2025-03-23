@@ -1,6 +1,6 @@
 import React from 'react'
 
-import DoctorForm from '@components/forms/DoctorForm'
+import DoctorForm from '@/modules/doctor/DoctorForm'
 
 const Page = () => {
   return <DoctorForm />

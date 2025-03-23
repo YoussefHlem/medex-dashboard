@@ -2,7 +2,7 @@ import React from 'react'
 
 import Grid from '@mui/material/Grid2'
 
-import BookingsTable from '@components/tables/BookingsTables'
+import BookingsTable from '@/modules/doctor/BookingsTables'
 
 const Page = () => {
   const id = 1

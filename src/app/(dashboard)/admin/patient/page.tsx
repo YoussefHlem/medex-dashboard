@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid2'
 
-import PatientsTable from '@components/tables/PatientsTable'
+import PatientsTable from '@/modules/patient/PatientsTable'
 
 export default function Page() {
   return (

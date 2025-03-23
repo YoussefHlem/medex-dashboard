@@ -16,12 +16,12 @@ import Card from '@mui/material/Card'
 // Custom Imports
 import Grid from '@mui/material/Grid2'
 
-import DoctorForm from '@components/forms/DoctorForm'
+import DoctorForm from '@/modules/doctor/DoctorForm'
 import AppFullCalendar from '@/libs/styles/AppFullCalendar'
 import CalendarWrapper from '@views/apps/calendar/CalendarWrapper'
 import { agendaService } from '@/apis/services/agenda'
 import { setEvents } from '@/redux-store/slices/calendar'
-import BookingsTable from '@components/tables/BookingsTables'
+import BookingsTable from '@/modules/doctor/BookingsTables'
 import DoctorSlots from '@components/DoctorSlots/DoctorSlots'
 
 const DoctorDetails = ({ params }: { params: { id: number } }) => {
