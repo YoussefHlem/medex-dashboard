@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update calendar state management and clean up workspace configuration">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update forms to support multi-language name fields for doctors, hospitals, and specialties">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/DoctorForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/HospitalForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/forms/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms/SpecialityForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux-store/slices/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux-store/slices/auth.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +22,8 @@
       <list>
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -34,6 +36,9 @@
     &quot;assignee&quot;: &quot;YoussefHlem&quot;
   }
 }</component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="00ed0dd1-ac2c-4b71-86fa-72f1a2e631b2" />
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/YoussefHlem/medex-dashboard.git&quot;,
@@ -154,7 +159,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.25659.40" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
       </set>
     </attachedChunks>
   </component>
@@ -220,7 +225,9 @@
       <workItem from="1741466732248" duration="1684000" />
       <workItem from="1741925052077" duration="770000" />
       <workItem from="1742181956818" duration="482000" />
-      <workItem from="1742247357294" duration="5237000" />
+      <workItem from="1742247357294" duration="6211000" />
+      <workItem from="1742276446631" duration="720000" />
+      <workItem from="1742742154203" duration="738000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -454,7 +461,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741454263427</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="refactor: update forms to support multi-language name fields for doctors, hospitals, and specialties">
+      <option name="closed" value="true" />
+      <created>1742275552975</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1742275552975</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -485,6 +500,7 @@
     <MESSAGE value="Refactor AccountDetails and DoctorSlots components for improved profile management and slot handling" />
     <MESSAGE value="Refactor authentication and calendar state management; enhance hospital form with Google Maps integration" />
     <MESSAGE value="refactor: update calendar state management and clean up workspace configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update calendar state management and clean up workspace configuration" />
+    <MESSAGE value="refactor: update forms to support multi-language name fields for doctors, hospitals, and specialties" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update forms to support multi-language name fields for doctors, hospitals, and specialties" />
   </component>
 </project>

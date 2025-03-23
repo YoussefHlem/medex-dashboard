@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
-type UserType = 'admin' | 'doctor' | 'hospital'
+type UserType = 'Admin' | 'Doctor' | 'Hospital'
 
 interface AuthState {
   userType: UserType | null

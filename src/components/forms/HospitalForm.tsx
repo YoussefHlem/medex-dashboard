@@ -84,8 +84,12 @@ const HospitalForm = ({ id }: { id?: number }) => {
         formData.append('_method', 'patch')
       }
 
-      // Handle name array separately
-      formData.append('name', JSON.stringify(values.name))
+      // Don't stringify the name array, append each object as individual form fields
+      values.name.forEach((nameObj, index) => {
+        Object.keys(nameObj).forEach(key => {
+          formData.append(`name[${index}][${key}]`, nameObj[key])
+        })
+      })
 
       // Append other form values
       Object.keys(values).forEach(key => {
