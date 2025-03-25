@@ -18,11 +18,11 @@ import Grid from '@mui/material/Grid2'
 
 import Index from '@/modules/doctor/DoctorForm'
 import AppFullCalendar from '@/libs/styles/AppFullCalendar'
-import CalendarWrapper from '@views/apps/calendar/CalendarWrapper'
+import CalendarWrapper from '@/modules/doctor/calendar/CalendarWrapper'
 import { agendaService } from '@/apis/services/agenda'
 import { setEvents } from '@/redux-store/slices/calendar'
 import BookingsTable from '@/modules/doctor/BookingsTables'
-import DoctorSlots from '@components/DoctorSlots/DoctorSlots'
+import DoctorSlots from '@/modules/doctor/DoctorSlots/DoctorSlots'
 
 const DoctorDetails = ({ params }: { params: { id: number } }) => {
   const id = params.id

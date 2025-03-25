@@ -3,7 +3,7 @@ import React from 'react'
 import Card from '@mui/material/Card'
 
 import AppFullCalendar from '@/libs/styles/AppFullCalendar'
-import CalendarWrapper from '@views/apps/calendar/CalendarWrapper'
+import CalendarWrapper from '@/modules/doctor/calendar/CalendarWrapper'
 
 const Page = () => {
   const id = 1

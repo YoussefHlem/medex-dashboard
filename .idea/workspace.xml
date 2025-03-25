@@ -4,7 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: reorganize component structure and update import paths for tables and forms" />
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: reorganize component structure and update import paths for tables and forms">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(blank-layout-pages)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(blank-layout-pages)/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/doctors/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctor/agenda/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/agenda/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctor/profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/profile/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/doctor/schedule/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/doctor/schedule/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospital/profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospital/profile/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[...not-found]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[...not-found]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DoctorSlots/DoctorSlots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorSlots/DoctorSlots.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DoctorSlots/SlotForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorSlots/SlotForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DoctorSlots/SlotList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorSlots/SlotList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DoctorSlots/doctor-slots.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorSlots/doctor-slots.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DoctorSlots/slotUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorSlots/slotUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DoctorSlots/use-slots-management.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorSlots/use-slots-management.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/vertical/VerticalMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/vertical/VerticalMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/navigation/horizontalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/data/horizontalMenuData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/navigation/verticalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/data/verticalMenuData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fake-db/apps/calendar.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux-store/slices/calendar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux-store/slices/calendar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/apps/calendarTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/calendar/calendarTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/dateUtils.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/getInitials.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/string.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/auth/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/NotFound.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NotFound.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/AddEventSidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/calendar/AddEventSidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/Calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/calendar/Calendar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/CalendarWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/calendar/CalendarWrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/apps/calendar/SidebarLeft.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/calendar/SidebarLeft.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/doctor/settings/AccountDelete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/settings/AccountDelete.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/doctor/settings/AccountDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/settings/AccountDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/list/ListTable.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/list/ViewCard.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/list/index.tsx" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,7 +60,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -105,11 +142,11 @@
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\dialogs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital\HospitalForm" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components\layout" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\data" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\doctor\calendar" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\doctor" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\patient" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -477,17 +514,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Complete Specialities endpoint" />

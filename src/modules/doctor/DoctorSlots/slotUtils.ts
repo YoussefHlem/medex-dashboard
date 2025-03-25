@@ -1,6 +1,6 @@
 import { format, parse, parseISO } from 'date-fns'
 
-import type { Slot, FormData } from '@components/DoctorSlots/doctor-slots'
+import type { Slot, FormData } from '@/modules/doctor/DoctorSlots/doctor-slots'
 
 export const transformBackendData = (schedules: any[]): Slot[] => {
   return schedules.map(schedule => ({

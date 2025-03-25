@@ -4,7 +4,7 @@ import { Box, Button } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 import { Plus } from 'lucide-react'
 
-import type { FormData } from '@components/DoctorSlots/doctor-slots'
+import type { FormData } from '@/modules/doctor/DoctorSlots/doctor-slots'
 
 import AppReactDatepicker from '@/libs/styles/AppReactDatepicker'
 import CustomTextField from '@core/components/mui/TextField'

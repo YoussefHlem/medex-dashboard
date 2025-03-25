@@ -7,14 +7,14 @@ import { parse } from 'date-fns'
 
 import { doctorsService } from '@/apis/services/doctors'
 
-import type { Slot } from '@components/DoctorSlots/doctor-slots'
+import type { Slot } from '@/modules/doctor/DoctorSlots/doctor-slots'
 import {
   updateSlotsState,
   transformBackendData,
   transformToBackendFormat,
   createNewSlot,
   createSlotFromFormData
-} from '@components/DoctorSlots/slotUtils'
+} from '@/modules/doctor/DoctorSlots/slotUtils'
 
 export const useSlotsManagement = (id: number) => {
   const [slots, setSlots] = useState<Slot[]>([])

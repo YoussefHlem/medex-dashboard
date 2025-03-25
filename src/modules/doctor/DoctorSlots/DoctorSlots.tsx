@@ -7,9 +7,9 @@ import Typography from '@mui/material/Typography'
 import 'react-toastify/dist/ReactToastify.css'
 import { Loader2 } from 'lucide-react'
 
-import SlotForm from '@components/DoctorSlots/SlotForm'
-import SlotList from '@components/DoctorSlots/SlotList'
-import { useSlotsManagement } from '@components/DoctorSlots/use-slots-management'
+import SlotForm from '@/modules/doctor/DoctorSlots/SlotForm'
+import SlotList from '@/modules/doctor/DoctorSlots/SlotList'
+import { useSlotsManagement } from '@/modules/doctor/DoctorSlots/use-slots-management'
 
 const DoctorSlots = ({ id }: { id: number }) => {
   const { slots, isLoading, formData, handlers, isSaving } = useSlotsManagement(id)

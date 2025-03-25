@@ -2,7 +2,7 @@ import React from 'react'
 
 import Grid from '@mui/material/Grid2'
 
-import AccountDetails from '@views/doctor/settings/AccountDetails'
+import AccountDetails from '@/modules/doctor/settings/AccountDetails'
 
 const Page = () => {
   return (

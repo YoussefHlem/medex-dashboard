@@ -8,7 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import classnames from 'classnames'
 
 // Types Imports
-import type { CalendarFiltersType, SidebarLeftProps } from '@/types/apps/calendarTypes'
+import type { CalendarFiltersType, SidebarLeftProps } from '@/modules/doctor/calendar/calendarTypes'
 import type { ThemeColor } from '@core/types'
 
 // Styled Component Imports

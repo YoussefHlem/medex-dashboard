@@ -15,7 +15,7 @@ import { Controller, useForm } from 'react-hook-form'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // Type Imports
-import type { AddEventSidebarType } from '@/types/apps/calendarTypes'
+import type { AddEventSidebarType } from '@/modules/doctor/calendar/calendarTypes'
 
 // Component Imports
 import CustomTextField from '@core/components/mui/TextField'

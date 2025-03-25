@@ -2,8 +2,8 @@ import React from 'react'
 
 import Grid from '@mui/material/Grid2'
 
-import AccountDetails from '@views/doctor/settings/AccountDetails'
-import AccountDelete from '@views/doctor/settings/AccountDelete'
+import AccountDetails from '@/modules/doctor/settings/AccountDetails'
+import AccountDelete from '@/modules/doctor/settings/AccountDelete'
 
 const Page = () => {
   return (

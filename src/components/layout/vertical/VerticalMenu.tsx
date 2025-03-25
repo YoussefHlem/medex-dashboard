@@ -22,7 +22,7 @@ import StyledVerticalNavExpandIcon from '@menu/styles/vertical/StyledVerticalNav
 import menuItemStyles from '@core/styles/vertical/menuItemStyles'
 import menuSectionStyles from '@core/styles/vertical/menuSectionStyles'
 import { GenerateVerticalMenu } from '@components/GenerateMenu'
-import verticalMenuData from '@/data/navigation/verticalMenuData'
+import verticalMenuData from '@components/layout/data/verticalMenuData'
 import type { RootState } from '@/redux-store'
 
 type RenderExpandIconProps = {

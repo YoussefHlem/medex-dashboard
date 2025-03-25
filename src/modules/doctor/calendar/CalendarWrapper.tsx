@@ -11,11 +11,11 @@ import type { Theme } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
 
 // Type Imports
-import type { CalendarColors, CalendarType } from '@/types/apps/calendarTypes'
+import type { CalendarColors, CalendarType } from '@/modules/doctor/calendar/calendarTypes'
 
 // Component Imports
 import Calendar from './Calendar'
-import SidebarLeft from '@views/apps/calendar/SidebarLeft'
+import SidebarLeft from '@/modules/doctor/calendar/SidebarLeft'
 
 // CalendarColors Object
 const calendarsColor: CalendarColors = {

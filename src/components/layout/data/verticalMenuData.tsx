@@ -1,4 +1,4 @@
-import type { VerticalMenuDataType } from '@/types/menuTypes'
+import type { VerticalMenuDataType } from '@components/layout/data/menuTypes'
 
 const verticalMenuData = (userType: 'Admin' | 'doctor' | 'hospital' | null): VerticalMenuDataType[] => {
   switch (userType) {

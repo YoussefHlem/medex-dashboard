@@ -3,7 +3,7 @@ import React from 'react'
 import { Box, Divider, List, ListItem, ListItemIcon, ListItemText, Switch, Typography } from '@mui/material'
 import { Calendar, PenSquare, Timer, User } from 'lucide-react'
 
-import type { Slot } from '@components/DoctorSlots/doctor-slots'
+import type { Slot } from '@/modules/doctor/DoctorSlots/doctor-slots'
 
 interface SlotListProps {
   slots: Slot[]

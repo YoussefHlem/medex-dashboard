@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { EventInput } from '@fullcalendar/core'
 
 // Type Imports
-import type { CalendarFiltersType, CalendarType } from '@/types/apps/calendarTypes'
+import type { CalendarFiltersType, CalendarType } from '@/modules/doctor/calendar/calendarTypes'
 
 // Data Imports
 // import { events } from '@/fake-db/apps/calendar'
