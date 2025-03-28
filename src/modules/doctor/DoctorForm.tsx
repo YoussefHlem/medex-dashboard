@@ -3,17 +3,25 @@ import type { ChangeEvent } from 'react'
 import { useEffect, useState } from 'react'
 
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
-import { Box, Button, Card, CardContent, InputAdornment, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, InputAdornment, MenuItem } from '@mui/material'
 import Grid from '@mui/material/Grid2'
-import MenuItem from '@mui/material/MenuItem'
 import { toast } from 'react-toastify'
 
+import Form from '@components/form/Form'
 import CustomTextField from '@core/components/mui/TextField'
-import Form from '@components/Form'
+
 import { doctorsService } from '@/apis/services/doctors'
 import { specialitiesService } from '@/apis/services/specialities'
 import { doctorValidationSchema } from '@/modules/doctor/utils/doctorValidationSchema'
+import { createFilePreview, createMultiLanguageFormData } from '@components/form/formUtils'
+import { MultiLanguageTextField } from '@components/form/MultiLanguageTextField'
+import { ImageUploadField } from '@components/form/ImageUploadField'
+
+// Constants
+const LANGUAGES = [
+  { id: 'en', label: 'English' },
+  { id: 'ar', label: 'Arabic' }
+]
 
 // Type definitions
 interface LanguageValue {
@@ -36,7 +44,7 @@ interface DoctorFormValues {
 
 interface Speciality {
   id: number
-  name: string
+  name: LanguageValue[]
 }
 
 interface DoctorFormProps {
@@ -82,69 +90,39 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
     initialValues: getInitialFormValues(),
     validationSchema: doctorValidationSchema,
     onSubmit: async values => {
-      const formData = prepareFormData(values, id)
+      try {
+        const formData = createMultiLanguageFormData(values, ['name'])
 
-      await submitDoctorData(formData, id)
+        if (id) {
+          formData.append('_method', 'patch')
+          await doctorsService.updateDoctor(id, formData)
+          toast.success('Doctor updated successfully')
+        } else {
+          await doctorsService.createDoctor(formData)
+          toast.success('Doctor created successfully')
+        }
+      } catch (error: any) {
+        const errorMessage = error.response?.data?.message || 'An unknown error occurred'
+
+        toast.error(`Failed to ${id ? 'update' : 'create'} doctor: ${errorMessage}`)
+      }
     }
   })
 
-  // Prepare form data for submission
-  const prepareFormData = (values: DoctorFormValues, doctorId?: number): FormData => {
-    const formData = new FormData()
-
-    if (doctorId) {
-      formData.append('_method', 'patch')
-    }
-
-    // Handle multilingual name fields
-    values.name.forEach((nameObj, index) => {
-      Object.keys(nameObj).forEach(key => {
-        formData.append(`name[${index}][${key}]`, nameObj[key])
-      })
-    })
-
-    // Handle other fields
-    Object.keys(values).forEach(key => {
-      if (key !== 'name' && values[key] !== null) {
-        formData.append(key, values[key] as string)
-      }
-    })
-
-    return formData
-  }
-
-  // Submit form data to API
-  const submitDoctorData = async (formData: FormData, doctorId?: number): Promise<void> => {
-    try {
-      if (doctorId) {
-        await doctorsService.updateDoctor(doctorId, formData)
-        toast.success('Doctor updated successfully')
-      } else {
-        await doctorsService.createDoctor(formData)
-        toast.success('Doctor created successfully')
-      }
-    } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'An unknown error occurred'
-
-      toast.error(`Failed to ${doctorId ? 'update' : 'create'} doctor: ${errorMessage}`)
-    }
-  }
-
   // Handle image selection
-  const handleImageSelection = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleImageSelection = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     const file = event.target.files?.[0]
 
     if (!file) return
 
-    formik.setFieldValue('cover', file)
+    try {
+      const previewUrl = await createFilePreview(file)
 
-    const reader = new FileReader()
-
-    reader.onloadend = () => {
-      setImagePreviewUrl(reader.result as string)
+      setImagePreviewUrl(previewUrl)
+      formik.setFieldValue('cover', file)
+    } catch (error) {
+      toast.error('Failed to process image')
     }
-
-    reader.readAsDataURL(file)
   }
 
   // Update name field for a specific language
@@ -220,97 +198,23 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
     }
   }, [])
 
-  // Render image upload section
-  const renderImageUploadSection = (): JSX.Element => (
-    <Grid>
-      <input
-        type='file'
-        accept='image/*'
-        id='cover-upload'
-        name='cover'
-        onChange={handleImageSelection}
-        style={{ display: 'none' }}
-      />
-      <label htmlFor='cover-upload'>
-        <Card
-          sx={{
-            height: 200,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '2px dashed',
-            borderColor: formik.touched.cover && formik.errors.cover ? 'error.main' : 'primary.main',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              borderColor: formik.touched.cover && formik.errors.cover ? 'error.dark' : 'primary.dark',
-              opacity: 0.8
-            }
-          }}
-        >
-          {imagePreviewUrl ? (
-            <Box
-              component='img'
-              src={imagePreviewUrl}
-              alt='Cover preview'
-              sx={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover'
-              }}
-            />
-          ) : (
-            <Box sx={{ textAlign: 'center', p: 2 }}>
-              <i className='tabler-upload' style={{ fontSize: '2rem', color: 'primary.main' }} />
-              <Typography variant='body1' color='primary' sx={{ mt: 2 }}>
-                Upload Cover Image
-              </Typography>
-              <Typography variant='caption' color='textSecondary'>
-                Click to select an image (JPG, PNG, or GIF)
-              </Typography>
-            </Box>
-          )}
-        </Card>
-      </label>
-      {formik.touched.cover && formik.errors.cover && (
-        <Typography color='error' variant='caption' sx={{ mt: 1, display: 'block' }}>
-          {formik.errors.cover as string}
-        </Typography>
-      )}
-    </Grid>
-  )
-
   return (
     <Card>
       <CardContent>
         <Form onSubmit={formik.handleSubmit}>
           <Grid container spacing={6}>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <CustomTextField
-                fullWidth
-                name='name.0.value'
-                label='Name (English)'
-                placeholder='Your Name in English'
-                value={formik.values.name[0].value}
-                onChange={e => updateNameField('en', e.target.value)}
-                onBlur={formik.handleBlur}
-                error={formik.touched.name?.[0]?.value && Boolean(formik.errors.name?.[0]?.value)}
-                helperText={formik.touched.name?.[0]?.value && formik.errors.name?.[0]?.value}
+            {/* Multilingual Name Field */}
+            <Grid size={{ xs: 12 }}>
+              <MultiLanguageTextField
+                formik={formik}
+                languages={LANGUAGES}
+                name='name'
+                onLanguageChange={updateNameField}
+                placeholder='Your Name'
               />
             </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <CustomTextField
-                fullWidth
-                name='name.1.value'
-                label='Name (Arabic)'
-                placeholder='Your Name in Arabic'
-                value={formik.values.name[1].value}
-                onChange={e => updateNameField('ar', e.target.value)}
-                onBlur={formik.handleBlur}
-                error={formik.touched.name?.[1]?.value && Boolean(formik.errors.name?.[1]?.value)}
-                helperText={formik.touched.name?.[1]?.value && formik.errors.name?.[1]?.value}
-              />
-            </Grid>
+
+            {/* Speciality Dropdown */}
             <Grid size={{ xs: 12 }}>
               <CustomTextField
                 select
@@ -325,11 +229,13 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
               >
                 {availableSpecialities.map((speciality: Speciality) => (
                   <MenuItem key={speciality.id} value={speciality.id}>
-                    {speciality.name && speciality.name[0]?.value} - {speciality.name && speciality.name[1]?.value}
+                    {speciality.name?.[0]?.value} - {speciality.name?.[1]?.value}
                   </MenuItem>
                 ))}
               </CustomTextField>
             </Grid>
+
+            {/* Other Text Fields */}
             <Grid size={{ xs: 12 }}>
               <CustomTextField
                 fullWidth
@@ -343,12 +249,14 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.bio && formik.errors.bio}
               />
             </Grid>
+
             <Grid size={{ xs: 12 }}>
               <CustomTextField
                 fullWidth
                 name='experience'
                 label='Experience (years)'
                 placeholder='Years of experience'
+                type='number'
                 value={formik.values.experience}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
@@ -356,6 +264,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.experience && (formik.errors.experience as string)}
               />
             </Grid>
+
             <Grid size={{ xs: 12 }}>
               <CustomTextField
                 fullWidth
@@ -369,6 +278,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.description && formik.errors.description}
               />
             </Grid>
+
             <Grid size={{ xs: 12 }}>
               <CustomTextField
                 fullWidth
@@ -392,6 +302,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 }}
               />
             </Grid>
+
             <Grid size={{ xs: 12 }}>
               <CustomTextField
                 fullWidth
@@ -406,6 +317,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.consultation_fee && (formik.errors.consultation_fee as string)}
               />
             </Grid>
+
             <Grid size={{ xs: 12 }}>
               <CustomTextField
                 select
@@ -422,6 +334,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 <MenuItem value={0}>Inactive</MenuItem>
               </CustomTextField>
             </Grid>
+
             <Grid size={{ xs: 12 }}>
               <CustomTextField
                 fullWidth
@@ -436,8 +349,13 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
                 helperText={formik.touched.rating && (formik.errors.rating as string)}
               />
             </Grid>
-            {renderImageUploadSection()}
+
+            {/* Image Upload Field */}
+            <Grid size={{ xs: 12 }}>
+              <ImageUploadField formik={formik} previewUrl={imagePreviewUrl} onImageChange={handleImageSelection} />
+            </Grid>
           </Grid>
+
           <Box sx={{ mt: 4 }}>
             <Button fullWidth type='submit' variant='contained' color='primary' disabled={formik.isSubmitting}>
               {id ? 'Update' : 'Create'}

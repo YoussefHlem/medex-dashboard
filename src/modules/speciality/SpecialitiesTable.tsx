@@ -177,7 +177,7 @@ const SpecialitiesTable = () => {
         setPageSize={setPageSize}
         searchPlaceholder='Search Specialty'
         createButtonProps={{
-          href: '/speciality/add',
+          href: 'speciality/add',
           label: 'Create Speciality'
         }}
       />

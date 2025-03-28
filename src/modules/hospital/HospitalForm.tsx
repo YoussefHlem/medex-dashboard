@@ -2,16 +2,18 @@
 import { useEffect, useState, useRef } from 'react'
 
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
 import { Box, Button, Card, CardContent, InputAdornment, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 import { toast } from 'react-toastify'
 import MenuItem from '@mui/material/MenuItem'
 
 import CustomTextField from '@core/components/mui/TextField'
-import Form from '@components/Form'
+import Form from '@components/form/Form'
 import { hospitalsService } from '@/apis/services/hospitals'
 import { hospitalValidationSchema } from '@/modules/hospital/utils/hospitalValidationSchema'
+import { createFilePreview, createMultiLanguageFormData } from '@components/form/formUtils'
+import { MultiLanguageTextField } from '@components/form/MultiLanguageTextField'
+import { ImageUploadField } from '@components/form/ImageUploadField'
 
 // Types
 interface NameTranslation {
@@ -56,14 +58,15 @@ interface Place {
   formatted_address?: string
 }
 
-// Validation schema
+// Languages for multi-language support
+const LANGUAGES = [
+  { id: 'en', label: 'English' },
+  { id: 'ar', label: 'Arabic' }
+]
 
 // Initial form values
 const initialHospitalFormValues: HospitalFormValues = {
-  name: [
-    { langId: 'en', value: '' },
-    { langId: 'ar', value: '' }
-  ],
+  name: LANGUAGES.map(lang => ({ langId: lang.id, value: '' })),
   address: '',
   phone: '',
   email: '',
@@ -91,7 +94,7 @@ const HospitalForm = ({ id }: HospitalFormProps) => {
 
   // Handle form submission
   const handleSubmitHospitalForm = async (values: HospitalFormValues) => {
-    const formData = createHospitalFormData(values, id)
+    const formData = createMultiLanguageFormData(values, ['name'])
 
     try {
       if (id) {
@@ -102,31 +105,6 @@ const HospitalForm = ({ id }: HospitalFormProps) => {
     } catch (error: any) {
       handleHospitalApiError(error, id ? 'Update' : 'Create')
     }
-  }
-
-  // Create FormData from form values
-  const createHospitalFormData = (values: HospitalFormValues, hospitalId?: number): FormData => {
-    const formData = new FormData()
-
-    if (hospitalId) {
-      formData.append('_method', 'patch')
-    }
-
-    // Append name translations
-    values.name.forEach((nameObj, index) => {
-      Object.keys(nameObj).forEach(key => {
-        formData.append(`name[${index}][${key}]`, nameObj[key])
-      })
-    })
-
-    // Append other form values
-    Object.keys(values).forEach(key => {
-      if (key !== 'name' && values[key] !== null) {
-        formData.append(key, values[key as keyof HospitalFormValues] as string | Blob)
-      }
-    })
-
-    return formData
   }
 
   // Create a new hospital
@@ -167,12 +145,10 @@ const HospitalForm = ({ id }: HospitalFormProps) => {
 
   // Populate form with hospital data
   const populateFormWithHospitalData = (hospital: any): void => {
-    const nameValue = hospital.name || ''
-
-    const nameArray = [
-      { langId: 'en', value: nameValue },
-      { langId: 'ar', value: '' }
-    ]
+    const nameArray = LANGUAGES.map(lang => ({
+      langId: lang.id,
+      value: hospital.name[lang.id] || ''
+    }))
 
     hospitalFormik.setValues(
       {
@@ -189,6 +165,29 @@ const HospitalForm = ({ id }: HospitalFormProps) => {
     )
 
     setCoverPreviewUrl(hospital.cover)
+  }
+
+  // Handle name field changes
+  const handleNameTranslationChange = (langId: string, value: string): void => {
+    const nameArray = [...hospitalFormik.values.name]
+    const langIndex = nameArray.findIndex(item => item.langId === langId)
+
+    if (langIndex !== -1) {
+      nameArray[langIndex].value = value
+      hospitalFormik.setFieldValue('name', nameArray)
+    }
+  }
+
+  // Handle cover image change
+  const handleCoverImageChange = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+    const file = event.target.files?.[0]
+
+    if (file) {
+      const previewUrl = await createFilePreview(file)
+
+      hospitalFormik.setFieldValue('cover', file)
+      setCoverPreviewUrl(previewUrl)
+    }
   }
 
   // Load Google Maps script
@@ -326,103 +325,19 @@ const HospitalForm = ({ id }: HospitalFormProps) => {
     }
   }
 
-  // Handle cover image change
-  const handleCoverImageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    const file = event.target.files?.[0]
-
-    if (file) {
-      hospitalFormik.setFieldValue('cover', file)
-      createFilePreview(file)
-    }
-  }
-
-  // Create file preview URL
-  const createFilePreview = (file: File): void => {
-    const reader = new FileReader()
-
-    reader.onloadend = () => {
-      setCoverPreviewUrl(reader.result as string)
-    }
-
-    reader.readAsDataURL(file)
-  }
-
-  // Handle name field change for specific language
-  const handleNameTranslationChange = (langId: string, value: string): void => {
-    const nameArray = [...hospitalFormik.values.name]
-    const langIndex = nameArray.findIndex(item => item.langId === langId)
-
-    if (langIndex !== -1) {
-      nameArray[langIndex].value = value
-      hospitalFormik.setFieldValue('name', nameArray)
-    }
-  }
-
-  // Toggle map visibility
-  const toggleMapVisibility = (): void => {
-    setShowMap(!showMap)
-  }
-
   return (
     <Card>
       <CardContent>
         <Form onSubmit={hospitalFormik.handleSubmit}>
           <Grid container spacing={6}>
             <Grid size={{ xs: 12 }}>
-              <Grid container spacing={2}>
-                <Grid size={{ xs: 12, md: 6 }}>
-                  <CustomTextField
-                    fullWidth
-                    name='name-en'
-                    label='Name (English)'
-                    placeholder='Hospital 1'
-                    value={hospitalFormik.values.name.find(item => item.langId === 'en')?.value || ''}
-                    onChange={e => handleNameTranslationChange('en', e.target.value)}
-                    onBlur={hospitalFormik.handleBlur}
-                    error={hospitalFormik.touched.name && Boolean(hospitalFormik.errors.name)}
-                    helperText={
-                      hospitalFormik.touched.name && typeof hospitalFormik.errors.name === 'string'
-                        ? hospitalFormik.errors.name
-                        : ''
-                    }
-                    slotProps={{
-                      input: {
-                        startAdornment: (
-                          <InputAdornment position='start'>
-                            <i className='tabler-building-hospital' />
-                          </InputAdornment>
-                        )
-                      }
-                    }}
-                  />
-                </Grid>
-                <Grid size={{ xs: 12, md: 6 }}>
-                  <CustomTextField
-                    fullWidth
-                    name='name-ar'
-                    label='Name (Arabic)'
-                    placeholder='المستشفى 1'
-                    value={hospitalFormik.values.name.find(item => item.langId === 'ar')?.value || ''}
-                    onChange={e => handleNameTranslationChange('ar', e.target.value)}
-                    onBlur={hospitalFormik.handleBlur}
-                    error={hospitalFormik.touched.name && Boolean(hospitalFormik.errors.name)}
-                    helperText={
-                      hospitalFormik.touched.name && typeof hospitalFormik.errors.name === 'string'
-                        ? hospitalFormik.errors.name
-                        : ''
-                    }
-                    slotProps={{
-                      input: {
-                        startAdornment: (
-                          <InputAdornment position='start'>
-                            <i className='tabler-building-hospital' />
-                          </InputAdornment>
-                        )
-                      }
-                    }}
-                  />
-                </Grid>
-              </Grid>
+              <MultiLanguageTextField
+                formik={hospitalFormik}
+                languages={LANGUAGES}
+                name='name'
+                onLanguageChange={handleNameTranslationChange}
+                placeholder='Hospital Name'
+              />
             </Grid>
             <Grid size={{ xs: 12 }}>
               <CustomTextField
@@ -525,7 +440,7 @@ const HospitalForm = ({ id }: HospitalFormProps) => {
                   variant='outlined'
                   color='primary'
                   startIcon={<i className='tabler-map' />}
-                  onClick={toggleMapVisibility}
+                  onClick={() => setShowMap(!showMap)}
                   sx={{ mb: 2 }}
                 >
                   {showMap ? 'Hide Map' : 'Show Map to Select Location'}
@@ -606,63 +521,12 @@ const HospitalForm = ({ id }: HospitalFormProps) => {
                 }}
               />
             </Grid>
-            <Grid>
-              <input
-                type='file'
-                accept='image/*'
-                id='cover-upload'
-                name='cover'
-                onChange={handleCoverImageChange}
-                style={{ display: 'none' }}
+            <Grid size={{ xs: 12 }}>
+              <ImageUploadField
+                formik={hospitalFormik}
+                previewUrl={coverPreviewUrl}
+                onImageChange={handleCoverImageChange}
               />
-              <label htmlFor='cover-upload'>
-                <Card
-                  sx={{
-                    height: 200,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    border: '2px dashed',
-                    borderColor:
-                      hospitalFormik.touched.cover && hospitalFormik.errors.cover ? 'error.main' : 'primary.main',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      borderColor:
-                        hospitalFormik.touched.cover && hospitalFormik.errors.cover ? 'error.dark' : 'primary.dark',
-                      opacity: 0.8
-                    }
-                  }}
-                >
-                  {coverPreviewUrl ? (
-                    <Box
-                      component='img'
-                      src={coverPreviewUrl}
-                      alt='Cover preview'
-                      sx={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover'
-                      }}
-                    />
-                  ) : (
-                    <Box sx={{ textAlign: 'center', p: 2 }}>
-                      <i className='tabler-upload' style={{ fontSize: '2rem', color: 'primary.main' }} />
-                      <Typography variant='body1' color='primary' sx={{ mt: 2 }}>
-                        Upload Cover Image
-                      </Typography>
-                      <Typography variant='caption' color='textSecondary'>
-                        Click to select an image (JPG, PNG, or GIF)
-                      </Typography>
-                    </Box>
-                  )}
-                </Card>
-              </label>
-              {hospitalFormik.touched.cover && hospitalFormik.errors.cover && (
-                <Typography color='error' variant='caption' sx={{ mt: 1, display: 'block' }}>
-                  {hospitalFormik.errors.cover as string}
-                </Typography>
-              )}
             </Grid>
           </Grid>
           <Box sx={{ mt: 4 }}>

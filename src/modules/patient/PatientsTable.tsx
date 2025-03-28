@@ -103,10 +103,6 @@ const PatientsTable = () => {
         pageSize={pageSize}
         setPageSize={setPageSize}
         searchPlaceholder='Search Patient'
-        createButtonProps={{
-          href: '/patients/create',
-          label: 'Create Patient'
-        }}
       />
       <DataTable
         data={data}

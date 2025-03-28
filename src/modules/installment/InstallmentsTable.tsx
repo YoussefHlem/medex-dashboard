@@ -156,10 +156,6 @@ const InstallmentsTable = () => {
         pageSize={pageSize}
         setPageSize={setPageSize}
         searchPlaceholder='Search Installment'
-        createButtonProps={{
-          href: '/installments/create',
-          label: 'Create Installment'
-        }}
       />
       <DataTable
         data={data}
