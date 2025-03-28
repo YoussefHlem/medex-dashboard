@@ -44,7 +44,7 @@ interface DoctorFormValues {
 
 interface Speciality {
   id: number
-  name: LanguageValue[]
+  name: string
 }
 
 interface DoctorFormProps {
@@ -229,7 +229,7 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
               >
                 {availableSpecialities.map((speciality: Speciality) => (
                   <MenuItem key={speciality.id} value={speciality.id}>
-                    {speciality.name?.[0]?.value} - {speciality.name?.[1]?.value}
+                    {speciality.name}
                   </MenuItem>
                 ))}
               </CustomTextField>
