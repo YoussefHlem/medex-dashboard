@@ -137,19 +137,49 @@ const ListTable = () => {
       },
       columnHelper.accessor('name', {
         header: 'Name',
-        cell: ({ row }) => (
-          <Typography className='font-medium' color='text.primary'>
-            {row.original.name}
-          </Typography>
-        )
+        cell: ({ row }) => {
+          const name = row.original.name
+
+          if (Array.isArray(name)) {
+            const english = name.find(n => n.langId === 'en')?.value || ''
+            const arabic = name.find(n => n.langId === 'ar')?.value || ''
+
+            return (
+              <Typography className='font-medium' color='text.primary'>
+                {english}, {arabic}
+              </Typography>
+            )
+          }
+
+          return (
+            <Typography className='font-medium' color='text.primary'>
+              {name}
+            </Typography>
+          )
+        }
       }),
       columnHelper.accessor('description', {
         header: 'Description',
-        cell: ({ row }) => (
-          <Typography className='font-medium' color='text.primary'>
-            {row.original.description}
-          </Typography>
-        )
+        cell: ({ row }) => {
+          const description = row.original.description
+
+          if (Array.isArray(description)) {
+            const english = description.find(n => n.langId === 'en')?.value || ''
+            const arabic = description.find(n => n.langId === 'ar')?.value || ''
+
+            return (
+              <Typography className='font-medium' color='text.primary'>
+                {english}, {arabic}
+              </Typography>
+            )
+          }
+
+          return (
+            <Typography className='font-medium' color='text.primary'>
+              {description}
+            </Typography>
+          )
+        }
       }),
       columnHelper.accessor('cover', {
         header: 'Cover',

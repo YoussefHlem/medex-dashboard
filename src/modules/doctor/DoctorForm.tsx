@@ -202,13 +202,14 @@ const DoctorForm = ({ id }: DoctorFormProps) => {
 
   // Format doctor data for form
   const formatDoctorDataForForm = (doctorData: DoctorData): DoctorFormValues => {
-    // Convert name field to proper format
-    const nameArray = Array.isArray(doctorData.name)
-      ? doctorData.name
-      : [
-          { langId: 'en', value: doctorData.name as string },
-          { langId: 'ar', value: '' }
-        ]
+    // Ensure that the name field always contains at least the English and Arabic entries
+    const nameArray =
+      Array.isArray(doctorData.name) && doctorData.name.length > 0
+        ? doctorData.name
+        : [
+            { langId: 'en', value: typeof doctorData.name === 'string' ? doctorData.name : '' },
+            { langId: 'ar', value: '' }
+          ]
 
     return {
       name: nameArray,
