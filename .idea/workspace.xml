@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update import paths for SpecialityForm and SpecialitiesTable components">
-      <change afterPath="$PROJECT_DIR$/src/modules/installment/components/InstallmentStatusSelector.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/installment/entities/installmentEntities.ts" afterDir="false" />
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: create installment entities and status selector component">
+      <change afterPath="$PROJECT_DIR$/src/modules/hospital/components/GoogleMapSelector.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/hospital/components/hospitalFormUtils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/hospital/entities/hospitalEntities.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/installment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/installment/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospital/installment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospital/installment/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/installment/InstallmentsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/installment/views/InstallmentsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/services/hospitals.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/services/hospitals.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/add/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/hospitals/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/views/HospitalForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/views/HospitalsTable.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +26,8 @@
       <list>
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -46,7 +50,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -112,11 +116,11 @@
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\patient" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital\views" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\installment\views" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\views" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\components" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\components\SpecialitiesTable" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components\form" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -522,14 +526,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743144925102</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="refactor: create installment entities and status selector component">
+      <option name="closed" value="true" />
+      <created>1743145147778</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1743145147778</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="remove unnecessary tabs" />
     <MESSAGE value="fix validation on forms" />
     <MESSAGE value="migrate to new baseUrl" />
     <MESSAGE value="remove profile default pic;&#10;change doctors apis" />
@@ -554,6 +565,7 @@
     <MESSAGE value="refactor: implement TableHeader component and replace DebouncedInput usage across multiple tables" />
     <MESSAGE value="refactor: extract validation schemas for Doctor, Hospital, and Specialty forms into separate files" />
     <MESSAGE value="refactor: update import paths for SpecialityForm and SpecialitiesTable components" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update import paths for SpecialityForm and SpecialitiesTable components" />
+    <MESSAGE value="refactor: create installment entities and status selector component" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: create installment entities and status selector component" />
   </component>
 </project>

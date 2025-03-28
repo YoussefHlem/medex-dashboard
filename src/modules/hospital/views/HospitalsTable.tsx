@@ -1,4 +1,3 @@
-// HospitalsTable.tsx
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
@@ -18,16 +17,7 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { hospitalsService } from '@/apis/services/hospitals'
 import DataTable from '@components/table/DataTable'
 import { TableHeader } from '@components/table/TableHeader'
-
-interface HospitalType {
-  id: string
-  name: string
-  type: string
-  cover: string
-  lat: number
-  lng: number
-  status: string
-}
+import type { HospitalType } from '@/modules/hospital/entities/hospitalEntities'
 
 type HospitalTypeWithAction = HospitalType & {
   action?: string
