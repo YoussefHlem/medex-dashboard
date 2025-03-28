@@ -5,18 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: extract validation schemas for Doctor, Hospital, and Specialty forms into separate files">
-      <change afterPath="$PROJECT_DIR$/src/components/form/ImageUploadField.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/form/MultiLanguageTextField.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/form/formUtils.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/Form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MultiLangTextFields.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/installment/InstallmentsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/installment/InstallmentsTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/patient/PatientsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/patient/PatientsTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialitiesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialitiesTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/add/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/edit/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialitiesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/views/SpecialitiesTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/views/SpecialityForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,40 +60,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Halimo/WebstormProjects/medex-dashboard/src/modules/hospital",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.stylelint": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "pnpm",
-    "npm.build.executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.start.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Halimo/WebstormProjects/medex-dashboard/src/modules/hospital&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TypeScript JSX",
-      "JSON",
-      "ECMAScript 6"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TypeScript JSX&quot;,
+      &quot;JSON&quot;,
+      &quot;ECMAScript 6&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -118,11 +112,11 @@
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\patient" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\views" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\components" />
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\components\SpecialitiesTable" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components\form" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components\table" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components\layout" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\data" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">

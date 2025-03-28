@@ -14,28 +14,11 @@ import { specialtyValidationSchema } from '@/modules/speciality/utils/specialtyV
 import { createFilePreview, createMultiLanguageFormData } from '@components/form/formUtils'
 import { MultiLanguageTextField } from '@components/form/MultiLanguageTextField'
 import { ImageUploadField } from '@components/form/ImageUploadField'
-
-// Types
-interface LanguageValue {
-  langId: string
-  value: string
-}
-
-interface SpecialtyFormValues {
-  name: LanguageValue[]
-  description: LanguageValue[]
-  cover: File | string | null
-}
-
-interface SpecialtyFormProps {
-  id?: number
-}
-
-interface SpecialtyData {
-  name: LanguageValue[] | string
-  description: LanguageValue[] | string
-  cover: string
-}
+import type {
+  LanguageValue,
+  SpecialtyFormProps,
+  SpecialtyFormValues
+} from '@/modules/speciality/entities/specialtyEntities'
 
 // Language configurations
 const languages = [
@@ -81,7 +64,7 @@ const SpecialtyForm = ({ id }: SpecialtyFormProps) => {
   }
 
   // Process specialty data from API response
-  const processSpecialtyData = (specialtyData: SpecialtyData): SpecialtyFormValues => {
+  const processSpecialtyData = (specialtyData: SpecialtyFormValues): SpecialtyFormValues => {
     const processMultiLanguageField = (value: LanguageValue[] | string, defaultLangId: string): LanguageValue[] => {
       return Array.isArray(value)
         ? value

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SpecialityForm from '@/modules/speciality/SpecialityForm'
+import SpecialityForm from '@/modules/speciality/views/SpecialityForm'
 
 const DoctorDetails = async ({ params }: { params: Promise<{ id: number }> }) => {
   const id = (await params).id

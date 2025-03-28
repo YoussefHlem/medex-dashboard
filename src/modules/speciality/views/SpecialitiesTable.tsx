@@ -20,19 +20,7 @@ import { TableHeader } from '@components/table/TableHeader'
 
 // Service Import
 import { specialitiesService } from '@/apis/services/specialities'
-
-interface SpecialityType {
-  id: string
-  name: string | { langId: string; value: string }[]
-  description: string | { langId: string; value: string }[]
-  cover: string
-  created_at: string
-  updated_at: string
-}
-
-type SpecialityTypeWithAction = SpecialityType & {
-  action?: string
-}
+import type { SpecialityType, SpecialityTypeWithAction } from '@/modules/speciality/entities/specialtyEntities'
 
 const columnHelper = createColumnHelper<SpecialityTypeWithAction>()
 

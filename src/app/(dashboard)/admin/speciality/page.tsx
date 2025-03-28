@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid2'
 
-import SpecialitiesTable from '@/modules/speciality/SpecialitiesTable'
+import SpecialitiesTable from '@/modules/speciality/views/SpecialitiesTable'
 
 export default function Page() {
   return (
