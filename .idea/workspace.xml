@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: enhance DoctorForm and SpecialitiesTable for multi-language support in name and description fields">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TablePaginationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/TablePaginationComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/doctor/BookingsTables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/BookingsTables.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/installment/InstallmentsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/installment/InstallmentsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/patient/PatientsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/patient/PatientsTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialitiesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/SpecialitiesTable.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,11 +113,11 @@
       <recent name="C:\Users\Hlemo\WebstormProjects\medex-dashboard\src\components\dialogs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components\table" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\hospital" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components\layout" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\data" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\doctor\calendar" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">

@@ -42,7 +42,7 @@ import Switch from '@mui/material/Switch'
 
 import { hospitalsService } from '@/apis/services/hospitals'
 
-import TablePaginationComponent from '@components/TablePaginationComponent'
+import TablePaginationComponent from '@components/table/TablePaginationComponent'
 
 // Component Imports
 import CustomTextField from '@core/components/mui/TextField'

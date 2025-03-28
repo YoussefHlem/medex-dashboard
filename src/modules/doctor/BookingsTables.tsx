@@ -31,7 +31,7 @@ import { Box, FormControl, Select } from '@mui/material'
 import Chip from '@mui/material/Chip'
 import { toast } from 'react-toastify'
 
-import TablePaginationComponent from '@components/TablePaginationComponent'
+import TablePaginationComponent from '@components/table/TablePaginationComponent'
 import CustomTextField from '@core/components/mui/TextField'
 import tableStyles from '@core/styles/table.module.css'
 import { doctorsService } from '@/apis/services/doctors'

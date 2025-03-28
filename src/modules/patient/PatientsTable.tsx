@@ -26,7 +26,7 @@ import {
 import { Box } from '@mui/material'
 import Chip from '@mui/material/Chip'
 
-import TablePaginationComponent from '@components/TablePaginationComponent'
+import TablePaginationComponent from '@components/table/TablePaginationComponent'
 import CustomTextField from '@core/components/mui/TextField'
 import tableStyles from '@core/styles/table.module.css'
 import { patientsService } from '@/apis/services/patients'

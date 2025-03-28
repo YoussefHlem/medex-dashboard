@@ -37,7 +37,7 @@ import { Box } from '@mui/material'
 
 import Switch from '@mui/material/Switch'
 
-import TablePaginationComponent from '@components/TablePaginationComponent'
+import TablePaginationComponent from '@components/table/TablePaginationComponent'
 
 // Component Imports
 import CustomTextField from '@core/components/mui/TextField'
