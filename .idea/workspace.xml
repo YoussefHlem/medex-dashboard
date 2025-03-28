@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: extract validation schemas for Doctor, Hospital, and Specialty forms into separate files">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update import paths for SpecialityForm and SpecialitiesTable components">
+      <change afterPath="$PROJECT_DIR$/src/modules/installment/components/InstallmentStatusSelector.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/modules/installment/entities/installmentEntities.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/add/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/add/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/edit/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/edit/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/speciality/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialitiesTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/views/SpecialitiesTable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/speciality/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/views/SpecialityForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/admin/installment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/installment/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(dashboard)/hospital/installment/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(dashboard)/hospital/installment/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/installment/InstallmentsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/installment/views/InstallmentsTable.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,11 +112,11 @@
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\patient" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\installment\views" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\views" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\components" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\components\SpecialitiesTable" />
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components\form" />
-      <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\components\table" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -514,14 +514,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743142370326</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="refactor: update import paths for SpecialityForm and SpecialitiesTable components">
+      <option name="closed" value="true" />
+      <created>1743144925102</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1743144925102</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="hot fix" />
     <MESSAGE value="remove unnecessary tabs" />
     <MESSAGE value="fix validation on forms" />
     <MESSAGE value="migrate to new baseUrl" />
@@ -546,6 +553,7 @@
     <MESSAGE value="refactor: replace table implementations with DataTable component across multiple tables" />
     <MESSAGE value="refactor: implement TableHeader component and replace DebouncedInput usage across multiple tables" />
     <MESSAGE value="refactor: extract validation schemas for Doctor, Hospital, and Specialty forms into separate files" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: extract validation schemas for Doctor, Hospital, and Specialty forms into separate files" />
+    <MESSAGE value="refactor: update import paths for SpecialityForm and SpecialitiesTable components" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update import paths for SpecialityForm and SpecialitiesTable components" />
   </component>
 </project>

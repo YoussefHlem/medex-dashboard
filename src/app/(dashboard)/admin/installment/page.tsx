@@ -1,6 +1,6 @@
 import Grid from '@mui/material/Grid2'
 
-import InstallmentsTable from '@/modules/installment/InstallmentsTable'
+import InstallmentsTable from '@/modules/installment/views/InstallmentsTable'
 
 export default function Page() {
   return (
