@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: enhance DoctorForm and SpecialitiesTable for multi-language support in name and description fields">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: replace table implementations with DataTable component across multiple tables">
+      <change afterPath="$PROJECT_DIR$/src/components/table/DataTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TablePaginationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/TablePaginationComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/doctor/BookingsTables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/BookingsTables.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorsTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalsTable.tsx" afterDir="false" />
@@ -491,15 +491,21 @@
       <option name="project" value="LOCAL" />
       <updated>1742995778832</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="refactor: update import paths for TablePaginationComponent across multiple table components">
+      <option name="closed" value="true" />
+      <created>1743138273751</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1743138273751</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="remove pnpm to package.json" />
-    <MESSAGE value="remove size validation" />
     <MESSAGE value="typescript-ignore" />
     <MESSAGE value="hot fix on doctors table" />
     <MESSAGE value="hot fix" />
@@ -523,6 +529,8 @@
     <MESSAGE value="refactor: reorganize component structure and update import paths for tables and forms" />
     <MESSAGE value="refactor: increase API timeout and rename HospitalForm index file for clarity" />
     <MESSAGE value="refactor: enhance DoctorForm and SpecialitiesTable for multi-language support in name and description fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: enhance DoctorForm and SpecialitiesTable for multi-language support in name and description fields" />
+    <MESSAGE value="refactor: update import paths for TablePaginationComponent across multiple table components" />
+    <MESSAGE value="refactor: replace table implementations with DataTable component across multiple tables" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: replace table implementations with DataTable component across multiple tables" />
   </component>
 </project>

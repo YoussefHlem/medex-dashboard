@@ -6,32 +6,19 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import MenuItem from '@mui/material/MenuItem'
-import TablePagination from '@mui/material/TablePagination'
-import type { TextFieldProps } from '@mui/material/TextField'
-import classnames from 'classnames'
-import { rankItem } from '@tanstack/match-sorter-utils'
-import type { ColumnDef, FilterFn } from '@tanstack/react-table'
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getFacetedMinMaxValues,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable
-} from '@tanstack/react-table'
 import { Box, FormControl, Select } from '@mui/material'
 import Chip from '@mui/material/Chip'
+import type { TextFieldProps } from '@mui/material/TextField'
+import type { ColumnDef } from '@tanstack/react-table'
+import { createColumnHelper } from '@tanstack/react-table'
+import { toast } from 'react-toastify'
 
-import TablePaginationComponent from '@components/table/TablePaginationComponent'
 import CustomTextField from '@core/components/mui/TextField'
-import tableStyles from '@core/styles/table.module.css'
+import DataTable from '@components/table/DataTable'
+
 import { isntallmentsService } from '@/apis/services/installments'
 
-// Define status enum and type
+// Define status enum and colors
 export enum Status {
   PENDING = 1,
   CONFIRMED = 2,
@@ -61,14 +48,6 @@ type InstallmentTypeWithAction = InstallmentType & {
   action?: string
 }
 
-const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
-  const itemRank = rankItem(row.getValue(columnId), value)
-
-  addMeta({ itemRank })
-
-  return itemRank.passed
-}
-
 const DebouncedInput = ({
   value: initialValue,
   onChange,
@@ -91,7 +70,7 @@ const DebouncedInput = ({
     }, debounce)
 
     return () => clearTimeout(timeout)
-  }, [value])
+  }, [value, debounce, onChange])
 
   return <CustomTextField {...props} value={value} onChange={e => setValue(e.target.value)} />
 }
@@ -99,9 +78,10 @@ const DebouncedInput = ({
 const columnHelper = createColumnHelper<InstallmentTypeWithAction>()
 
 const InstallmentsTable = () => {
-  const [rowSelection, setRowSelection] = useState({})
   const [data, setData] = useState<InstallmentType[]>([])
   const [globalFilter, setGlobalFilter] = useState('')
+  const [pageSize, setPageSize] = useState(25)
+  const [pageIndex, setPageIndex] = useState(0)
 
   const fetchInstallments = () => {
     isntallmentsService.listInstallments().then(response => {
@@ -119,6 +99,7 @@ const InstallmentsTable = () => {
       fetchInstallments()
     } catch (error) {
       console.error('Failed to update status:', error)
+      toast.error('Failed to update installment status')
     }
   }
 
@@ -196,44 +177,16 @@ const InstallmentsTable = () => {
     []
   )
 
-  const table = useReactTable({
-    data,
-    columns,
-    filterFns: {
-      fuzzy: fuzzyFilter
-    },
-    state: {
-      rowSelection,
-      globalFilter
-    },
-    initialState: {
-      pagination: {
-        pageSize: 25
-      }
-    },
-    enableRowSelection: true,
-    globalFilterFn: fuzzyFilter,
-    onRowSelectionChange: setRowSelection,
-    getCoreRowModel: getCoreRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFacetedMinMaxValues: getFacetedMinMaxValues()
-  })
-
   return (
     <Card>
       <CardContent className='flex justify-between flex-col items-start md:items-center md:flex-row gap-4'>
-        <div className='flex flex-col sm:flex-row items-center justify-between gap-4 is-full sm:is-auto'>
-          <div className='flex items-center gap-2 is-full sm:is-auto'>
+        <div className='flex flex-col sm:flex-row items-center justify-between gap-4'>
+          <div className='flex items-center gap-2'>
             <Typography className='hidden sm:block'>Show</Typography>
             <CustomTextField
               select
-              value={table.getState().pagination.pageSize}
-              onChange={e => table.setPageSize(Number(e.target.value))}
+              value={pageSize}
+              onChange={e => setPageSize(Number(e.target.value))}
               className='is-[70px] max-sm:is-full'
             >
               <MenuItem value='10'>10</MenuItem>
@@ -242,79 +195,24 @@ const InstallmentsTable = () => {
             </CustomTextField>
           </div>
         </div>
-        <div className='flex max-sm:flex-col max-sm:is-full sm:items-center gap-4'>
+        <div className='flex max-sm:flex-col sm:items-center gap-4'>
           <DebouncedInput
-            value={globalFilter ?? ''}
+            value={globalFilter}
             onChange={value => setGlobalFilter(String(value))}
             placeholder='Search Installment'
             className='max-sm:is-full sm:is-[250px]'
           />
         </div>
       </CardContent>
-      <div className='overflow-x-auto'>
-        <table className={tableStyles.table}>
-          <thead>
-            {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map(header => (
-                  <th key={header.id}>
-                    {header.isPlaceholder ? null : (
-                      <>
-                        <div
-                          className={classnames({
-                            'flex items-center': header.column.getIsSorted(),
-                            'cursor-pointer select-none': header.column.getCanSort()
-                          })}
-                          onClick={header.column.getToggleSortingHandler()}
-                        >
-                          {flexRender(header.column.columnDef.header, header.getContext())}
-                          {{
-                            asc: <i className='tabler-chevron-up text-xl' />,
-                            desc: <i className='tabler-chevron-down text-xl' />
-                          }[header.column.getIsSorted() as 'asc' | 'desc'] ?? null}
-                        </div>
-                      </>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          {table.getFilteredRowModel().rows.length === 0 ? (
-            <tbody>
-              <tr>
-                <td colSpan={table.getVisibleFlatColumns().length} className='text-center'>
-                  No data available
-                </td>
-              </tr>
-            </tbody>
-          ) : (
-            <tbody>
-              {table
-                .getRowModel()
-                .rows.slice(0, table.getState().pagination.pageSize)
-                .map(row => {
-                  return (
-                    <tr key={row.id} className={classnames({ selected: row.getIsSelected() })}>
-                      {row.getVisibleCells().map(cell => (
-                        <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
-                      ))}
-                    </tr>
-                  )
-                })}
-            </tbody>
-          )}
-        </table>
-      </div>
-      <TablePagination
-        component={() => <TablePaginationComponent table={table} />}
-        count={table.getFilteredRowModel().rows.length}
-        rowsPerPage={table.getState().pagination.pageSize}
-        page={table.getState().pagination.pageIndex}
-        onPageChange={(_, page) => {
-          table.setPageIndex(page)
-        }}
-        onRowsPerPageChange={e => table.setPageSize(Number(e.target.value))}
+      <DataTable
+        data={data}
+        columns={columns}
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        pageIndex={pageIndex}
+        setPageIndex={setPageIndex}
       />
     </Card>
   )
