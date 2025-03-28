@@ -4,12 +4,10 @@ import { useEffect, useMemo, useState } from 'react'
 
 // MUI Imports
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
-import MenuItem from '@mui/material/MenuItem'
-import { Box, FormControl, Select } from '@mui/material'
 import Chip from '@mui/material/Chip'
-import type { TextFieldProps } from '@mui/material/TextField'
+import { Box, FormControl, Select } from '@mui/material'
+import MenuItem from '@mui/material/MenuItem'
 
 // Third-party Imports
 import type { ColumnDef } from '@tanstack/react-table'
@@ -17,11 +15,11 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { toast } from 'react-toastify'
 
 // Component Imports
-import CustomTextField from '@core/components/mui/TextField'
 import DataTable from '@components/table/DataTable'
 
 // Service Import
 import { doctorsService } from '@/apis/services/doctors'
+import { TableHeader } from '@components/table/TableHeader'
 
 type Status = 'Approved' | 'Rejected' | 'Pending'
 
@@ -45,46 +43,30 @@ type BookingTypeWithAction = BookingType & {
   action?: string
 }
 
-const DebouncedInput = ({
-  value: initialValue,
-  onChange,
-  debounce = 500,
-  ...props
-}: {
-  value: string | number
-  onChange: (value: string | number) => void
-  debounce?: number
-} & Omit<TextFieldProps, 'onChange'>) => {
-  const [value, setValue] = useState(initialValue)
-
-  useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      onChange(value)
-    }, debounce)
-
-    return () => clearTimeout(timeout)
-  }, [value, debounce, onChange])
-
-  return <CustomTextField {...props} value={value} onChange={e => setValue(e.target.value)} />
-}
-
 const columnHelper = createColumnHelper<BookingTypeWithAction>()
 
 const BookingsTable = ({ id }: { id: number }) => {
   const [data, setData] = useState<BookingType[]>([])
+  const [filteredData, setFilteredData] = useState<BookingType[]>([])
   const [globalFilter, setGlobalFilter] = useState('')
   const [pageSize, setPageSize] = useState(25)
   const [pageIndex, setPageIndex] = useState(0)
+  const [statusFilter, setStatusFilter] = useState('')
 
   useEffect(() => {
     doctorsService.listBookings(id).then(res => {
       setData(res.data.bookings)
     })
   }, [id])
+
+  // Apply status filtering to the bookings data
+  useEffect(() => {
+    const filtered = data.filter(item => {
+      return !(statusFilter && item.status !== statusFilter)
+    })
+
+    setFilteredData(filtered)
+  }, [statusFilter, data])
 
   const handleStatusChange = async (bookingId: number, newStatus: Status) => {
     try {
@@ -96,9 +78,9 @@ const BookingsTable = ({ id }: { id: number }) => {
       await doctorsService.updateBooking(id, bookingId, action)
 
       // Update local state after successful API call
-      setData(prevData =>
-        prevData.map(booking => (booking.id === bookingId ? { ...booking, status: newStatus } : booking))
-      )
+      const updatedData = data.map(booking => (booking.id === bookingId ? { ...booking, status: newStatus } : booking))
+
+      setData(updatedData)
       toast.success('Booking status updated successfully')
     } catch (error) {
       console.error('Error updating booking status:', error)
@@ -185,33 +167,25 @@ const BookingsTable = ({ id }: { id: number }) => {
 
   return (
     <Card>
-      <CardContent className='flex justify-between flex-col items-start md:items-center md:flex-row gap-4'>
-        <div className='flex flex-col sm:flex-row items-center justify-between gap-4'>
-          <div className='flex items-center gap-2'>
-            <Typography className='hidden sm:block'>Show</Typography>
-            <CustomTextField
-              select
-              value={pageSize}
-              onChange={e => setPageSize(Number(e.target.value))}
-              className='is-[70px] max-sm:is-full'
-            >
-              <MenuItem value='10'>10</MenuItem>
-              <MenuItem value='25'>25</MenuItem>
-              <MenuItem value='50'>50</MenuItem>
-            </CustomTextField>
-          </div>
-        </div>
-        <div className='flex max-sm:flex-col sm:items-center gap-4'>
-          <DebouncedInput
-            value={globalFilter ?? ''}
-            onChange={value => setGlobalFilter(String(value))}
-            placeholder='Search Bookings'
-            className='max-sm:is-full sm:is-[250px]'
-          />
-        </div>
-      </CardContent>
+      <TableHeader
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        searchPlaceholder='Search Bookings'
+        filterProps={{
+          options: [
+            { value: 'Approved', label: 'Approved' },
+            { value: 'Rejected', label: 'Rejected' },
+            { value: 'Pending', label: 'Pending' }
+          ],
+          value: statusFilter,
+          onChange: setStatusFilter,
+          placeholder: 'Booking Status'
+        }}
+      />
       <DataTable
-        data={data}
+        data={filteredData}
         columns={columns}
         globalFilter={globalFilter}
         setGlobalFilter={setGlobalFilter}

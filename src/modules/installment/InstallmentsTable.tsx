@@ -3,22 +3,20 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import MenuItem from '@mui/material/MenuItem'
 import { Box, FormControl, Select } from '@mui/material'
 import Chip from '@mui/material/Chip'
-import type { TextFieldProps } from '@mui/material/TextField'
 import type { ColumnDef } from '@tanstack/react-table'
 import { createColumnHelper } from '@tanstack/react-table'
 import { toast } from 'react-toastify'
 
-import CustomTextField from '@core/components/mui/TextField'
 import DataTable from '@components/table/DataTable'
+import { TableHeader } from '@components/table/TableHeader'
 
 import { isntallmentsService } from '@/apis/services/installments'
 
-// Define status enum and colors
+// Status enum and colors remain the same as in the original file
 export enum Status {
   PENDING = 1,
   CONFIRMED = 2,
@@ -46,33 +44,6 @@ interface InstallmentType {
 
 type InstallmentTypeWithAction = InstallmentType & {
   action?: string
-}
-
-const DebouncedInput = ({
-  value: initialValue,
-  onChange,
-  debounce = 500,
-  ...props
-}: {
-  value: string | number
-  onChange: (value: string | number) => void
-  debounce?: number
-} & Omit<TextFieldProps, 'onChange'>) => {
-  const [value, setValue] = useState(initialValue)
-
-  useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      onChange(value)
-    }, debounce)
-
-    return () => clearTimeout(timeout)
-  }, [value, debounce, onChange])
-
-  return <CustomTextField {...props} value={value} onChange={e => setValue(e.target.value)} />
 }
 
 const columnHelper = createColumnHelper<InstallmentTypeWithAction>()
@@ -179,31 +150,17 @@ const InstallmentsTable = () => {
 
   return (
     <Card>
-      <CardContent className='flex justify-between flex-col items-start md:items-center md:flex-row gap-4'>
-        <div className='flex flex-col sm:flex-row items-center justify-between gap-4'>
-          <div className='flex items-center gap-2'>
-            <Typography className='hidden sm:block'>Show</Typography>
-            <CustomTextField
-              select
-              value={pageSize}
-              onChange={e => setPageSize(Number(e.target.value))}
-              className='is-[70px] max-sm:is-full'
-            >
-              <MenuItem value='10'>10</MenuItem>
-              <MenuItem value='25'>25</MenuItem>
-              <MenuItem value='50'>50</MenuItem>
-            </CustomTextField>
-          </div>
-        </div>
-        <div className='flex max-sm:flex-col sm:items-center gap-4'>
-          <DebouncedInput
-            value={globalFilter}
-            onChange={value => setGlobalFilter(String(value))}
-            placeholder='Search Installment'
-            className='max-sm:is-full sm:is-[250px]'
-          />
-        </div>
-      </CardContent>
+      <TableHeader
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        searchPlaceholder='Search Installment'
+        createButtonProps={{
+          href: '/installments/create',
+          label: 'Create Installment'
+        }}
+      />
       <DataTable
         data={data}
         columns={columns}

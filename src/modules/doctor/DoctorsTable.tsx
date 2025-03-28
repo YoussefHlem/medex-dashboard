@@ -7,12 +7,9 @@ import Link from 'next/link'
 
 // MUI Imports
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
 import IconButton from '@mui/material/IconButton'
-import MenuItem from '@mui/material/MenuItem'
 import { Box } from '@mui/material'
 import Switch from '@mui/material/Switch'
 
@@ -22,11 +19,11 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { toast } from 'react-toastify'
 
 // Component Imports
-import CustomTextField from '@core/components/mui/TextField'
 import DataTable from '@components/table/DataTable'
 
 // Service Import
 import { doctorsService } from '@/apis/services/doctors'
+import { TableHeader } from '@components/table/TableHeader'
 
 interface DoctorType {
   id: string
@@ -46,33 +43,6 @@ interface DoctorType {
 
 type DoctorTypeWithAction = DoctorType & {
   action?: string
-}
-
-const DebouncedInput = ({
-  value: initialValue,
-  onChange,
-  debounce = 500,
-  ...props
-}: {
-  value: string | number
-  onChange: (value: string | number) => void
-  debounce?: number
-} & Omit<React.ComponentProps<typeof CustomTextField>, 'onChange'>) => {
-  const [value, setValue] = useState(initialValue)
-
-  useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      onChange(value)
-    }, debounce)
-
-    return () => clearTimeout(timeout)
-  }, [value, debounce, onChange])
-
-  return <CustomTextField {...props} value={value} onChange={e => setValue(e.target.value)} />
 }
 
 const columnHelper = createColumnHelper<DoctorTypeWithAction>()
@@ -162,7 +132,7 @@ const DoctorsTable = () => {
         cell: ({ row }) => {
           const isActive = row.original.status === 'Active'
 
-          const handleStatusChange = event => {
+          const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             const newStatus = event.target.checked ? 'Active' : 'Inactive'
 
             doctorsService
@@ -215,52 +185,26 @@ const DoctorsTable = () => {
 
   return (
     <Card>
-      <CardContent className='flex justify-between flex-col items-start md:items-center md:flex-row gap-4'>
-        <div className='flex flex-col sm:flex-row items-center justify-between gap-4'>
-          <div className='flex items-center gap-2'>
-            <Typography className='hidden sm:block'>Show</Typography>
-            <CustomTextField
-              select
-              value={pageSize}
-              onChange={e => setPageSize(Number(e.target.value))}
-              className='is-[70px] max-sm:is-full'
-            >
-              <MenuItem value='10'>10</MenuItem>
-              <MenuItem value='25'>25</MenuItem>
-              <MenuItem value='50'>50</MenuItem>
-            </CustomTextField>
-          </div>
-          <Button
-            variant='contained'
-            component={Link}
-            startIcon={<i className='tabler-plus' />}
-            href='doctors/add'
-            className='max-sm:is-full'
-          >
-            Create Doctor
-          </Button>
-        </div>
-        <div className='flex max-sm:flex-col sm:items-center gap-4'>
-          <DebouncedInput
-            value={globalFilter}
-            onChange={value => setGlobalFilter(String(value))}
-            placeholder='Search Doctor'
-            className='max-sm:is-full sm:is-[250px]'
-          />
-          <CustomTextField
-            select
-            id='select-status'
-            value={status}
-            onChange={e => setStatus(e.target.value)}
-            className='max-sm:is-full sm:is-[160px]'
-            slotProps={{ select: { displayEmpty: true } }}
-          >
-            <MenuItem value=''>Doctor Status</MenuItem>
-            <MenuItem value='inactive'>In Active</MenuItem>
-            <MenuItem value='active'>Active</MenuItem>
-          </CustomTextField>
-        </div>
-      </CardContent>
+      <TableHeader
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        createButtonProps={{
+          href: 'doctors/add',
+          label: 'Create Doctor'
+        }}
+        searchPlaceholder='Search Doctor'
+        filterProps={{
+          options: [
+            { value: 'active', label: 'Active' },
+            { value: 'inactive', label: 'Inactive' }
+          ],
+          value: status,
+          onChange: setStatus,
+          placeholder: 'Doctor Status'
+        }}
+      />
       <DataTable
         data={filteredData}
         columns={columns}

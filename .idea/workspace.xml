@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: replace table implementations with DataTable component across multiple tables">
-      <change afterPath="$PROJECT_DIR$/src/components/table/DataTable.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/table/TableHeader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/table/hooks/useDebouncedInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/table/hooks/useTableData.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/table/DataTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/DataTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/doctor/BookingsTables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/BookingsTables.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorsTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/hospital/HospitalsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/hospital/HospitalsTable.tsx" afterDir="false" />

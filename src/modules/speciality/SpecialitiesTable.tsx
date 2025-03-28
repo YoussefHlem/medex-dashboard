@@ -6,11 +6,7 @@ import Link from 'next/link'
 
 // MUI Imports
 import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import MenuItem from '@mui/material/MenuItem'
-import type { TextFieldProps } from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 
 // Third-party Imports
@@ -19,8 +15,8 @@ import { createColumnHelper } from '@tanstack/react-table'
 import { toast } from 'react-toastify'
 
 // Component Imports
-import CustomTextField from '@core/components/mui/TextField'
 import DataTable from '@components/table/DataTable'
+import { TableHeader } from '@components/table/TableHeader'
 
 // Service Import
 import { specialitiesService } from '@/apis/services/specialities'
@@ -38,36 +34,9 @@ type SpecialityTypeWithAction = SpecialityType & {
   action?: string
 }
 
-const DebouncedInput = ({
-  value: initialValue,
-  onChange,
-  debounce = 500,
-  ...props
-}: {
-  value: string | number
-  onChange: (value: string | number) => void
-  debounce?: number
-} & Omit<TextFieldProps, 'onChange'>) => {
-  const [value, setValue] = useState(initialValue)
-
-  useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      onChange(value)
-    }, debounce)
-
-    return () => clearTimeout(timeout)
-  }, [value, debounce, onChange])
-
-  return <CustomTextField {...props} value={value} onChange={e => setValue(e.target.value)} />
-}
-
 const columnHelper = createColumnHelper<SpecialityTypeWithAction>()
 
-const ListTable = () => {
+const SpecialitiesTable = () => {
   const [data, setData] = useState<SpecialityType[]>([])
   const [globalFilter, setGlobalFilter] = useState('')
   const [pageSize, setPageSize] = useState(25)
@@ -201,40 +170,17 @@ const ListTable = () => {
 
   return (
     <Card>
-      <CardContent className='flex justify-between flex-col items-start md:items-center md:flex-row gap-4'>
-        <div className='flex flex-col sm:flex-row items-center justify-between gap-4'>
-          <div className='flex items-center gap-2'>
-            <Typography className='hidden sm:block'>Show</Typography>
-            <CustomTextField
-              select
-              value={pageSize}
-              onChange={e => setPageSize(Number(e.target.value))}
-              className='is-[70px] max-sm:is-full'
-            >
-              <MenuItem value='10'>10</MenuItem>
-              <MenuItem value='25'>25</MenuItem>
-              <MenuItem value='50'>50</MenuItem>
-            </CustomTextField>
-          </div>
-          <Button
-            variant='contained'
-            component={Link}
-            startIcon={<i className='tabler-plus' />}
-            href='speciality/add'
-            className='max-sm:is-full'
-          >
-            Create Speciality
-          </Button>
-        </div>
-        <div className='flex max-sm:flex-col sm:items-center gap-4'>
-          <DebouncedInput
-            value={globalFilter}
-            onChange={value => setGlobalFilter(String(value))}
-            placeholder='Search Specialty'
-            className='max-sm:is-full sm:is-[250px]'
-          />
-        </div>
-      </CardContent>
+      <TableHeader
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        searchPlaceholder='Search Specialty'
+        createButtonProps={{
+          href: '/speciality/add',
+          label: 'Create Speciality'
+        }}
+      />
       <DataTable
         data={data}
         columns={columns}
@@ -249,4 +195,4 @@ const ListTable = () => {
   )
 }
 
-export default ListTable
+export default SpecialitiesTable
