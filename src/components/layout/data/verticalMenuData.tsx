@@ -1,6 +1,6 @@
 import type { VerticalMenuDataType } from '@components/layout/data/menuTypes'
 
-const verticalMenuData = (userType: 'Admin' | 'doctor' | 'hospital' | null): VerticalMenuDataType[] => {
+const verticalMenuData = (userType: 'Admin' | 'Doctor' | 'Hospital' | null): VerticalMenuDataType[] => {
   switch (userType) {
     case 'Admin':
       return [
@@ -8,7 +8,8 @@ const verticalMenuData = (userType: 'Admin' | 'doctor' | 'hospital' | null): Ver
         { label: 'Doctors', href: '/admin/doctors', icon: 'tabler-stethoscope' },
         { label: 'Speciality', href: '/admin/speciality', icon: 'tabler-medical-cross' },
         { label: 'Patient', href: '/admin/patient', icon: 'tabler-user' },
-        { label: 'Installment', href: '/admin/installment', icon: 'tabler-cash' }
+        { label: 'Installment', href: '/admin/installment', icon: 'tabler-cash' },
+        { label: 'Cards', href: '/admin/medex-cards', icon: 'tabler-credit-card-pay' }
       ]
     case 'Doctor':
       return [
