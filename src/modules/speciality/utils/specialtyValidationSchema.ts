@@ -13,7 +13,7 @@ export const specialtyValidationSchema = Yup.object({
     .of(
       Yup.object({
         langId: Yup.string().required('Language ID is required'),
-        value: Yup.string().required('Description is required').min(10, 'Description must be at least 10 characters')
+        value: Yup.string().required('Description is required').min(5, 'Description must be at least 5 characters')
       })
     )
     .required('Description is required'),

@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update Speciality interface in DoctorForm to use string for name">
-      <change afterPath="$PROJECT_DIR$/src/apis/services/cards.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(dashboard)/admin/medex-cards/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/modules/medex-cards/views/MedexCardsTable.tsx" afterDir="false" />
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: add MedexCardsTable component and integrate Medex cards service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/data/verticalMenuData.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/data/verticalMenuData.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/speciality/utils/specialtyValidationSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/utils/specialtyValidationSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/speciality/views/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/views/SpecialityForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,40 +57,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Halimo/WebstormProjects/medex-dashboard/src/apis/services",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.stylelint": "C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "pnpm",
-    "npm.build.executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.start.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Halimo/WebstormProjects/medex-dashboard/src/apis/services&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;C:\\Users\\Hlemo\\WebstormProjects\\medex-dashboard\\node_modules\\stylelint&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Halimo\\WebstormProjects\\medex-dashboard\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TypeScript JSX",
-      "JSON",
-      "ECMAScript 6"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TypeScript JSX&quot;,
+      &quot;JSON&quot;,
+      &quot;ECMAScript 6&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -234,7 +232,9 @@
       <workItem from="1743063848751" duration="9072000" />
       <workItem from="1743174357547" duration="2935000" />
       <workItem from="1743189836705" duration="9000" />
-      <workItem from="1743252511585" duration="473000" />
+      <workItem from="1743252511585" duration="1132000" />
+      <workItem from="1743324542069" duration="612000" />
+      <workItem from="1743865631641" duration="448000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -548,14 +548,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743175825305</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="refactor: add MedexCardsTable component and integrate Medex cards service">
+      <option name="closed" value="true" />
+      <created>1743253020534</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1743253020534</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="remove profile default pic;&#10;change doctors apis" />
     <MESSAGE value="Implementing Calendar Page" />
     <MESSAGE value="remove unused files" />
     <MESSAGE value="implement InstallmentsTable" />
@@ -580,6 +587,7 @@
     <MESSAGE value="refactor: create installment entities and status selector component" />
     <MESSAGE value="refactor: add GoogleMapSelector component and integrate with HospitalForm" />
     <MESSAGE value="refactor: update Speciality interface in DoctorForm to use string for name" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update Speciality interface in DoctorForm to use string for name" />
+    <MESSAGE value="refactor: add MedexCardsTable component and integrate Medex cards service" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: add MedexCardsTable component and integrate Medex cards service" />
   </component>
 </project>
