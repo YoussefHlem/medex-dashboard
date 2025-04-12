@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: add MedexCardsTable component and integrate Medex cards service">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update specialty validation schema to require a minimum description length of 5 characters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/doctor/BookingsTables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/BookingsTables.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/modules/speciality/utils/specialtyValidationSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/utils/specialtyValidationSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/speciality/views/SpecialityForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/speciality/views/SpecialityForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +234,8 @@
       <workItem from="1743189836705" duration="9000" />
       <workItem from="1743252511585" duration="1132000" />
       <workItem from="1743324542069" duration="612000" />
-      <workItem from="1743865631641" duration="448000" />
+      <workItem from="1743865631641" duration="1053000" />
+      <workItem from="1744471581591" duration="258000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -556,14 +557,21 @@
       <option name="project" value="LOCAL" />
       <updated>1743253020534</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="refactor: update specialty validation schema to require a minimum description length of 5 characters">
+      <option name="closed" value="true" />
+      <created>1743866108151</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1743866108151</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implementing Calendar Page" />
     <MESSAGE value="remove unused files" />
     <MESSAGE value="implement InstallmentsTable" />
     <MESSAGE value="done" />
@@ -588,6 +596,7 @@
     <MESSAGE value="refactor: add GoogleMapSelector component and integrate with HospitalForm" />
     <MESSAGE value="refactor: update Speciality interface in DoctorForm to use string for name" />
     <MESSAGE value="refactor: add MedexCardsTable component and integrate Medex cards service" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: add MedexCardsTable component and integrate Medex cards service" />
+    <MESSAGE value="refactor: update specialty validation schema to require a minimum description length of 5 characters" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update specialty validation schema to require a minimum description length of 5 characters" />
   </component>
 </project>

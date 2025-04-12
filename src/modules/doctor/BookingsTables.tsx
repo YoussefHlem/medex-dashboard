@@ -78,9 +78,9 @@ const BookingsTable = ({ id }: { id: number }) => {
       await doctorsService.updateBooking(id, bookingId, action)
 
       // Update local state after successful API call
-      const updatedData = data.map(booking => (booking.id === bookingId ? { ...booking, status: newStatus } : booking))
-
-      setData(updatedData)
+      doctorsService.listBookings(id).then(res => {
+        setData(res.data.bookings)
+      })
       toast.success('Booking status updated successfully')
     } catch (error) {
       console.error('Error updating booking status:', error)

@@ -9,14 +9,12 @@ export const specialtyValidationSchema = Yup.object({
       })
     )
     .required('Name is required'),
-  description: Yup.array()
-    .of(
-      Yup.object({
-        langId: Yup.string().required('Language ID is required'),
-        value: Yup.string().required('Description is required').min(5, 'Description must be at least 5 characters')
-      })
-    )
-    .required('Description is required'),
+  description: Yup.array().of(
+    Yup.object({
+      langId: Yup.string().required('Language ID is required'),
+      value: Yup.string()
+    })
+  ),
   cover: Yup.mixed()
     .test('fileOrString', 'Cover image is required', function (value) {
       return value instanceof File || (typeof value === 'string' && value.length > 0)
