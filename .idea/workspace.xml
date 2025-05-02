@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update booking status handling and modify specialty description validation">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update API base URL and adjust workspace configuration" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -240,6 +238,7 @@
       <workItem from="1743865631641" duration="1053000" />
       <workItem from="1744471581591" duration="338000" />
       <workItem from="1745255083579" duration="661000" />
+      <workItem from="1746019054358" duration="77000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -577,14 +576,21 @@
       <option name="project" value="LOCAL" />
       <updated>1744471897690</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="refactor: update API base URL and adjust workspace configuration">
+      <option name="closed" value="true" />
+      <created>1746019132466</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1746019132466</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implement InstallmentsTable" />
     <MESSAGE value="done" />
     <MESSAGE value="Implementing Agenda APIs" />
     <MESSAGE value="Add Bookings Table" />
@@ -609,6 +615,7 @@
     <MESSAGE value="refactor: add MedexCardsTable component and integrate Medex cards service" />
     <MESSAGE value="refactor: update specialty validation schema to require a minimum description length of 5 characters" />
     <MESSAGE value="refactor: update booking status handling and modify specialty description validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update booking status handling and modify specialty description validation" />
+    <MESSAGE value="refactor: update API base URL and adjust workspace configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update API base URL and adjust workspace configuration" />
   </component>
 </project>
