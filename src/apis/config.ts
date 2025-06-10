@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Create base axios instance
 export const api = axios.create({
-  baseURL: 'https://medex.uni-act.org/medex-api/api/',
+  baseURL: 'https://medex.uni-act.org/medex-api/api',
   timeout: 25000,
   headers: {
     'Content-Type': 'application/json'
