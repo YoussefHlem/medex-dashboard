@@ -108,22 +108,32 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
         password
       })
 
+      console.log('Login response:', response) // Debug log
+
       // Store the token in cookies
       setCookie('userToken', response.data.data._token, {
         maxAge: 24 * 60 * 60, // 1 day
         path: '/',
-        secure: process.env.NODE_ENV === 'production'
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax' // Add sameSite attribute
       })
 
       // Set user type from the response role
       dispatch(setUserType(response.data.data.role))
 
-      // Redirect to dashboard - using replace instead of push for a full navigation
-      // and adding a small timeout to ensure state updates are processed
-      setTimeout(() => {
-        router.replace('/')
-      }, 100)
+      console.log('About to navigate to /') // Debug log
+
+      // Try different navigation approaches
+      // Option 1: Use window.location (most reliable)
+      window.location.href = '/'
+
+      // Option 2: If you prefer router.push, uncomment this and comment window.location
+      // await router.push('/')
+
+      // Option 3: If you need router.replace, uncomment this
+      // await router.replace('/')
     } catch (err) {
+      console.error('Login error:', err) // Debug log
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.')
     } finally {
       setIsLoading(false)
