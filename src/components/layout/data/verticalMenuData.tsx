@@ -20,7 +20,7 @@ const verticalMenuData = (userType: 'Admin' | 'Doctor' | 'Hospital' | null): Ver
       ]
     case 'Hospital':
       return [
-        { label: 'Profile', href: '/doctor/profile', icon: 'tabler-user' },
+        { label: 'Profile', href: '/hospital/profile', icon: 'tabler-user' },
         { label: 'Installment', href: '/hospital/installment', icon: 'tabler-cash' }
       ]
     default:

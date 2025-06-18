@@ -118,8 +118,11 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
       // Set user type from the response role
       dispatch(setUserType(response.data.data.role))
 
-      // Redirect to dashboard
-      router.push('/')
+      // Redirect to dashboard - using replace instead of push for a full navigation
+      // and adding a small timeout to ensure state updates are processed
+      setTimeout(() => {
+        router.replace('/')
+      }, 100)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed. Please try again.')
     } finally {
