@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update API base URL in axios configuration and adjust workspace settings">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update Next.js configuration for standalone output and adjust workspace settings">
+      <change afterPath="$PROJECT_DIR$/server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +19,8 @@
       <list>
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -251,15 +252,7 @@
       <workItem from="1750239858831" duration="4146000" />
       <workItem from="1750255855226" duration="252000" />
       <workItem from="1750256167120" duration="597000" />
-      <workItem from="1750397184885" duration="642000" />
-    </task>
-    <task id="LOCAL-00001" summary="Initial Commit">
-      <option name="closed" value="true" />
-      <created>1735034764561</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1735034764561</updated>
+      <workItem from="1750397184885" duration="2266000" />
     </task>
     <task id="LOCAL-00002" summary="Complete Doctors endpoint">
       <option name="closed" value="true" />
@@ -645,14 +638,21 @@
       <option name="project" value="LOCAL" />
       <updated>1750256000574</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="refactor: update Next.js configuration for standalone output and adjust workspace settings">
+      <option name="closed" value="true" />
+      <created>1750399619405</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1750399619406</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Refactor AccountDetails and DoctorSlots components for improved profile management and slot handling" />
     <MESSAGE value="Refactor authentication and calendar state management; enhance hospital form with Google Maps integration" />
     <MESSAGE value="refactor: update calendar state management and clean up workspace configuration" />
     <MESSAGE value="refactor: update forms to support multi-language name fields for doctors, hospitals, and specialties" />
@@ -677,6 +677,7 @@
     <MESSAGE value="refactor: improve login flow with enhanced redirection and debug logging" />
     <MESSAGE value="refactor: remove unused router import from Login component" />
     <MESSAGE value="refactor: update API base URL in axios configuration and adjust workspace settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update API base URL in axios configuration and adjust workspace settings" />
+    <MESSAGE value="refactor: update Next.js configuration for standalone output and adjust workspace settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update Next.js configuration for standalone output and adjust workspace settings" />
   </component>
 </project>
