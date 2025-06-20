@@ -15,7 +15,7 @@ import { patientsService } from '@/apis/services/patients'
 
 interface PatientType {
   id: number
-  name: string
+  name: [{ langId: string; value: string }]
   email: string
   phone: string
   status: string
@@ -58,7 +58,7 @@ const PatientsTable = () => {
         header: 'Name',
         cell: ({ row }) => (
           <Typography className='font-medium' color='text.primary'>
-            {row.original.name}
+            {row.original.name[0].value}
           </Typography>
         )
       }),
