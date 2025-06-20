@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: remove unused router import from Login component">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update API base URL in axios configuration and adjust workspace settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +118,7 @@
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\components\SpecialitiesTable" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.build">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
     </configuration>
@@ -128,6 +129,7 @@
         <script value="build" />
       </scripts>
       <node-interpreter value="project" />
+      <package-manager value="npm" />
       <envs />
       <method v="2" />
     </configuration>
@@ -154,9 +156,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -247,6 +249,9 @@
       <workItem from="1746194761903" duration="12000" />
       <workItem from="1749556001239" duration="404000" />
       <workItem from="1750239858831" duration="4146000" />
+      <workItem from="1750255855226" duration="252000" />
+      <workItem from="1750256167120" duration="597000" />
+      <workItem from="1750397184885" duration="642000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -632,14 +637,21 @@
       <option name="project" value="LOCAL" />
       <updated>1750247721018</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="refactor: update API base URL in axios configuration and adjust workspace settings">
+      <option name="closed" value="true" />
+      <created>1750256000574</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1750256000574</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Hot fixes" />
     <MESSAGE value="Refactor AccountDetails and DoctorSlots components for improved profile management and slot handling" />
     <MESSAGE value="Refactor authentication and calendar state management; enhance hospital form with Google Maps integration" />
     <MESSAGE value="refactor: update calendar state management and clean up workspace configuration" />
@@ -664,6 +676,7 @@
     <MESSAGE value="refactor: enhance login redirection and improve welcome screen routing" />
     <MESSAGE value="refactor: improve login flow with enhanced redirection and debug logging" />
     <MESSAGE value="refactor: remove unused router import from Login component" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: remove unused router import from Login component" />
+    <MESSAGE value="refactor: update API base URL in axios configuration and adjust workspace settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update API base URL in axios configuration and adjust workspace settings" />
   </component>
 </project>

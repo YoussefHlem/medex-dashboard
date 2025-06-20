@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
+  output: 'standalone',
   basePath: process.env.BASEPATH,
   redirects: async () => {
     return [
