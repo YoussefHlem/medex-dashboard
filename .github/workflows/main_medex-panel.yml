@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          npm ci
+          npm install
           npm run build
 
       - name: Copy static files for Next.js standalone deployment
