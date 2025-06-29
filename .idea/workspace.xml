@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update PatientType structure and adjust workspace settings">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/main_medex-panel.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/main_medex-panel.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update Azure publish profile and adjust workspace settings" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -253,15 +250,7 @@
       <workItem from="1750256167120" duration="597000" />
       <workItem from="1750397184885" duration="4398000" />
       <workItem from="1750498765854" duration="615000" />
-      <workItem from="1751213981018" duration="86000" />
-    </task>
-    <task id="LOCAL-00004" summary="add pnpm to package.json">
-      <option name="closed" value="true" />
-      <created>1735381046894</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1735381046894</updated>
+      <workItem from="1751213981018" duration="578000" />
     </task>
     <task id="LOCAL-00005" summary="add pnpm to package.json">
       <option name="closed" value="true" />
@@ -647,14 +636,21 @@
       <option name="project" value="LOCAL" />
       <updated>1750408038382</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="refactor: update Azure publish profile and adjust workspace settings">
+      <option name="closed" value="true" />
+      <created>1751214080519</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1751214080519</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor: update calendar state management and clean up workspace configuration" />
     <MESSAGE value="refactor: update forms to support multi-language name fields for doctors, hospitals, and specialties" />
     <MESSAGE value="refactor: update user type definitions and improve name field handling in forms" />
     <MESSAGE value="refactor: reorganize component structure and update import paths for tables and forms" />
@@ -679,6 +675,7 @@
     <MESSAGE value="refactor: update API base URL in axios configuration and adjust workspace settings" />
     <MESSAGE value="refactor: update Next.js configuration for standalone output and adjust workspace settings" />
     <MESSAGE value="refactor: update PatientType structure and adjust workspace settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update PatientType structure and adjust workspace settings" />
+    <MESSAGE value="refactor: update Azure publish profile and adjust workspace settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update Azure publish profile and adjust workspace settings" />
   </component>
 </project>

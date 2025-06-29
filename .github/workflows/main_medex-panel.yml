@@ -1,4 +1,4 @@
-name: Build and Deploy Node.js App to Azure Web App - medex-panel
+name: Build and Deploy Node.js App to Azure Web App - medex-dashboard
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: medex-panel # Replace with your Azure Web App name
+  AZURE_WEBAPP_NAME: medex-dashboard # Replace with your Azure Web App name
 
 jobs:
   build:
@@ -65,7 +65,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'medex-panel'
+          app-name: 'medex-dashboard'
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_71C095022F3F4F8CB7EABF8FE5C579F7 }}
