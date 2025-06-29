@@ -68,4 +68,4 @@ jobs:
           app-name: 'medex-panel'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_376611B431994F4FA1BD44A9672DA527 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_71C095022F3F4F8CB7EABF8FE5C579F7 }}
