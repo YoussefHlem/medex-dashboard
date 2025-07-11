@@ -1,9 +1,14 @@
 import { api } from '@/apis/config'
 
 export const hospitalsService = {
-  listHospitals: async () => {
+  listHospitals: async (page = 1, per_page = 10) => {
     try {
-      const response = await api.get('/hospitals')
+      const response = await api.get('/hospitals', {
+        params: {
+          page,
+          per_page
+        }
+      })
 
       return response.data
     } catch (error) {

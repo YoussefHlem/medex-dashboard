@@ -29,6 +29,7 @@ interface DataTableProps<T> {
   setPageSize: (size: number) => void
   pageIndex: number
   setPageIndex: (index: number) => void
+  totalCount?: number
 }
 
 function DataTable<T>({
@@ -39,7 +40,8 @@ function DataTable<T>({
   pageSize,
   setPageSize,
   pageIndex,
-  setPageIndex
+  setPageIndex,
+  totalCount
 }: DataTableProps<T>) {
   const table = useReactTable({
     data,
@@ -116,7 +118,7 @@ function DataTable<T>({
       </div>
       <TablePagination
         component={() => <TablePaginationComponent table={table} />}
-        count={table.getFilteredRowModel().rows.length}
+        count={totalCount !== undefined ? totalCount : table.getFilteredRowModel().rows.length}
         rowsPerPage={table.getState().pagination.pageSize}
         page={table.getState().pagination.pageIndex}
         onPageChange={(_, page) => {

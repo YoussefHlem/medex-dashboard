@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update Azure publish profile and adjust workspace settings" />
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update Azure publish profile and adjust workspace settings">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/services/doctors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/services/doctors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/table/DataTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/DataTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modules/doctor/DoctorsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/modules/doctor/DoctorsTable.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -250,15 +256,9 @@
       <workItem from="1750256167120" duration="597000" />
       <workItem from="1750397184885" duration="4398000" />
       <workItem from="1750498765854" duration="615000" />
-      <workItem from="1751213981018" duration="578000" />
-    </task>
-    <task id="LOCAL-00005" summary="add pnpm to package.json">
-      <option name="closed" value="true" />
-      <created>1735381192456</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1735381192456</updated>
+      <workItem from="1751213981018" duration="2503000" />
+      <workItem from="1751349083829" duration="20000" />
+      <workItem from="1752236712332" duration="430000" />
     </task>
     <task id="LOCAL-00006" summary="add pnpm to package.json">
       <option name="closed" value="true" />
@@ -644,7 +644,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751214080519</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="refactor: update Azure publish profile and adjust workspace settings">
+      <option name="closed" value="true" />
+      <created>1751214603410</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1751214603410</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

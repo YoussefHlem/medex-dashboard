@@ -2,8 +2,8 @@ import axios from 'axios'
 
 // Create base axios instance
 export const api = axios.create({
-  baseURL: 'https://medex-backend.azurewebsites.net/api',
   timeout: 25000,
+  baseURL: 'https://medex-backend-westus-b4hbd7eeg4d0bnbr.westus-01.azurewebsites.net/api',
   headers: {
     'Content-Type': 'application/json'
   }

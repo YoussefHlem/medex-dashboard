@@ -32,16 +32,22 @@ const HospitalsTable = () => {
   const [globalFilter, setGlobalFilter] = useState('')
   const [pageSize, setPageSize] = useState(25)
   const [pageIndex, setPageIndex] = useState(0)
+  const [totalCount, setTotalCount] = useState(0)
 
   const fetchHospitals = () => {
-    hospitalsService.listHospitals().then(res => {
+    // Add 1 to pageIndex because the API uses 1-based indexing
+    hospitalsService.listHospitals(pageIndex + 1, pageSize).then(res => {
       setData(res.data.hospitals)
+
+      if (res.data.pagination) {
+        setTotalCount(res.data.pagination.total)
+      }
     })
   }
 
   useEffect(() => {
     fetchHospitals()
-  }, [])
+  }, [pageIndex, pageSize])
 
   const handleDelete = async (id: string) => {
     await toast.promise(hospitalsService.deleteHospital(id), {
@@ -187,6 +193,7 @@ const HospitalsTable = () => {
         setPageSize={setPageSize}
         pageIndex={pageIndex}
         setPageIndex={setPageIndex}
+        totalCount={totalCount}
       />
     </Card>
   )

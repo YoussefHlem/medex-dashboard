@@ -1,9 +1,14 @@
 import { api } from '@/apis/config'
 
 export const doctorsService = {
-  listDoctors: async () => {
+  listDoctors: async (page = 1, per_page = 10) => {
     try {
-      const response = await api.get('/doctors')
+      const response = await api.get('/doctors', {
+        params: {
+          page,
+          per_page
+        }
+      })
 
       return response.data
     } catch (error) {
