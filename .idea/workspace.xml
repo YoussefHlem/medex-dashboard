@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update start script to use TypeScript and adjust workspace settings" />
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update start script to use TypeScript and adjust workspace settings">
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,7 +117,7 @@
       <recent name="C:\Users\Halimo\WebstormProjects\medex-dashboard\src\modules\speciality\components\SpecialitiesTable" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.start">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
     </configuration>
@@ -153,9 +155,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
@@ -253,14 +255,6 @@
       <workItem from="1751213981018" duration="2503000" />
       <workItem from="1751349083829" duration="20000" />
       <workItem from="1752236712332" duration="430000" />
-    </task>
-    <task id="LOCAL-00007" summary="remove pnpm to package.json">
-      <option name="closed" value="true" />
-      <created>1735381577539</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1735381577539</updated>
     </task>
     <task id="LOCAL-00008" summary="hot fix">
       <option name="closed" value="true" />
@@ -646,7 +640,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753709907187</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="refactor: update start script to use TypeScript and adjust workspace settings">
+      <option name="closed" value="true" />
+      <created>1753716071815</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1753716071815</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
