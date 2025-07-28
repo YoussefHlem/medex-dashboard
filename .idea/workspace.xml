@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update Azure publish profile and adjust workspace settings">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update start script to use TypeScript and adjust workspace settings" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -255,14 +253,6 @@
       <workItem from="1751213981018" duration="2503000" />
       <workItem from="1751349083829" duration="20000" />
       <workItem from="1752236712332" duration="430000" />
-    </task>
-    <task id="LOCAL-00006" summary="add pnpm to package.json">
-      <option name="closed" value="true" />
-      <created>1735381349326</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1735381349326</updated>
     </task>
     <task id="LOCAL-00007" summary="remove pnpm to package.json">
       <option name="closed" value="true" />
@@ -648,15 +638,21 @@
       <option name="project" value="LOCAL" />
       <updated>1751214603410</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="refactor: update start script to use TypeScript and adjust workspace settings">
+      <option name="closed" value="true" />
+      <created>1753709907187</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1753709907187</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor: update forms to support multi-language name fields for doctors, hospitals, and specialties" />
-    <MESSAGE value="refactor: update user type definitions and improve name field handling in forms" />
     <MESSAGE value="refactor: reorganize component structure and update import paths for tables and forms" />
     <MESSAGE value="refactor: increase API timeout and rename HospitalForm index file for clarity" />
     <MESSAGE value="refactor: enhance DoctorForm and SpecialitiesTable for multi-language support in name and description fields" />
@@ -680,6 +676,8 @@
     <MESSAGE value="refactor: update Next.js configuration for standalone output and adjust workspace settings" />
     <MESSAGE value="refactor: update PatientType structure and adjust workspace settings" />
     <MESSAGE value="refactor: update Azure publish profile and adjust workspace settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update Azure publish profile and adjust workspace settings" />
+    <MESSAGE value="refactor: update API endpoints for doctors and hospitals services with pagination support" />
+    <MESSAGE value="refactor: update start script to use TypeScript and adjust workspace settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update start script to use TypeScript and adjust workspace settings" />
   </component>
 </project>
