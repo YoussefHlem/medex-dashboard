@@ -49,6 +49,6 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'medex-dashboard'
-          slot-name: 'Production'
+          slot-name: 'production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2DABAC2F5B2A4B7A81577B79C78293F4 }}
