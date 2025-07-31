@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update start script to use TypeScript and adjust workspace settings">
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update slot name to lowercase in main_medex-dashboard.yml">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/main_medex-dashboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/main_medex-dashboard.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,31 +256,8 @@
       <workItem from="1751213981018" duration="2503000" />
       <workItem from="1751349083829" duration="20000" />
       <workItem from="1752236712332" duration="430000" />
-      <workItem from="1753762262631" duration="110000" />
-    </task>
-    <task id="LOCAL-00009" summary="remove size validation">
-      <option name="closed" value="true" />
-      <created>1735383929855</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1735383929855</updated>
-    </task>
-    <task id="LOCAL-00010" summary="remove size validation">
-      <option name="closed" value="true" />
-      <created>1735383987522</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1735383987523</updated>
-    </task>
-    <task id="LOCAL-00011" summary="typescript-ignore">
-      <option name="closed" value="true" />
-      <created>1735385513061</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1735385513061</updated>
+      <workItem from="1753762262631" duration="2495000" />
+      <workItem from="1753947515663" duration="692000" />
     </task>
     <task id="LOCAL-00012" summary="hot fix on doctors table">
       <option name="closed" value="true" />
@@ -650,16 +627,37 @@
       <option name="project" value="LOCAL" />
       <updated>1753716215667</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="refactor: force production mode in server configuration">
+      <option name="closed" value="true" />
+      <created>1753762537369</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1753762537370</updated>
+    </task>
+    <task id="LOCAL-00059" summary="refactor: simplify build process in main_medex-dashboard.yml">
+      <option name="closed" value="true" />
+      <created>1753763628633</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1753763628633</updated>
+    </task>
+    <task id="LOCAL-00060" summary="refactor: update slot name to lowercase in main_medex-dashboard.yml">
+      <option name="closed" value="true" />
+      <created>1753764576810</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1753764576811</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor: reorganize component structure and update import paths for tables and forms" />
-    <MESSAGE value="refactor: increase API timeout and rename HospitalForm index file for clarity" />
-    <MESSAGE value="refactor: enhance DoctorForm and SpecialitiesTable for multi-language support in name and description fields" />
     <MESSAGE value="refactor: update import paths for TablePaginationComponent across multiple table components" />
     <MESSAGE value="refactor: replace table implementations with DataTable component across multiple tables" />
     <MESSAGE value="refactor: implement TableHeader component and replace DebouncedInput usage across multiple tables" />
@@ -682,6 +680,9 @@
     <MESSAGE value="refactor: update Azure publish profile and adjust workspace settings" />
     <MESSAGE value="refactor: update API endpoints for doctors and hospitals services with pagination support" />
     <MESSAGE value="refactor: update start script to use TypeScript and adjust workspace settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update start script to use TypeScript and adjust workspace settings" />
+    <MESSAGE value="refactor: force production mode in server configuration" />
+    <MESSAGE value="refactor: simplify build process in main_medex-dashboard.yml" />
+    <MESSAGE value="refactor: update slot name to lowercase in main_medex-dashboard.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update slot name to lowercase in main_medex-dashboard.yml" />
   </component>
 </project>
