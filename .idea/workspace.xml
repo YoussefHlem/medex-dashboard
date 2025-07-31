@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update build and test commands in main_medex-dashboard.yml">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/main_medex-dashboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/main_medex-dashboard.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a6f81399-880b-447d-9417-20ae26f29010" name="Changes" comment="refactor: update build and test steps in main_medex-dashboard.yml" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -257,15 +254,7 @@
       <workItem from="1751349083829" duration="20000" />
       <workItem from="1752236712332" duration="430000" />
       <workItem from="1753762262631" duration="2495000" />
-      <workItem from="1753947515663" duration="2594000" />
-    </task>
-    <task id="LOCAL-00014" summary="remove unnecessary tabs">
-      <option name="closed" value="true" />
-      <created>1735913538357</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1735913538357</updated>
+      <workItem from="1753947515663" duration="3395000" />
     </task>
     <task id="LOCAL-00015" summary="fix validation on forms">
       <option name="closed" value="true" />
@@ -651,14 +640,21 @@
       <option name="project" value="LOCAL" />
       <updated>1753949935704</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="refactor: update build and test steps in main_medex-dashboard.yml">
+      <option name="closed" value="true" />
+      <created>1753954126363</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1753954126363</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor: implement TableHeader component and replace DebouncedInput usage across multiple tables" />
     <MESSAGE value="refactor: extract validation schemas for Doctor, Hospital, and Specialty forms into separate files" />
     <MESSAGE value="refactor: update import paths for SpecialityForm and SpecialitiesTable components" />
     <MESSAGE value="refactor: create installment entities and status selector component" />
@@ -683,6 +679,7 @@
     <MESSAGE value="refactor: update slot name to lowercase in main_medex-dashboard.yml" />
     <MESSAGE value="refactor: update slot name to 'Production' in main_medex-dashboard.yml" />
     <MESSAGE value="refactor: update build and test commands in main_medex-dashboard.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: update build and test commands in main_medex-dashboard.yml" />
+    <MESSAGE value="refactor: update build and test steps in main_medex-dashboard.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: update build and test steps in main_medex-dashboard.yml" />
   </component>
 </project>
