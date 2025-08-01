@@ -59,6 +59,15 @@ jobs:
         # Copy all next files
         cp -r .next deploy-package/
         
+        echo "Deployment package structure:"
+        echo "==================================="
+        echo "Files in deploy-package:"
+        ls -la deploy-package/
+        
+        echo  " files outside deploy-package:"
+        # List files outside deploy-package to ensure we have the right structure
+        ls -la
+
         # Create verification script for Azure
         cat > deploy-package/verify-deployment.js << 'EOF'
         const fs = require('fs');
