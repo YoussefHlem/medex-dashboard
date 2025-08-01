@@ -1,0 +1,95 @@
+name: Deploy to Azure App Service
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: 'medex-dashboard'
+  NODE_VERSION: '18.x'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build Application
+    
+    steps:
+    - name: 🛒 Checkout Source Code
+      uses: actions/checkout@v4
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: 📦 Install Dependencies
+      run: npm ci
+
+    - name: 🔍 Run Linting
+      run: npm run lint
+
+    - name: 🔨 Build Application
+      run: npm run build
+      env:
+        NEXT_PUBLIC_API_BASE_URL: https://medex-backend-westus-b4hbd7eeg4d0bnbr.westus-01.azurewebsites.net/api
+        NEXT_PUBLIC_APP_NAME: 'Medex Dashboard'
+        NEXT_PUBLIC_APP_VERSION: '1.0.0'
+
+    - name: 📤 Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: webapp
+        path: |
+          .next/
+          public/
+          src/
+          package.json
+          package-lock.json
+          server.js
+          next.config.ts
+          web.config
+          .deployment
+          deploy.sh
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Deploy to Azure Production
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: 📥 Download Build Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: webapp
+
+    - name: 🚀 Deploy to Azure Web App
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: .
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Deploy to Azure Staging
+    if: github.event_name == 'pull_request' && secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING != ''
+    
+    steps:
+    - name: 📥 Download Build Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: webapp
+
+    - name: 🚀 Deploy to Azure Staging Slot
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        slot-name: 'staging'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}
+        package: .
