@@ -124,6 +124,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: webapp
+        include-hidden-files: true
         path: deploy-package/
 
   deploy:
