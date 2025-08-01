@@ -8,7 +8,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  userType: localStorage.getItem('userType') as UserType
+  userType: typeof window !== 'undefined' ? (localStorage.getItem('userType') as UserType) : null
 }
 
 const authSlice = createSlice({
@@ -16,7 +16,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUserType: (state, action: PayloadAction<UserType>) => {
-      localStorage.setItem('userType', action.payload)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userType', action.payload)
+      }
+
       state.userType = action.payload
     }
   }
