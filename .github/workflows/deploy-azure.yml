@@ -56,6 +56,9 @@ jobs:
         # Copy web.config for Azure
         cp web.config deploy-package/
         
+        # Copy all next files
+        cp -r .next deploy-package/
+        
         # Create verification script for Azure
         cat > deploy-package/verify-deployment.js << 'EOF'
         const fs = require('fs');
