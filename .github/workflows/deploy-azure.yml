@@ -44,7 +44,7 @@ jobs:
         # Create deployment directory
         mkdir -p deploy-package
         
-        # Copy the standalone build including hidden files (use -a for all files)
+        # Copy the standalone build including hidden files
         cp -r .next/standalone/. deploy-package/
         
         # Copy public directory
@@ -56,15 +56,57 @@ jobs:
         # Copy web.config for Azure
         cp web.config deploy-package/
         
-        # List the structure to verify
-        echo "Deployment package structure:"
-        ls -la deploy-package/
-        echo "Contents of .next directory:"
-        ls -la deploy-package/.next/
-        echo "Server files should exist:"
-        ls -la deploy-package/.next/server/ 2>/dev/null || echo "No server directory found"
-        echo "Static files should exist:"
-        ls -la deploy-package/.next/static/ 2>/dev/null || echo "No static directory found"
+        # Create verification script for Azure
+        cat > deploy-package/verify-deployment.js << 'EOF'
+        const fs = require('fs');
+        const path = require('path');
+
+        console.log('=== DEPLOYMENT VERIFICATION ===');
+        console.log('Current directory:', process.cwd());
+        console.log('Files in current directory:', fs.readdirSync('.'));
+        
+        if (fs.existsSync('.next')) {
+          console.log('✓ .next directory exists');
+          console.log('.next contents:', fs.readdirSync('.next'));
+          
+          if (fs.existsSync('.next/BUILD_ID')) {
+            console.log('✓ BUILD_ID exists:', fs.readFileSync('.next/BUILD_ID', 'utf8').trim());
+          } else {
+            console.log('✗ BUILD_ID missing');
+          }
+          
+          if (fs.existsSync('.next/server')) {
+            console.log('✓ server directory exists');
+          } else {
+            console.log('✗ server directory missing');
+          }
+          
+          if (fs.existsSync('.next/static')) {
+            console.log('✓ static directory exists');
+          } else {
+            console.log('✗ static directory missing');
+          }
+        } else {
+          console.log('✗ .next directory missing');
+        }
+        console.log('===============================');
+        EOF
+        
+        # Make sure package.json has correct start script
+        node -e "
+        const pkg = JSON.parse(require('fs').readFileSync('deploy-package/package.json', 'utf8'));
+        pkg.scripts.start = 'node server.js';
+        require('fs').writeFileSync('deploy-package/package.json', JSON.stringify(pkg, null, 2));
+        "
+        
+        # Test the deployment package locally
+        echo "Testing deployment package:"
+        cd deploy-package
+        node verify-deployment.js
+        
+        # Verify server.js can be executed
+        echo "Verifying server.js structure:"
+        head -10 server.js
 
     - name: 📤 Upload Build Artifacts
       uses: actions/upload-artifact@v4

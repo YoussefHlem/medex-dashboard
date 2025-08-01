@@ -104,6 +104,15 @@ $NPM_CMD --version
 # Next.js standalone mode includes all dependencies
 echo "Skipping npm install - using Next.js standalone mode with bundled dependencies"
 
+# Check if this is a standalone build
+if [ -f "$DEPLOYMENT_TARGET/.standalone-build" ]; then
+  echo "Detected Next.js standalone build - all dependencies are bundled"
+  echo "Verifying deployment structure:"
+  ls -la "$DEPLOYMENT_TARGET/.next/" || echo "Warning: .next directory not found"
+else
+  echo "Warning: .standalone-build marker not found - this might not be a standalone build"
+fi
+
 # 4. Application is already built in CI/CD pipeline with standalone mode
 # The .next/standalone directory contains everything needed to run the app
 echo "Using pre-built Next.js standalone application from CI/CD pipeline"
