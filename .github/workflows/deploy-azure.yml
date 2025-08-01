@@ -39,17 +39,38 @@ jobs:
         NEXT_PUBLIC_APP_NAME: 'Medex Dashboard'
         NEXT_PUBLIC_APP_VERSION: '1.0.0'
 
-    - name: 📁 Copy Static Files
+    - name: 📁 Prepare Deployment Package
       run: |
-        cp -r public .next/standalone/
-        cp -r .next/static .next/standalone/.next/
-        cp web.config .next/standalone/
+        # Create deployment directory
+        mkdir -p deploy-package
+        
+        # Copy the standalone build including hidden files (use -a for all files)
+        cp -r .next/standalone/. deploy-package/
+        
+        # Copy public directory
+        cp -r public deploy-package/
+        
+        # Copy static files to .next/static
+        cp -r .next/static deploy-package/.next/
+        
+        # Copy web.config for Azure
+        cp web.config deploy-package/
+        
+        # List the structure to verify
+        echo "Deployment package structure:"
+        ls -la deploy-package/
+        echo "Contents of .next directory:"
+        ls -la deploy-package/.next/
+        echo "Server files should exist:"
+        ls -la deploy-package/.next/server/ 2>/dev/null || echo "No server directory found"
+        echo "Static files should exist:"
+        ls -la deploy-package/.next/static/ 2>/dev/null || echo "No static directory found"
 
     - name: 📤 Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: webapp
-        path: .next/standalone/
+        path: deploy-package/
 
   deploy:
     runs-on: ubuntu-latest
