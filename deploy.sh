@@ -100,18 +100,13 @@ $NODE_EXE --version
 echo Selected npm version:
 $NPM_CMD --version
 
-# 3. Install npm packages
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  echo "Running $NPM_CMD install --production"
-  eval $NPM_CMD install --production
-  exitWithMessageOnError "npm failed"
-  cd - > /dev/null
-fi
+# 3. Install npm packages - SKIP for standalone mode
+# Next.js standalone mode includes all dependencies
+echo "Skipping npm install - using Next.js standalone mode with bundled dependencies"
 
-# 4. Application is already built in CI/CD pipeline
-# Skip rebuild since we already have the .next directory from artifacts
-echo "Using pre-built application from CI/CD pipeline"
+# 4. Application is already built in CI/CD pipeline with standalone mode
+# The .next/standalone directory contains everything needed to run the app
+echo "Using pre-built Next.js standalone application from CI/CD pipeline"
 
 ##################################################################################################################################
 

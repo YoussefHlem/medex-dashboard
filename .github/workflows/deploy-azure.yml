@@ -39,20 +39,17 @@ jobs:
         NEXT_PUBLIC_APP_NAME: 'Medex Dashboard'
         NEXT_PUBLIC_APP_VERSION: '1.0.0'
 
+    - name: 📁 Copy Static Files
+      run: |
+        cp -r public .next/standalone/
+        cp -r .next/static .next/standalone/.next/
+        cp web.config .next/standalone/
+
     - name: 📤 Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: webapp
-        path: |
-          .next/
-          public/
-          package.json
-          package-lock.json
-          server.js
-          next.config.ts
-          web.config
-          .deployment
-          deploy.sh
+        path: .next/standalone/
 
   deploy:
     runs-on: ubuntu-latest
