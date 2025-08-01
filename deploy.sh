@@ -109,14 +109,9 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd - > /dev/null
 fi
 
-# 4. Build the application
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  echo "Running $NPM_CMD run build"
-  eval $NPM_CMD run build
-  exitWithMessageOnError "npm run build failed"
-  cd - > /dev/null
-fi
+# 4. Application is already built in CI/CD pipeline
+# Skip rebuild since we already have the .next directory from artifacts
+echo "Using pre-built application from CI/CD pipeline"
 
 ##################################################################################################################################
 

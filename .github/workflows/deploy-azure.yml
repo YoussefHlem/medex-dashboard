@@ -46,7 +46,6 @@ jobs:
         path: |
           .next/
           public/
-          src/
           package.json
           package-lock.json
           server.js
