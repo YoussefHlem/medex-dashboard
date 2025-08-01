@@ -4,14 +4,14 @@
   "license": "Commercial",
   "private": true,
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run build:icons && next build",
     "lint": "next lint",
     "start": "node .next/standalone/server.js",
-    "postinstall": "next build",
+    "postinstall": "npm run build:icons && next build",
     "lint:fix": "next lint --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "build:icons": "tsx src/assets/iconify-icons/bundle-icons-css.ts"

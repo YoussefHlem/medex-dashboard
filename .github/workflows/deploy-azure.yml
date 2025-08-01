@@ -29,9 +29,6 @@ jobs:
     - name: 📦 Install Dependencies
       run: npm ci
 
-    - name: 📦 Install Dependencies
-      run: npm install
-
     - name: 🔍 Run Linting
       run: npm run lint
 
