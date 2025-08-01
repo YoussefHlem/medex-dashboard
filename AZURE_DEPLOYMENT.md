@@ -2,6 +2,14 @@
 
 This file contains deployment configurations for Azure App Service.
 
+## Deployment Details
+
+**App Service Name**: medex-dashboard  
+**Resource Group**: medex-rg  
+**Location**: West US  
+**Runtime**: Node.js 20 LTS  
+**URL**: https://medex-dashboard.azurewebsites.net
+
 ## Environment Variables Required
 
 Set the following environment variables in your Azure App Service:
@@ -11,7 +19,7 @@ Set the following environment variables in your Azure App Service:
 - `NEXT_PUBLIC_APP_NAME`: Medex Dashboard
 - `NEXT_PUBLIC_APP_VERSION`: 1.0.0
 - `NODE_ENV`: production
-- `WEBSITE_NODE_DEFAULT_VERSION`: 18-lts
+- `WEBSITE_NODE_DEFAULT_VERSION`: 20-lts
 
 ### GitHub Secrets Required
 
