@@ -73,23 +73,3 @@ jobs:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: .
-
-  deploy-staging:
-    runs-on: ubuntu-latest
-    needs: build
-    name: Deploy to Azure Staging
-    if: github.event_name == 'pull_request' && secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING != ''
-    
-    steps:
-    - name: 📥 Download Build Artifacts
-      uses: actions/download-artifact@v4
-      with:
-        name: webapp
-
-    - name: 🚀 Deploy to Azure Staging Slot
-      uses: azure/webapps-deploy@v3
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        slot-name: 'staging'
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}
-        package: .
