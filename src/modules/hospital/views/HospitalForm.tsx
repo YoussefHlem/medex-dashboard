@@ -50,10 +50,9 @@ const HospitalForm = ({ id }: HospitalFormProps) => {
   const handleSubmitHospitalForm = async (values: HospitalFormValues) => {
     const formData = createMultiLanguageFormData(values, ['name'])
 
-    formData.append('_method', 'PUT')
-
     try {
       if (id) {
+        formData.append('_method', 'PUT')
         await updateExistingHospital(id, formData)
       } else {
         await createNewHospital(formData)
