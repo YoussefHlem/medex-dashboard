@@ -50,7 +50,8 @@ export const useSlotsManagement = (id: number) => {
 
         if (response.status === 'Request Was Successful') {
           toast.success('Slots updated successfully')
-          await fetchSlots()
+        } else {
+          throw new Error('Failed to save slots')
         }
       } catch (error) {
         handleError(error, 'Error updating slots')
@@ -59,7 +60,7 @@ export const useSlotsManagement = (id: number) => {
         setIsSaving(false)
       }
     },
-    [fetchSlots]
+    [id]
   )
 
   const handleEdit = useCallback(
@@ -92,8 +93,13 @@ export const useSlotsManagement = (id: number) => {
       const newSlot = createSlotFromFormData(formData)
       const updatedSlots = updateSlotsState(slots, newSlot)
 
-      setFormData(createNewSlot())
-      await saveSlots(updatedSlots)
+      try {
+        await saveSlots(updatedSlots)
+        setSlots(updatedSlots)
+        setFormData(createNewSlot())
+      } catch (error) {
+        // Error is already handled in saveSlots
+      }
     },
     [formData, slots, saveSlots]
   )
@@ -103,12 +109,12 @@ export const useSlotsManagement = (id: number) => {
       const updatedSlots = [...slots]
 
       updatedSlots[dayIndex].timeSlots[slotIndex].active = !updatedSlots[dayIndex].timeSlots[slotIndex].active
-      setSlots(updatedSlots)
 
       try {
         await saveSlots(updatedSlots)
-      } catch {
-        setSlots(slots) // Revert on error
+        setSlots(updatedSlots)
+      } catch (error) {
+        // Error is already handled in saveSlots, no need to revert state since it wasn't updated yet
       }
     },
     [slots, saveSlots]

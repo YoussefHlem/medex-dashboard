@@ -1,0 +1,147 @@
+name: Deploy to Azure App Service
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  AZURE_WEBAPP_NAME: 'medex-dashboard'
+  NODE_VERSION: '24.x'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build Application
+    
+    steps:
+    - name: 🛒 Checkout Source Code
+      uses: actions/checkout@v4
+
+    - name: 🟢 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: 📦 Install Dependencies
+      run: npm ci
+
+    - name: 🔍 Run Linting
+      run: npm run lint
+
+    - name: 🔨 Build Application
+      run: npm run build
+      env:
+        NEXT_PUBLIC_API_BASE_URL: https://medex-backend-westus-b4hbd7eeg4d0bnbr.westus-01.azurewebsites.net/api
+        NEXT_PUBLIC_APP_NAME: 'Medex Dashboard'
+        NEXT_PUBLIC_APP_VERSION: '1.0.0'
+
+    - name: 📁 Prepare Deployment Package
+      run: |
+        # Create deployment directory
+        mkdir -p deploy-package
+        
+        # Copy the standalone build including hidden files
+        cp -r .next/standalone/. deploy-package/
+        
+        # Copy public directory
+        cp -r public deploy-package/
+        
+        # Copy static files to .next/static
+        cp -r .next/static deploy-package/.next/
+        
+        # Copy web.config for Azure
+        cp web.config deploy-package/
+        
+        # Copy all next files
+        cp -r .next deploy-package/
+        
+        echo "Deployment package structure:"
+        echo "==================================="
+        echo "Files in deploy-package:"
+        ls -la deploy-package/
+        
+        echo  " files outside deploy-package:"
+        # List files outside deploy-package to ensure we have the right structure
+        ls -la
+
+        # Create verification script for Azure
+        cat > deploy-package/verify-deployment.js << 'EOF'
+        const fs = require('fs');
+        const path = require('path');
+
+        console.log('=== DEPLOYMENT VERIFICATION ===');
+        console.log('Current directory:', process.cwd());
+        console.log('Files in current directory:', fs.readdirSync('.'));
+        
+        if (fs.existsSync('.next')) {
+          console.log('✓ .next directory exists');
+          console.log('.next contents:', fs.readdirSync('.next'));
+          
+          if (fs.existsSync('.next/BUILD_ID')) {
+            console.log('✓ BUILD_ID exists:', fs.readFileSync('.next/BUILD_ID', 'utf8').trim());
+          } else {
+            console.log('✗ BUILD_ID missing');
+          }
+          
+          if (fs.existsSync('.next/server')) {
+            console.log('✓ server directory exists');
+          } else {
+            console.log('✗ server directory missing');
+          }
+          
+          if (fs.existsSync('.next/static')) {
+            console.log('✓ static directory exists');
+          } else {
+            console.log('✗ static directory missing');
+          }
+        } else {
+          console.log('✗ .next directory missing');
+        }
+        console.log('===============================');
+        EOF
+        
+        # Make sure package.json has correct start script
+        node -e "
+        const pkg = JSON.parse(require('fs').readFileSync('deploy-package/package.json', 'utf8'));
+        pkg.scripts.start = 'node server.js';
+        require('fs').writeFileSync('deploy-package/package.json', JSON.stringify(pkg, null, 2));
+        "
+        
+        # Test the deployment package locally
+        echo "Testing deployment package:"
+        cd deploy-package
+        node verify-deployment.js
+        
+        # Verify server.js can be executed
+        echo "Verifying server.js structure:"
+        head -10 server.js
+
+    - name: 📤 Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: webapp
+        include-hidden-files: true
+        path: deploy-package/
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Deploy to Azure Production
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: 📥 Download Build Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: webapp
+
+    - name: 🚀 Deploy to Azure Web App
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: .
